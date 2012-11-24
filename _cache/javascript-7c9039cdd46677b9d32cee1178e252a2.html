@@ -1,0 +1,14 @@
+<div class="highlight"><pre><code class="javascript"><span class="c1">// use it as extension of other library</span>
+<span class="kd">var</span> <span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;jquery&#39;</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">easing</span><span class="p">[</span><span class="s1">&#39;jswing&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">easing</span><span class="p">[</span><span class="s1">&#39;swing&#39;</span><span class="p">];</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">easing</span><span class="p">,</span> <span class="nx">easingLib</span><span class="p">.</span><span class="nx">functions</span><span class="p">);</span>
+<span class="c1">//</span>
+<span class="nx">require</span><span class="p">(</span><span class="s1">&#39;mo/mainloop&#39;</span><span class="p">).</span><span class="nx">config</span><span class="p">({</span>
+    <span class="nx">easing</span><span class="o">:</span> <span class="nx">easingLib</span><span class="p">.</span><span class="nx">functions</span>
+<span class="p">});</span>
+<span class="c1">//</span>
+<span class="nx">require</span><span class="p">(</span><span class="s1">&#39;choreo&#39;</span><span class="p">).</span><span class="nx">config</span><span class="p">({</span>
+    <span class="nx">easing</span><span class="o">:</span> <span class="nx">easingLib</span>
+<span class="p">});</span>
+</code></pre>
+</div>

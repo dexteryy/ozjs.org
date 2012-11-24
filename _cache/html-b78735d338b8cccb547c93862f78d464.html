@@ -1,0 +1,24 @@
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;js/lib/oz.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+<span class="nx">require</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span>
+    <span class="nx">baseUrl</span><span class="o">:</span> <span class="s1">&#39;js/&#39;</span>
+<span class="p">});</span>
+<span class="c1">//</span>
+<span class="nx">define</span><span class="p">(</span><span class="s1">&#39;jquery&#39;</span><span class="p">,</span> <span class="s1">&#39;lib/jquery.js&#39;</span><span class="p">);</span>
+<span class="c1">//</span>
+<span class="nx">define</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;jquery&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;mo/domready&#39;</span>
+<span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="c1">// do something with jquery</span>
+    <span class="p">};</span>
+    <span class="k">return</span> <span class="nx">app</span><span class="p">;</span>
+<span class="p">});</span>
+<span class="c1">//</span>
+<span class="nx">require</span><span class="p">([</span><span class="s1">&#39;app&#39;</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">app</span><span class="p">){</span>
+    <span class="c1">// do something with app </span>
+<span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre>
+</div>

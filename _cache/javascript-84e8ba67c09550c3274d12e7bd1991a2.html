@@ -1,0 +1,12 @@
+<div class="highlight"><pre><code class="javascript"><span class="nx">define</span><span class="p">([</span>
+    <span class="s2">&quot;finish&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;module_dependency&quot;</span>
+<span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">finish</span><span class="p">,</span> <span class="nx">module_dependency</span><span class="p">,</span> <span class="nx">require</span><span class="p">,</span> <span class="nx">exports</span><span class="p">){</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">exports</span><span class="p">.</span><span class="nx">myname</span> <span class="o">=</span> <span class="s1">&#39;xx&#39;</span><span class="p">;</span>
+        <span class="nx">finish</span><span class="p">({</span> <span class="nx">myname</span><span class="o">:</span> <span class="s1">&#39;yy&#39;</span> <span class="p">});</span> <span class="c1">//如果finish有参数，会替代原有的exports对象</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+    <span class="c1">// 不支持return</span>
+<span class="p">});</span>
+</code></pre>
+</div>
