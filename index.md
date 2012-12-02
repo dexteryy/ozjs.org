@@ -9,10 +9,8 @@ title: OzJS - a microkernel for modular javascript, with bundles of powerful yet
 
 OzJS is NOT yet another script loader, but a microkernel that provides sorely-missing module mechanism at runtime (that means it mainly works at language-level, not file-level. Use [Ozma.js](http://ozjs.org/ozma/) to process files statically at build time based on the same mechanism) for large/complex javascript program, compatible with the de facto standards ([AMD](https://github.com/amdjs/amdjs-api/wiki/AMD), [NodeJS/CommonJS](http://www.commonjs.org/specs/modules/1.0/) and traditional [module pattern](http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth)). 
 
-<br>
 Even better, it was implemented earlier than the well-known RequireJS, so there are differences between [similar APIs](http://ozjs.org/docs/define.html) in philosophy and approach, which bring more value.
 
-<br>
 The API and code of oz.js are minimalist and stable. It won’t add new features that aren't truly needed (It's absolutely bad practice to meet new requirements through new configuration options or new plugins for a module mechanism provider!). The Oz project now focuses on providing bundles of powerful and yet micro-framework friendly AMD modules.
 
 ## Toolchain <a id="toolchain">&nbsp;</a>
@@ -165,6 +163,7 @@ require.config({
     baseUrl: 'js/',
     distUrl: 'dist/js/'
 });
+
 // same as above
 ```
 
@@ -207,7 +206,7 @@ See usage for more detail:
 
 ## Tutorials <a id="ref">&nbsp;</a>
 
-* [define的9种使用方法和模块类型](http://ozjs.org/docs/define.html)
+* [define & require](http://ozjs.org/docs/define.html)
 
 ## In the Real World
 
@@ -225,6 +224,9 @@ See usage for more detail:
 
 ## Release History <a id="release">&nbsp;</a>
 
+* 2012.12.2
+    * oz.js v2.5 和 ozma v1.4 发布。支持在模块名中使用别名和相对当前文件的路径
+    * 新的API文档：[define & require](http://ozjs.org/docs/define.html)
 * 2012.11.21
     * OzJS仓库中的`/mod`拆分为7个子项目和独立仓库
     * `mod/event` 改名为 [EventMaster](https://github.com/dexteryy/EventMaster/)

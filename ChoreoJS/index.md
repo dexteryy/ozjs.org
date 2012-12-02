@@ -22,7 +22,6 @@ title: ChoreoJS
 * [mo/lang](https://github.com/dexteryy/mo)
 * [mo/mainloop](https://github.com/dexteryy/mo)
 * [EventMaster](https://github.com/dexteryy/EventMaster)
-* [host](https://github.com/dexteryy/OzJS) (oz.js built-in module, alternate implementation: `define("host", [], function(){ return window; });` )
 
 ## Examples
 

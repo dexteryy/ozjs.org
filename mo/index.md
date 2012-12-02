@@ -1,7 +1,11 @@
+---
+layout: intro
+title: Mo
+---
 
 # Mo
 
-* A collection of OzJS core modules that form a library called "Mo" 
+> * A collection of OzJS core modules that form a library called "Mo" 
 
 ## AMD and OzJS
 
@@ -38,6 +42,13 @@
 
 * [demo for mo/lang](http://ozjs.org/mo/examples/lang)
 
+## Get the code
+
+* [View/download on Github](https://github.com/dexteryy/mo/blob/master/)
+* Add/update to your project as new dependency:
+    * via [istatic](https://github.com/mockee/istatic.git)
+    * via [volo](https://github.com/volojs/volo)
+
 ## API and usage
 
 ### mo/lang
@@ -46,40 +57,39 @@
 var _ = require('mo/lang');
 ```
 
-* _.type(sth) -- 
-* _.isFunction(sth) -- 
-* _.isWindow(sth) -- 
-* _.isEmptyObject(sth) -- 
-* _.mix(origin, obj1, obj2, ..., depth) -- 
-* _.merge(origin, obj1, obj2, ..., depth) -- 
-* _.interset(origin, obj1, obj2, ..., depth) -- 
-* _.defaults(origin, obj1, obj2, ..., depth) -- 
-* _.copy(origin, depth) -- 
-* _.occupy(origin, obj, depth) -- 
-* _.config(cfg, opt, DEFAULT_CFG) -- 
-* _.unique(list) -- 
-* _.ns(string, value) -- 
-* _.FnQueue() -- 
-* _.semver(version1, version2) -- 
+* `_.type(sth)` -- 
+* `_.isFunction(sth)` -- 
+* `_.isWindow(sth)` -- 
+* `_.isEmptyObject(sth)` -- 
+* `_.mix(origin, obj1, obj2, ..., depth)` -- 
+* `_.merge(origin, obj1, obj2, ..., depth)` -- 
+* `_.interset(origin, obj1, obj2, ..., depth)` -- 
+* `_.defaults(origin, obj1, obj2, ..., depth)` -- 
+* `_.copy(origin, depth)` -- 
+* `_.occupy(origin, obj, depth)` -- 
+* `_.config(cfg, opt, DEFAULT_CFG)` -- 
+* `_.unique(list)` -- 
+* `_.ns(string, value)` -- 
+* `_.FnQueue()` -- 
 
 ```javascript 
 // Add ES5 methods in browsers that don't natively support them:
 ```
 
-* Array.prototype.forEach
-* Array.prototype.map
-* Array.prototype.filter
-* Array.prototype.reduce
-* Array.prototype.some
-* Array.prototype.every
-* Array.prototype.indexOf
-* Array.prototype.lastIndexOf
-* Array.isArray
-* String.prototype.trim
-* Object.keys
-* Object.create
-* Object.getPrototypeOf
-* Function.prototype.bind
+* `Array.prototype.forEach`
+* `Array.prototype.map`
+* `Array.prototype.filter`
+* `Array.prototype.reduce`
+* `Array.prototype.some`
+* `Array.prototype.every`
+* `Array.prototype.indexOf`
+* `Array.prototype.lastIndexOf`
+* `Array.isArray`
+* `String.prototype.trim`
+* `Object.keys`
+* `Object.create`
+* `Object.getPrototypeOf`
+* `Function.prototype.bind`
 
 ### mo/domready
 
@@ -95,13 +105,13 @@ require(['mo/domready'], function(none){
 var browsers = require('mo/browsers');
 ```
 
-* browsers.browser
-* browsers.version
-* browsers.skin
-* browsers.rank
-* browsers['msie'|'webkit'|'mozilla'|...]
+* `browsers.browser` --
+* `browsers.version` -- 
+* `browsers.skin` -- 
+* `browsers.rank` -- 
+* `browsers['msie'|'webkit'|'mozilla'|...]` --
 
-### mo/browsers
+### mo/cookie
 
 ```javascript 
 var cookie = require('mo/cookie');
@@ -113,19 +123,20 @@ cookie(name, value, {
     secure: ''
 });
 ```
+
 ### mo/template
 
 ```javascript 
 var tpl = require('mo/template');
 ```
 
-* tpl.escapeHTML(string) -- 
-* tpl.substr(string, limit, callback) -- 
-* tpl.strsize(string) -- 
-* tpl.str2html(string) -- 
-* tpl.format(string, dict|list) -- 
-* tpl.convertTpl(tplName|tplString, dictData, namespace) -- 
-* tpl.reloadTpl(tplName) -- 
+* `tpl.escapeHTML(string)` -- 
+* `tpl.substr(string, limit, callback)` -- 
+* `tpl.strsize(string)` -- 
+* `tpl.str2html(string)` -- 
+* `tpl.format(string, dict|list)` -- 
+* `tpl.convertTpl(tplName|tplString, dictData, namespace)` -- 
+* `tpl.reloadTpl(tplName)` -- 
 
 ### mo/network
 
@@ -133,12 +144,12 @@ var tpl = require('mo/template');
 var net = require('mo/network');
 ```
 
-* net.ajax(options) -- 
-* net.params(data) -- 
-* net.getScript(url, callback) -- 
-* net.getStyle(url) -- 
-* net.getJSON(url, params, callback, options) -- 
-* net.getRequest(url, params) -- 
+* `net.ajax(options)` -- 
+* `net.params(data)` -- 
+* `net.getScript(url, callback)` -- 
+* `net.getStyle(url)` -- 
+* `net.getJSON(url, params, callback, options)` -- 
+* `net.getRequest(url, params)` -- 
 
 ### mo/easing
 
@@ -146,9 +157,9 @@ var net = require('mo/network');
 var easingLib = require('mo/easing');
 ```
 
-* easingLib.def -- 
-* easingLib.values -- 
-* easingLib.functions -- 
+* `easingLib.def` -- 
+* `easingLib.values` -- 
+* `easingLib.functions` -- 
 
 ```javascript 
 // use it as extension of other library
@@ -172,17 +183,17 @@ require('choreo').config({
 var loop = require('mo/mainloop');
 ```
 
-* loop.config(options) -- 
-* loop.run(optional_stageName) -- 
-* loop.pause(stageName) -- 
-* loop.complete(stageName) -- 
-* loop.remove(stageName) -- 
-* loop.info(stageName) -- 
-* loop.isRunning(stageName) -- 
-* loop.addStage(stageName, optional_canvas) -- 
-* loop.addRender(stageName, render, optional_canvas) -- 
-* loop.getRender(renderId) -- 
-* loop.addTween(stageName, current, end, duration, options) -- 
+* `loop.config(options)` -- 
+* `loop.run(optional_stageName)` -- 
+* `loop.pause(stageName)` -- 
+* `loop.complete(stageName)` -- 
+* `loop.remove(stageName)` -- 
+* `loop.info(stageName)` -- 
+* `loop.isRunning(stageName)` -- 
+* `loop.addStage(stageName, optional_canvas)` -- 
+* `loop.addRender(stageName, render, optional_canvas)` -- 
+* `loop.getRender(renderId)` -- 
+* `loop.addTween(stageName, current, end, duration, options)` -- 
 
 ### mo/key
 
@@ -190,21 +201,21 @@ var loop = require('mo/mainloop');
 var Key = require('mo/key');
 ```
 
-* Key.KEYS_CODE -- 
+* `Key.KEYS_CODE` -- 
 
 ```javascript 
 var key = Key(config);
 ```
 
-* key.addHandler(event, keyName, handler) -- 
-* key.down([keyName, ...], handler) -- 
-* key.up([keyName, ...], handler) -- 
-* key.press([keyName, ...], handler) -- 
-* key.reset() -- 
-* key.addRule(fn) -- 
-* key.enable() -- 
-* key.disable() -- 
-* key.check() -- 
+* `key.addHandler(event, keyName, handler)` -- 
+* `key.down([keyName, ...], handler)` -- 
+* `key.up([keyName, ...], handler)` -- 
+* `key.press([keyName, ...], handler)` -- 
+* `key.reset()` -- 
+* `key.addRule(fn)` -- 
+* `key.enable()` -- 
+* `key.disable()` -- 
+* `key.check()` -- 
 
 Under construction...
 
@@ -215,3 +226,10 @@ See [OzJS References](http://ozjs.org/#ref)
 ## Release History
 
 See [OzJS Release History](http://ozjs.org/#release)
+
+## License
+
+Copyright (c) 2010 - 2013 dexteryy  
+Licensed under the MIT license.
+
+

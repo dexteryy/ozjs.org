@@ -4,3 +4,4 @@ mod/editable.js
 mod/stylesheet.js
 .sass-cache/
 _site/
+_cache/
