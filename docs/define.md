@@ -131,16 +131,16 @@ define(function(require, exports, module){
 ### require的机制
 * require的代码块等同于无命名、无输出、会在声明之后立刻尝试解决依赖并执行的模块代码，所以以下机制也适用于define
 * 解决依赖时，基于不同模块名对应的模块状态，处理方式如下：
-    1. "public_module"还没有声明过（即没有执行过`define("public_module", ...)`），会根据模块名生成一个文件地址（基于当前文件解析相对路径、将aliases里配置过的别名替换为实际路径、加上'.js'后缀，等等），然后自动为这个模块名声明一个远程模块，指向这个文件地址，之后重新检测依赖关系，同状态 *2*
+    1. "alias/A"还没有声明过（即没有执行过`define("alias/A", ...)`），会根据模块名生成一个文件地址（基于当前文件解析相对路径、将aliases里配置过的别名替换为实际路径、加上'.js'后缀，等等），然后自动为这个模块名声明一个远程模块，指向这个文件地址，之后重新检测依赖关系，同状态 *2*
     2. "remote_module"已声明为远程模块，会先下载对应的js文件，等加载完成执行其中的define代码，当前远程模块被新声明的同名模块或匿名模块替代，之后重新检测依赖关系，同状态 *3*
     3. "public_module"已声明为本地模块，如果此模块也存在依赖，则回到状态 *1*，如果没有依赖或依赖已解决，则执行当前模块的代码，获得return的值或exports的值，等所有依赖都像这样解决完之后，开始执行require的代码块
 
 ```javascript
 require([
-    "./private_module", //  模块状态1
+    "alias/A", //  模块状态1
     "remote_module", // 模块状态2
     "public_module" // 模块状态3
-], function(mod, remote, pub/*, require */){
+], function(A, remote, pub/*, require */){
     // do something
 });
 ```
@@ -167,7 +167,7 @@ require(function(require){
 * 开发时无需考虑文件加载策略，只需按照业务逻辑描述依赖（引入当前需要的模块，而不是手动指定加载哪个文件），之后由构建工具（[ozma](http://ozjs.org/ozma/)）生成合适的发布文件，自动为产品环境实现延后加载和按需加载
 
 ```javascript
-require([
+define([
     "./private_module_A",
     "remote_module",
     "public_module"
@@ -183,16 +183,16 @@ require([
 ```
 
 ### require的配置
-* Coming soon...
+* require.config可以多次调用，添加新的配置或覆盖之前的配置
 
 ```javascript
 require.config({
-    baseUrl: 'js/mod/',       // 
-    distUrl: 'dist/js/mod/',  // 可选
-    aliases: {                // 可选，用于模块名和远程模块的地址
+    baseUrl: '/js/mod/',  // js文件URL的基础部分（ozma的配置文件里的baseUrl则表示本地路径），默认为""
+    distUrl: 'http://static_domain/js/mod/',  // oz.js在处理ozma生成的发布文件时，会用distUrl取代baseUrl（产品环境中html里如果指定了CDN地址，则不会用到baseUrl和distUrl）
+    aliases: {                // 可选。能用于模块名和远程模块的地址
         'app': '../app/'      // 相对于baseUrl
     },
-    enableAutoSuffix: false   // 
+    enableAutoSuffix: false   // 如果ozma的配置文件里设置了`disableAutoSuffix: false`（默认为true），则oz.js需要设置`enableAutoSuffix: true`
 });
 ```
 

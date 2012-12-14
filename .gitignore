@@ -5,3 +5,4 @@ mod/stylesheet.js
 .sass-cache/
 _site/
 _cache/
+.statictmp/
