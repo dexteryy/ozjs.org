@@ -5,6 +5,8 @@ require.config({
 
 require(['mo/lang'], function(_){
 
+    console.group('mo/lang/mix');
+
     var origin = {
         obj_A: {
             a: 1,
@@ -102,46 +104,48 @@ require(['mo/lang'], function(_){
     console.info('list1: ', list1);
     console.groupEnd('prepare');
 
-    console.group('test case 1: ', '_.copy(origin) === origin');
+    console.group('testcase 1: ', '_.copy(origin) === origin');
     console.info(_.copy(origin) === origin);
-    console.groupEnd('test case 1: ');
+    console.groupEnd('testcase 1: ');
 
-    console.group('test case 2: ', '_.copy(origin, 3) === origin');
+    console.group('testcase 2: ', '_.copy(origin, 3) === origin');
     console.info(_.copy(origin, 3) === origin);
-    console.groupEnd('test case 2: ');
+    console.groupEnd('testcase 2: ');
 
-    console.group('test case 3: ', '_.copy(origin).arr_A[3][0] === origin.arr_A[3][0]');
+    console.group('testcase 3: ', '_.copy(origin).arr_A[3][0] === origin.arr_A[3][0]');
     console.info(_.copy(origin).arr_A[3][0] === origin.arr_A[3][0]);
-    console.groupEnd('test case 3: ');
+    console.groupEnd('testcase 3: ');
 
-    console.group('test case 4: ', '_.copy(origin, 3).arr_A[3][0] === origin.arr_A[3][0]');
+    console.group('testcase 4: ', '_.copy(origin, 3).arr_A[3][0] === origin.arr_A[3][0]');
     console.info(_.copy(origin, 3).arr_A[3][0] === origin.arr_A[3][0]);
-    console.groupEnd('test case 4: ');
+    console.groupEnd('testcase 4: ');
 
-    console.group('test case 5: ', '_.mix(_.copy(origin, 3), obj1, obj2, 3)');
+    console.group('testcase 5: ', '_.mix(_.copy(origin, 3), obj1, obj2, 3)');
     console.info(_.mix(_.copy(origin, 3), obj1, obj2, 3));
-    console.groupEnd('test case 5: ');
+    console.groupEnd('testcase 5: ');
 
-    console.group('test case 6: ', '_.merge(_.copy(origin, 3), obj1, obj2, 3)');
+    console.group('testcase 6: ', '_.merge(_.copy(origin, 3), obj1, obj2, 3)');
     console.info(_.merge(_.copy(origin, 3), obj1, obj2, 3));
-    console.groupEnd('test case 6: ');
+    console.groupEnd('testcase 6: ');
 
-    console.group('test case 7: ', '_.interset(origin_copy1, obj2, 1)');
+    console.group('testcase 7: ', '_.interset(origin_copy1, obj2, 1)');
     console.info(_.interset(origin_copy1, obj2, 1));
-    console.groupEnd('test case 7: ');
+    console.groupEnd('testcase 7: ');
 
-    console.group('test case 8: ', '_.occupy(origin_copy2, obj2, 3) === origin_copy2');
+    console.group('testcase 8: ', '_.occupy(origin_copy2, obj2, 3) === origin_copy2');
     console.info(_.occupy(origin_copy2, obj2, 3) === origin_copy2);
     console.info('origin_copy2: ', origin_copy2);
-    console.groupEnd('test case 8: ');
+    console.groupEnd('testcase 8: ');
 
-    console.group('test case 9: ', '_.config({ str_A: "a", num_D: 1 }, obj1, obj2, 3)');
+    console.group('testcase 9: ', '_.config({ str_A: "a", num_D: 1 }, obj1, obj2, 3)');
     console.info(_.config({ str_A: "a", num_D: 1 }, obj1, obj2, 3));
-    console.groupEnd('test case 8: ');
+    console.groupEnd('testcase 8: ');
 
-    console.group('test case 10: ', '_.unique(_.copy(list1, 1), 4)');
+    console.group('testcase 10: ', '_.unique(_.copy(list1, 1), 4)');
     console.info(_.unique(_.copy(list1), 4));
-    console.groupEnd('test case 10: ');
+    console.groupEnd('testcase 10: ');
+
+    console.groupEnd('mo/lang/mix');
 
 });
 

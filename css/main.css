@@ -335,6 +335,19 @@ a.buttons:hover {
 	text-decoration: none;
 }
 
+.followme {
+  background:url(../images/weibo_ico.png) no-repeat center;
+  width:100px;
+  height:31px;
+  display:block;
+  line-height:400px;
+  overflow:hidden;
+  margin:20px 0 0 15px;
+}
+.doubansite {
+  background:url(../images/douban_site_ico.png) no-repeat center;
+}
+
 nav{
 	background-color: #AF0011;
 	color: #fff;
@@ -447,6 +460,11 @@ footer {
     padding-left:115px;
   }
 
+  .followme {
+    margin:15px 10px 20px 0;
+    float:left;
+  }
+
 }
 
 @media print, screen and (max-width: 720px) {
@@ -492,3 +510,4 @@ footer {
     color:#444;
   }
 }
+

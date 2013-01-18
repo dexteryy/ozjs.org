@@ -8,21 +8,16 @@ repos:
       /adapter.js: /js/lib/
   dexteryy/mo:
     file:
-      /browsers.js: /js/mo/
-      /cookie.js: /js/mo/
-      /domready.js: /js/mo/
-      /easing.js: /js/mo/
-      /key.js: /js/mo/
-      /lang.js: /js/mo/
-      /mainloop.js: /js/mo/
-      /network.js: /js/mo/
-      /template.js: /js/mo/
+      /: /js/mo/
   dexteryy/ChoreoJS:
     file:
       /choreo.js: /js/
   dexteryy/DollarJS:
     file:
       /dollar.js: /js/
+  dexteryy/SovietJS:
+    file:
+      /soviet.js: /js/
   dexteryy/EventMaster:
     file:
       /eventmaster.js: /js/

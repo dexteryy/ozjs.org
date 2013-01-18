@@ -1,6 +1,6 @@
 ---
 layout: intro
-title: OzJS - a microkernel for modular javascript, with bundles of powerful yet micro-framework friendly AMD modules.
+title: OzJS - a microkernel for modular javascript, a toolchain for modern front-end, a micro-framework for growable WebApp.
 ---
 
 ###### [>> English version](http://ozjs.org) <a id="overview">&nbsp;</a>
@@ -13,20 +13,25 @@ OzJS才不是神马脚本加载器呢！人家是一个在浏览器端运行时�
 
 oz.js的API和代码都是极简和稳定的，不会轻易加新功能（对一个实现模块机制的库来说，通过加入新配置选项或新插件的方式来满足新需求是多么可怕的故事啊！）。Oz项目现在专注于开发一大票能用于自由组合微框架、便于搭建WebApp的通用模块，代码都在`/mod`目录里，正在逐个发布和完善文档，一个[真实世界中的例子](http://ww4.sinaimg.cn/large/62651c14jw1dvpfdi27o7j.jpg)。
 
+*----------- 以上是傲娇版简介，下面是价值观总结版 -----------*
+
+OzJS是一个为“现代JS开发”提供支持的开源项目，反对臃肿冗余的、大而无当的、捆绑强塞的、封闭体系的、重复实现的、脱离实践的工具/库/框架，推崇单一目的、单一方案、单一层次、体积最小化、依赖最小化、重复最小化、自由选择、自由混搭、自由替换的模块，自底向上的提供当前欠缺的实现和工具，帮助JS开发者轻松构建传统网页脚本、大型或复杂JS程序、桌面或移动web应用。
+
 ## Toolchain <a id="toolchain">&nbsp;</a>
 
 #### [OzmaJS](http://ozjs.org/ozma)
 * Intelligent autobuild tool for OzJS
+* Unique ability to support transparent dynamic dependence
 * [Source code](https://github.com/dexteryy/ozma.js)
 
 #### [grunt-ozjs](http://ozjs.org/grunt-ozjs) 
 * Grunt tasks for oz.js and ozma.js
 * [Source code](https://github.com/dexteryy/grunt-ozjs)
 
-#### istatic
+#### [istatic](https://github.com/mockee/istatic)
 * A static-file dependency manager more than a package manager
 * Let you quickly and automatically add modules of specified (or latest) version to your project
-* [Source code](https://github.com/mockee/istatic)
+* [grunt-istatic](https://github.com/mockee/grunt-istatic)
 
 #### [OzJS Adapter](http://ozjs.org/adapter): 
 * Mini define/require mplementation for old web page
@@ -53,6 +58,11 @@ OzJS Project provides plenty of tiny, mutually independent, single purpose modul
 * A jQuery-compatible and non-All-in-One library which is more "Zepto" than Zepto.js
 * Focus on DOM operations and mobile platform, wrap native API wherever possible.
 * [Source code](https://github.com/dexteryy/DollarJS)
+
+#### [SovietJS](http://ozjs.org/SovietJS)
+* Standalone UI event delegate implementation
+* Provide multiple styles/modes: override, automatically preventDefault, partial matching, exact matching...
+* [Source code](https://github.com/dexteryy/SovietJS)
 
 #### CordJS 
 * A tiny, pure, event-based model-view-binder (MVB) library which is far more thin than Backbone 
@@ -228,6 +238,12 @@ See usage for more detail:
 
 ## Release History <a id="release">&nbsp;</a>
 
+* 2013.1.18
+    * 项目网页更新内容，增加微博和豆瓣小站的链接
+    * `SovietJS` v0.0.1 发布
+    * `mo/lang` 增加OOP工具`.construct()`
+    * `mo/lang` 拆分子模块
+    * `ozma.js` 支持windows
 * 2012.12.2
     * 新的API文档：[define & require](http://ozjs.org/docs/define.html)
     * `oz.js` v2.5 和 `ozma` v1.4 发布。支持在模块名中使用别名和相对当前文件的路径

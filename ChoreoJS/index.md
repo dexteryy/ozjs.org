@@ -19,7 +19,8 @@ title: ChoreoJS
 
 ## Dependencies
 
-* [mo/lang](https://github.com/dexteryy/mo)
+* [mo/lang/es5](https://github.com/dexteryy/mo)
+* [mo/lang/mix](https://github.com/dexteryy/mo)
 * [mo/mainloop](https://github.com/dexteryy/mo)
 * [EventMaster](https://github.com/dexteryy/EventMaster)
 
