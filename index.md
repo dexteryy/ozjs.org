@@ -227,11 +227,15 @@ See usage for more detail:
 * [Bubbler](http://bubbler.labs.douban.com/) *Webapp to explore social music technology*
 * [BugHunter](https://github.com/dexteryy/BugHunter) *Multiplayer "answer first game" or a competition responder system, based on NodeJS and OzJS*
 
+## Follow @ozjs
+
+* [新浪微博](http://weibo.com/ozjs)
+* [豆瓣小站](http://site.douban.com/199314/)
+
 ## More References
 
 * [d2forum2010: 通用JS时代的模块机制和编译工具(slide)](http://www.slideshare.net/dexter_yy/js-6228773)
 * [d2forum2011: 新版阿尔法城背后的前端MVC实践(slide)](http://www.slideshare.net/dexter_yy/mvc-8554206)
-
 
 ## Release History <a id="release">&nbsp;</a>
 
