@@ -95,6 +95,4 @@ See usage for more detail:
     * [demo3: for production](http://ozjs.org/ozma/examples/demo3.html) 
     * [demo4: for third party package manager](http://ozjs.org/ozma/examples/demo4.html)
 * Config example for grunt: [doc](http://ozjs.org/grunt-ozjs/) 
-* WebApp demo: [Doubanchou](https://github.com/dexteryy/doubanchou)
-* TodoMVC demo: coming soon...
 

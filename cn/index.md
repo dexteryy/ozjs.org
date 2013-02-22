@@ -139,6 +139,14 @@ Install the [scaffolding/workflow tool](http://ozjs.org/generator-ozjs) then try
 * [Getting Started with oz.js and ozma.js](http://ozjs.org/docs/start.html)
 * [define & require](http://ozjs.org/docs/define.html)
 
+## Demo App
+
+* [Doubanchou](https://github.com/dexteryy/doubanchou) - Lottery / Draft app
+* [Doubanchou II: Pachislot](https://github.com/dexteryy/pachislot) - Lottery app
+* [BugHunter](https://github.com/dexteryy/BugHunter) - Multiplayer "answer first game" or a competition responder system
+* [Demonstory](https://github.com/douban-f2e/demonstory) -  real time movie acts by web page elements
+* TodoMVC: coming soon...
+
 ## In the Real World
 
 * [Alphatown](http://alphatown.com) - *2D browser based virtual world*
@@ -146,7 +154,6 @@ Install the [scaffolding/workflow tool](http://ozjs.org/generator-ozjs) then try
 * [Douban's contributor system](http://read.douban.com/submit/) - *Online self-publishing tool for Douban Reader*
 * [Bubbler](http://bubbler.labs.douban.com/) - *Webapp to explore social music technology*
 * Code - *Douban's Github clone for internal use*
-* [BugHunter](https://github.com/dexteryy/BugHunter) - *Multiplayer "answer first game" or a competition responder system, based on NodeJS and OzJS*
 
 ## Follow @ozjs
 
