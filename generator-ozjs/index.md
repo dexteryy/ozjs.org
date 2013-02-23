@@ -57,11 +57,11 @@ grunt
 
 ## Source code
 
-* [View on Github](https://github.com/dexteryy/grunt-ozjs)
+* [View on Github](https://github.com/dexteryy/generator-ozjs)
 
 ## More References
 
-See [OzJS References](http://ozjs.org/#ref)
+See [OzJS Project Homepage](http://ozjs.org/)
 
 ## Release History
 

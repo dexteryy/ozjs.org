@@ -46,7 +46,7 @@ OzJS是一个为“现代JS开发”提供支持的开源项目，反对臃肿�
 #### [OzJS Adapter](http://ozjs.org/adapter): 
 * Mini define/require mplementation for old web page
 * Transform AMD module into traditional module pattern
-* [Source code](https://github.com/dexteryy/OzJS/blob/master/adapter.js)
+* [Source code](https://github.com/dexteryy/OzJS/blob/master/contrib/adapter.js)
 
 ## Micro-framework <a id="framework">&nbsp;</a>
 
@@ -59,11 +59,6 @@ OzJS Project provides plenty of tiny, mutually independent, single purpose modul
 * Provide both Promise/Deferred/Flow pattern and Event/Notify/Observer/PubSub pattern
 * [Source code](https://github.com/dexteryy/EventMaster)
 
-#### [URLKit](http://ozjs.org/URLKit)
-* A lightweight implementation of routing and URL manager
-* Automatic switch between html5 History API and IE's hashbang
-* [Source code](https://github.com/dexteryy/URLKit)
-
 #### [DollarJS](http://ozjs.org/DollarJS)
 * A jQuery-compatible and non-All-in-One library which is more "Zepto" than Zepto.js
 * Focus on DOM operations and mobile platform, wrap native API wherever possible.
@@ -73,6 +68,11 @@ OzJS Project provides plenty of tiny, mutually independent, single purpose modul
 * Standalone UI event delegate implementation
 * Provide multiple styles/modes: override, automatically preventDefault, partial matching, exact matching...
 * [Source code](https://github.com/dexteryy/SovietJS)
+
+#### [URLKit](http://ozjs.org/URLKit)
+* A lightweight implementation of routing and URL manager
+* Automatic switch between html5 History API and IE's hashbang
+* [Source code](https://github.com/dexteryy/URLKit)
 
 #### CordJS 
 * A tiny, pure, event-based model-view-binder (MVB) library which is far more thin than Backbone 
@@ -116,30 +116,20 @@ OzJS Project provides plenty of tiny, mutually independent, single purpose modul
 
 #### [Moui](http://ozjs.org/moui)
 * A collection of OzJS UI behavior modules that form a library called "Moui" 
-* Modules overview
-    * `moui/stick`
-        * Stick a DOM element to anther from any clock position 
-    * `moui/drag`: 
-        * Standalone drag & drop library provides HTML5 shim 
-    * `moui/danvas`
-        * Implement canvas API using DOM elements
-    * `moui/mention`
-    * `moui/scrollbar`
-    * `moui/mapviewer`
-    * `moui/dialog`
-    * More coming soon...
+* Focus on mobile web app
+* v2.0 coming soon...
 * [Source code](https://github.com/dexteryy/moui)
 
-## Quick Start <a id="start">&nbsp;</a>
-
-Install the [scaffolding/workflow tool](http://ozjs.org/generator-ozjs) then try the [ozjs:app](http://ozjs.org/generator-ozjs#app) generator.
-
-## Tutorials <a id="ref">&nbsp;</a>
+## Tutorials <a id="start">&nbsp;</a>
 
 * [Getting Started with oz.js and ozma.js](http://ozjs.org/docs/start.html)
 * [define & require](http://ozjs.org/docs/define.html)
 
-## Demo App
+## Quick Start
+
+Install the [scaffolding/workflow tool](http://ozjs.org/generator-ozjs) then try the [ozjs:app](http://ozjs.org/generator-ozjs#app) generator.
+
+## Demo App <a id="demo">&nbsp;</a>
 
 * [Doubanchou](https://github.com/dexteryy/doubanchou) - Lottery / Draft app
 * [Doubanchou II: Pachislot](https://github.com/dexteryy/pachislot) - Lottery app
@@ -155,7 +145,7 @@ Install the [scaffolding/workflow tool](http://ozjs.org/generator-ozjs) then try
 * [Bubbler](http://bubbler.labs.douban.com/) - *Webapp to explore social music technology*
 * Code - *Douban's Github clone for internal use*
 
-## Follow @ozjs
+## Follow @ozjs <a id="ref">&nbsp;</a>
 
 * [新浪微博](http://weibo.com/ozjs)
 * [豆瓣小站](http://site.douban.com/199314/)
@@ -167,6 +157,11 @@ Install the [scaffolding/workflow tool](http://ozjs.org/generator-ozjs) then try
 
 ## Release History <a id="release">&nbsp;</a>
 
+* 2013.2.23
+    * [主页](http://ozjs.org)更新
+    * [grunt-furnace](http://ozjs.org/grunt-furnace) 0.1.2 支持AMD>CJS, CJS>AMD, TPL>CJS
+    * `mo` 1.2 和 `EventMaster` 2.1 可以直接用npm安装了
+    * OzJS主仓库调整目录结构，子项目移入[contrib/](https://github.com/dexteryy/OzJS/tree/master/contrib)和[toolchain/](https://github.com/dexteryy/OzJS/tree/master/toolchain)
 * 2013.2.22
     * [generator-ozjs](http://ozjs.org/generator-ozjs) beta release
     * [grunt-furnace](http://ozjs.org/grunt-furnace) beta release

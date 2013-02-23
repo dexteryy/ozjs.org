@@ -18,7 +18,7 @@ Coming soon...
 
 ## More References
 
-See [OzJS References](http://ozjs.org/#ref)
+See [OzJS Project Homepage](http://ozjs.org/)
 
 ## Release History
 

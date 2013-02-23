@@ -8,12 +8,21 @@ title: SovietJS
 > * Standalone UI event delegate implementation
 > * Provide multiple styles/modes: override, automatically preventDefault, partial matching, exact matching...
 
-## AMD and OzJS
+## Usage
+
+### AMD and OzJS
 
 * SovietJS can either be viewed as an independent library, or as a part of [OzJS mirco-framework](http://ozjs.org/#framework).
 * It's wrapped as an [AMD (Asynchronous Module Definition)](https://github.com/amdjs/amdjs-api/wiki/AMD) module. You should use it with [oz.js](http://ozjs.org/#start) (or require.js or [similar](http://wiki.commonjs.org/wiki/Implementations) for handling dependencies). 
 * If you want to make it available for both other AMD code and traditional code based on global namespace. OzJS provides [a mini define/require implementation](http://ozjs.org/examples/adapter/) to transform AMD module into traditional [module pattern](http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth).
 * See [http://ozjs.org](http://ozjs.org) for details.
+
+### Get the code
+
+* [Download on Github](https://github.com/dexteryy/SovietJS/blob/master/soviet.js)
+* Add to your project as new dependency:
+    * via [istatic](http://ozjs.org/istatic)
+    * via [volo](https://github.com/volojs/volo)
 
 ## Dependencies
 
@@ -26,13 +35,6 @@ title: SovietJS
 ## Examples
 
 Under construction...
-
-## Get the code
-
-* [View/download on Github](https://github.com/dexteryy/SovietJS/blob/master/soviet.js)
-* Add/update to your project as new dependency:
-    * via [istatic](https://github.com/mockee/istatic.git)
-    * via [volo](https://github.com/volojs/volo)
 
 ## API and usage
 
@@ -62,7 +64,7 @@ Under construction...
 
 ## More References
 
-See [OzJS References](http://ozjs.org/#ref)
+See [OzJS Project Homepage](http://ozjs.org/)
 
 ## Release History
 

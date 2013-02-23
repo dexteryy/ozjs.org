@@ -6,7 +6,8 @@ title: Moui
 # Moui
 
 > * A collection of OzJS UI behavior modules that form a library called "Moui"
-> * Under construction...
+> * Focus on mobile web app
+> * v2.0 coming soon...
 
 ## AMD and OzJS
 
@@ -22,17 +23,7 @@ title: Moui
 
 ## Modules Overview
 
-* [moui/stick](https://github.com/dexteryy/moui/blob/master/stick.js): 
-    * Stick a DOM element to anther from any clock position 
-* `moui/drag`: 
-    * Standalone drag & drop library provides HTML5 shim 
-    * Refactoring...
-* [moui/danvas](https://github.com/dexteryy/moui/blob/master/danvas.js): 
-    * Implement canvas API using DOM elements
-* [moui/mention](https://github.com/dexteryy/moui/blob/master/mention.js): 
-* [moui/scrollbar](https://github.com/dexteryy/moui/blob/master/scrollbar.js): 
-* [moui/mapviewer](https://github.com/dexteryy/moui/blob/master/mapviewer.js): 
-* [moui/dialog](https://github.com/dexteryy/moui/blob/master/dialog.js): 
+> * Under construction...
 
 ## Examples
 
