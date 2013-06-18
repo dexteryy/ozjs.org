@@ -47,6 +47,7 @@ var soviet = require('soviet');
         * `preventDefault` -- false
         * `matchesSelector` -- false
         * `autoOverride` -- false
+        * `aliasEvents` -- {}
         * `trace` -- false
         * `traceStack` -- null
     * API:
