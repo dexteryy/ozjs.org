@@ -29,7 +29,7 @@ grunt.loadNpmTasks('grunt-ozjs');
 
 ``` javascript
 oz: {
-    // comming soon...
+    // coming soon...
 },
 ozma: {
     testapp: {
