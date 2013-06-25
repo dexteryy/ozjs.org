@@ -189,5 +189,10 @@ Install the [scaffolding/workflow tool](http://ozjs.org/generator-ozjs) then try
 
 ## Release History
 
-See [changelog](http://ozjs.org/changelog)
+See [changelog](https://github.com/dexteryy/OzJS/wiki/Changelog)
+
+## License
+
+Copyright (c) 2010 - 2013 dexteryy  
+Licensed under the MIT license.
 

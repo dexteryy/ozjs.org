@@ -623,7 +623,7 @@ require.config({ enable_ozma: true });
  */
 define("mo/browsers", [], function(){
 
-    var match, skin, os, is_mobile,
+    var match, skin, os, is_mobile, is_webview,
         ua = this.navigator.userAgent.toLowerCase(),
         rank = { 
             "360ee": 2,
@@ -644,6 +644,7 @@ define("mo/browsers", [], function(){
             randroid = /(android)[ ;]([\w.]*)/,
             rmobilesafari = /(\w+)[ \/]([\w.]+)[ \/]mobile.*safari/,
             rsafari = /(\w+)[ \/]([\w.]+) safari/,
+            rwebview = /(.)([^\/]+)[ \/]mobile\//,
             rwebkit = /(webkit)[ \/]([\w.]+)/,
             ropera = /(opera)(?:.*version)?[ \/]([\w.]+)/,
             rmsie = /(msie) ([\w.]+)/,
@@ -675,7 +676,7 @@ define("mo/browsers", [], function(){
             || ua.indexOf("compatible") < 0 && rmozilla.exec(ua) 
             || [];
 
-        is_mobile = rmobilesafari.exec(ua);
+        is_mobile = rmobilesafari.exec(ua) || (is_webview = rwebview.exec(ua));
 
         if (match[1] === 'webkit') {
             var vendor = is_mobile || rsafari.exec(ua);
@@ -689,8 +690,9 @@ define("mo/browsers", [], function(){
                         || os[1] === 'android' 
                             && 'aosp' 
                         || 'safari')
+                    || is_webview && 'webview'
                     || vendor[1];
-                match[2] = vendor[2];
+                match[2] = is_webview ? 0 : vendor[2];
             }
         }
 
@@ -811,8 +813,9 @@ define("mo/domready", [
 /* @source ../cardkit/supports.js */;
 
 define("../cardkit/supports", [
-  "mo/browsers"
-], function(browsers){
+  "mo/browsers",
+  "cardkit/env"
+], function(browsers, env){
 
     var window = this,
         document = window.document,
@@ -821,7 +824,8 @@ define("../cardkit/supports", [
         is_ios = browsers.os === 'iphone' || browsers.os === 'ipad',
         is_ios5 = is_ios
             && browsers.engine === 'webkit'
-            && parseInt(browsers.engineversion, 10) < 536,
+            && parseFloat(browsers.engineversion) < 536,
+        is_ios7 = parseFloat(browsers.osversion) >= 7,
         is_mobilefirefox = browsers.mozilla && is_android,
         is_desktop = browsers.os === 'mac'
             || browsers.os === 'windows'
@@ -843,7 +847,7 @@ define("../cardkit/supports", [
 
         BROWSER_CONTROL: is_desktop
             || browsers.mobilesafari
-            || browsers.shell === 'micromessenger'
+            //|| browsers.shell === 'micromessenger'
             //|| browsers.aosp
             || is_android && browsers.chrome,
 
@@ -863,7 +867,9 @@ define("../cardkit/supports", [
 
         PREVENT_WINDOW_SCROLL: !!browsers.mobilesafari,
 
-        HIDE_TOPBAR: !!browsers.mobilesafari
+        FULLSCREEN_MODE: browsers.webview || env.fullscreenMode,
+
+        FOLDABLE_URLBAR: browsers.mobilesafari && !is_ios7
 
     };
 
@@ -2556,14 +2562,17 @@ define("../cardkit/parser/navdrawer", [
 define("../cardkit/parser/actionbar", [
   "dollar",
   "mo/lang",
-  "../cardkit/parser/util"
-], function($, _, util){
+  "../cardkit/parser/util",
+  "../cardkit/supports"
+], function($, _, util, supports){
     
     function exports(cfg, raw){
         cfg = $(cfg);
         var source = util.getSource(cfg, raw),
             config = {
-                limit: cfg.data('cfgLimit') || 1
+                limit: cfg.data('cfgLimit') 
+                    || !supports.FULLSCREEN_MODE && 1
+                    || 0
             },
             items = source && source.find('.ckd-item').map(function(elm){
                 return util.getItemDataOuter(elm, null, 'item');
@@ -2909,7 +2918,7 @@ define("../cardkit/tpl/unit/list", [], function(){
 
 define("../cardkit/tpl/unit/box", [], function(){
 
-    return {"template":"\n{% function hd(){ %}\n    {% if (data.hd) { %}\n    <header class=\"ck-hd-wrap\">\n\n        <span class=\"ck-hd {%= (data.hd_url && 'clickable' || '') %}\">\n            {% if (data.hd_url) { %}\n            <a href=\"{%= data.hd_url %}\" class=\"ck-link ck-link-mask {%= (data.hd_url_extern ? 'ck-link-extern' : '') %}\"></a>\n            {% } %}\n            <span>{%= data.hd %}</span>\n        </span>\n\n        {% if (data.hd_opt) { %}\n        <div class=\"ck-hdopt-wrap\">{%=data.hd_opt%}</div>\n        {% } %}\n\n    </header>\n    {% } %}\n{% } %}\n\n{% if (data.config.plain || data.config.plainhd) { %}\n    {%= hd() %}\n{% } %}\n\n<article class=\"ck-unit-wrap\">\n\n    {% if (!data.config.plain && !data.config.plainhd) { %}\n        {%= hd() %}\n    {% } %}\n\n    {% if (data.hasContent) { %}\n    <section>\n        {% if (data.config.disableReader) { %}\n        <script type=\"text/template\" class=\"ckd-delay-content\">\n        {%= data.content %}\n        </script>\n        {% } else { %}\n        {%= data.content %}\n        {% } %}\n    </section>\n    {% } %}\n\n    {% if (data.ft) { %}\n    <footer>{%= data.ft %}</footer>\n    {% } %}\n\n</article>\n"}; 
+    return {"template":"\n{% function hd(){ %}\n    {% if (data.hd) { %}\n    <header class=\"ck-hd-wrap\">\n\n        <span class=\"ck-hd {%= (data.hd_url && 'clickable' || '') %}\">\n            {% if (data.hd_url) { %}\n            <a href=\"{%= data.hd_url %}\" class=\"ck-link ck-link-mask {%= (data.hd_url_extern ? 'ck-link-extern' : '') %}\"></a>\n            {% } %}\n            <span>{%= data.hd %}</span>\n        </span>\n\n        {% if (data.hd_opt) { %}\n        <div class=\"ck-hdopt-wrap\">{%=data.hd_opt%}</div>\n        {% } %}\n\n    </header>\n    {% } %}\n{% } %}\n\n{% if (data.config.plain || data.config.plainhd) { %}\n    {%= hd() %}\n{% } %}\n\n<article class=\"ck-unit-wrap\">\n\n    {% if (!data.config.plain && !data.config.plainhd) { %}\n        {%= hd() %}\n    {% } %}\n\n    {% if (data.hasContent) { %}\n    <section>\n        {%= data.content %}\n    </section>\n    {% } %}\n\n    {% if (data.ft) { %}\n    <footer>{%= data.ft %}</footer>\n    {% } %}\n\n</article>\n"}; 
 
 });
 /* @source mo/template/string.js */;
@@ -3191,11 +3200,11 @@ define("../cardkit/render", [
             var data = boxParser(unit, raw);
             if (data.hasContent || data.hd) {
                 unit.innerHTML = tpl.convertTpl(tpl_box.template, data, 'data');
-                setTimeout(function(){
-                    $('.ckd-delay-content', unit).forEach(function(tpl){
-                        this(tpl).replaceWith(tpl.innerHTML);
-                    }, $);
-                }, 100);
+                //setTimeout(function(){
+                    //$('.ckd-delay-content', unit).forEach(function(tpl){
+                        //this(tpl).replaceWith(tpl.innerHTML);
+                    //}, $);
+                //}, 100);
                 return true;
             } else {
                 $(unit).remove();
@@ -3689,7 +3698,7 @@ define("../cardkit/bus", [
 
 define("../cardkit/tpl/layout/ctlbar", [], function(){
 
-    return {"template":"<div class=\"ck-ctl-bar\">\n    <input type=\"button\" class=\"ck-ctl-backward\">\n    <input type=\"button\" class=\"ck-ctl-forward disabled\">\n    <input type=\"button\" class=\"ck-ctl-reload\">\n</div>\n"}; 
+    return {"template":"<div class=\"ck-ctl-bar\">\n    <input type=\"button\" class=\"ck-ctl-backward\">\n    <input type=\"button\" class=\"ck-ctl-reload\">\n</div>\n"}; 
 
 });
 /* @source ../cardkit/tpl/layout/overflowmenu.js */;
@@ -7742,6 +7751,14 @@ define("../cardkit/app", [
             });
         },
 
+        '.ck-top-title': function(){
+            if (supports.FULLSCREEN_MODE) {
+                $('.ck-top-nav').trigger('tap');
+            } else {
+                return true;
+            }
+        },
+
         '.ck-top-nav, .ck-top-nav span': function(){
             if (this.href) {
                 return;
@@ -8026,14 +8043,14 @@ define("../cardkit/app", [
             if (!supports.SAFARI_OVERFLOWSCROLL) {
                 $(body).addClass('no-overflowscroll');
             }
-            if (supports.HIDE_TOPBAR) {
+            if (supports.FOLDABLE_URLBAR) {
                 $(body).addClass('mobilesafari-bar');
             }
             if (supports.FIXED_BOTTOM_BUGGY) {
                 $(body).addClass('fixed-bottom-buggy');
             }
-            if (env.hideToolbars) {
-                $(body).addClass('hide-toolbars');
+            if (supports.FULLSCREEN_MODE) {
+                $(body).addClass('fullscreen-mode');
             }
 
             this.initState();
@@ -8179,7 +8196,8 @@ define("../cardkit/app", [
 
             }
 
-            if (supports.CARD_SCROLL) {
+            if (supports.CARD_SCROLL
+                    && !supports.FULLSCREEN_MODE) {
 
                 var startY,
                     topbar_holded,
@@ -8201,7 +8219,7 @@ define("../cardkit/app", [
                     .bind('touchstart', scroll_on_header);
                 this.header.bind('touchstart', scroll_on_header);
 
-                if (supports.HIDE_TOPBAR) {
+                if (supports.FOLDABLE_URLBAR) {
 
                     this.header.bind('touchmove', function(e){
                         if (topbar_holded && e.touches[0].clientY < startY) {
@@ -8215,6 +8233,14 @@ define("../cardkit/app", [
 
                 }
 
+            }
+
+            if (supports.FULLSCREEN_MODE) {
+                $(document).on('scrollstart', function(){
+                    ck.hideAllBars();
+                }).on('scrollend', function(){
+                    ck.showAllBars();
+                });
             }
 
         },
@@ -8280,7 +8306,7 @@ define("../cardkit/app", [
                     rewrite_state = state === MODAL_CARDID && DEFAULT_CARDID 
                         || state;
                     if (!$('#' + rewrite_state).hasClass('ck-card')) {
-                        window.location.reload(true);
+                        //window.location.reload(true);
                         return;
                     }
                     history.back();
@@ -8290,7 +8316,11 @@ define("../cardkit/app", [
                 }
             });
 
-            $(window).bind("popstate", function(){
+            bus.once('inited', function(){
+                $(window).bind("popstate", when_pop);
+            });
+
+            function when_pop(){
                 if (ck._backFromSameUrl) {
                     var state = window.location.hash.split(HASH_SEP).pop();
                     //alert('10.2: ' + state)
@@ -8316,7 +8346,7 @@ define("../cardkit/app", [
                         }
                     }
                 }, 100);
-            });
+            }
 
         },
 
@@ -8525,6 +8555,14 @@ define("../cardkit/app", [
             ck.showTopbar();
         },
 
+        hideAllBars: function(){
+            $(body).addClass('allbars-disabled');
+        },
+
+        showAllBars: function(){
+            $(body).removeClass('allbars-disabled');
+        },
+
         hideTopbar: function(){
             if (this.topbarEnable && !this.disableView) {
                 this.topbarEnable = false;
@@ -8542,7 +8580,7 @@ define("../cardkit/app", [
         hideAddressbar: function(){
             if (this.windowFullHeight > window.innerHeight) {
                 this.loadingCard.find('div')[0].style.visibility = 'hidden';
-                if (supports.HIDE_TOPBAR
+                if (supports.FOLDABLE_URLBAR
                         && (supports.CARD_SCROLL || !this.sizeInited)) {
                     ck.resetWindowTop();
                     body.scrollTop = 0;
@@ -8937,7 +8975,8 @@ define("../cardkit/app", [
     function when_back_end(prev_id){
         if (prev_id === LOADING_CARDID) {
             //alert('back: ' + document.referrer + '\n' + location.href)
-            if (compare_link(document.referrer)
+            if (document.referrer
+                   && compare_link(document.referrer)
                    || !/#.+/.test(document.referrer)) { // redirect.html
                 ck._backFromSameUrl = true;
             }
