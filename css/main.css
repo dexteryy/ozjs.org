@@ -116,18 +116,19 @@ strong {
 
 ul li {
   list-style: inside;
-  padding-left: 25px;
+  padding-left: 20px;
 }
 
 ol li {
   list-style: decimal inside;
-  padding-left: 20px;
+  padding-left: 15px;
 }
 
 blockquote {
-  margin: 0;
-  padding: 0 0 0 20px;
-  font-style: italic;
+  margin: 0 0 0 2px;
+  padding: 0 0 0 10px;
+  border-left: 4px solid #EEE;
+  color:#666;
 }
 
 dl, dt, dd, dl p {
