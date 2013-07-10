@@ -11,7 +11,13 @@ title: CordJS
 > * Provides minimal built-in APIs but supports all external and conventional methods to access the model.
 > * Model can be nested and supports bubbling events.
 
-## Usage
+## In NodeJS
+
+```
+npm install cord
+```
+
+## In browser
 
 ### AMD and OzJS
 
