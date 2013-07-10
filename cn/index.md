@@ -59,7 +59,7 @@ OzJS Project provides plenty of tiny, mutually independent, single purpose modul
 * [Source code](https://github.com/dexteryy/EventMaster)
 
 #### [NervJS](http://ozjs.org/NervJS)
-> * A tiny, pure, event-based model wrapper for the MVC or MDV (Model-driven Views) pattern.
+* A tiny, pure, event-based model wrapper for the MVC or MDV (Model-driven Views) pattern.
 * [Source code](https://github.com/dexteryy/NervJS)
 
 #### [DollarJS](http://ozjs.org/DollarJS)
