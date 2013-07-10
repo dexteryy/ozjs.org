@@ -54,6 +54,10 @@ OzJS Project provides plenty of tiny, mutually independent, single purpose modul
 * A simple, compact and consistent implementation of a variant of CommonJS's Promises and Events
 * [Source code](https://github.com/dexteryy/EventMaster)
 
+#### [NervJS](http://ozjs.org/NervJS)
+> * A tiny, pure, event-based model wrapper for the MVC or MDV (Model-driven Views) pattern.
+* [Source code](https://github.com/dexteryy/NervJS)
+
 #### [DollarJS](http://ozjs.org/DollarJS)
 * A jQuery-compatible and non-All-in-One library which is more "Zepto" than Zepto.js
 * [Source code](https://github.com/dexteryy/DollarJS)
@@ -61,10 +65,6 @@ OzJS Project provides plenty of tiny, mutually independent, single purpose modul
 #### [SovietJS](http://ozjs.org/SovietJS)
 * Standalone UI event delegate implementation
 * [Source code](https://github.com/dexteryy/SovietJS)
-
-#### [CordJS](http://ozjs.org/CordJS)
-> * A tiny, pure, event-based model wrapper for the MVC or MDV (Model-driven Views) pattern.
-* [Source code](https://github.com/dexteryy/CordJS)
 
 #### [URLKit](http://ozjs.org/URLKit)
 * A lightweight implementation of routing and URL manager

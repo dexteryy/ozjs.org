@@ -1,5 +1,5 @@
 /**
- * CordJS 
+ * NervJS 
  * A tiny, pure, event-based model wrapper for the MVC or MDV (Model-driven Views) pattern.
  * It is far thinner than Backbone. None of View, Controller or Router is involved.
  * Strict data hiding but straightforward way to use.
@@ -12,7 +12,7 @@
  * Copyright (C) 2010-2012, Dexter.Yy, MIT License
  * vim: et:ts=4:sw=4:sts=4
  */
-define('cord', [
+define('nerv', [
     'mo/lang',
     'eventmaster'
 ], function(_, event){

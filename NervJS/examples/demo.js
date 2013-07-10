@@ -5,10 +5,10 @@ require.config({
 
 define('a', [
     "mo/lang", 
-    "cord" 
-], function(_, cord){
+    "nerv" 
+], function(_, nerv){
 
-    var a = cord({
+    var a = nerv({
         v1: 10
     });
 
@@ -34,10 +34,10 @@ define('a', [
 
 define('b', [
     "mo/lang", 
-    "cord" 
-], function(_, cord){
+    "nerv" 
+], function(_, nerv){
 
-    var b = cord({
+    var b = nerv({
         v2: 10
     });
 
@@ -63,10 +63,10 @@ define('b', [
 
 define('c', [
     "mo/lang", 
-    "cord" 
-], function(_, cord){
+    "nerv" 
+], function(_, nerv){
 
-    var cModel = cord.model({
+    var cModel = nerv.model({
 
         defaults: {
             v3: 0,
@@ -102,10 +102,10 @@ define('c', [
 
 define('d', [
     "mo/lang", 
-    "cord" 
-], function(_, cord){
+    "nerv" 
+], function(_, nerv){
 
-    var d = cord([1, 2]);
+    var d = nerv([1, 2]);
 
     d.observer.bind('change', function(){
         console.info('change d');
@@ -117,12 +117,12 @@ define('d', [
 
 require([
     "mo/lang", 
-    "cord", 
+    "nerv", 
     "a",
     "b",
     "c",
     "d"
-], function(_, cord, a, b, c, d){
+], function(_, nerv, a, b, c, d){
 
     var HR = '---------------';
 
@@ -142,7 +142,7 @@ require([
 
     console.info(HR);
 
-    a.set('m1', cord());
+    a.set('m1', nerv());
 
     console.info(HR);
 
