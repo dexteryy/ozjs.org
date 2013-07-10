@@ -9,7 +9,8 @@
  */
 define("mo/browsers", [], function(){
 
-    var match, skin, 
+    var match, skin, os, is_mobile, is_webview,
+        ua = this.navigator.userAgent.toLowerCase(),
         rank = { 
             "360ee": 2,
             "maxthon/3": 2,
@@ -22,8 +23,14 @@ define("mo/browsers", [], function(){
         };
 
     try {
-        var ua = navigator.userAgent.toLowerCase(),
-            rmobilesafari = /apple.*mobile.*safari/,
+        var rwindows = /(windows) nt ([\w.]+)/,
+            rmac = /(mac) os \w+ ([\w.]+)/,
+            riphone = /(iphone) os ([\w._]+)/,
+            ripad = /(ipad) os ([\w.]+)/,
+            randroid = /(android)[ ;]([\w.]*)/,
+            rmobilesafari = /(\w+)[ \/]([\w.]+)[ \/]mobile.*safari/,
+            rsafari = /(\w+)[ \/]([\w.]+) safari/,
+            rwebview = /(.)([^\/]+)[ \/]mobile\//,
             rwebkit = /(webkit)[ \/]([\w.]+)/,
             ropera = /(opera)(?:.*version)?[ \/]([\w.]+)/,
             rmsie = /(msie) ([\w.]+)/,
@@ -31,24 +38,63 @@ define("mo/browsers", [], function(){
 
         var r360se = /(360se)/,
             r360ee = /(360ee)/,
+            r360phone = /(360) \w+phone/,
             rtheworld = /(theworld)/,
             rmaxthon3 = /(maxthon\/3)/,
-            rmaxthon = /(maxthon)\s/,
+            rmaxthon = /(maxthon)/,
+            rwechat = /(micromessenger)/,
             rtt = /(tencenttraveler)/,
             rqq = /(qqbrowser)/,
+            rbaidu = /(baidubrowser)/,
+            ruc = /(ucbrowser)/,
             rmetasr = /(metasr)/;
 
-        match = rmobilesafari.test(ua) && [0, "mobilesafari"] ||
-            rwebkit.exec(ua) ||
-            ropera.exec(ua) ||
-            rmsie.exec(ua) ||
-            ua.indexOf("compatible") < 0 && rmozilla.exec(ua) ||
-            [];
+        os = riphone.exec(ua) 
+            || ripad.exec(ua) 
+            || randroid.exec(ua) 
+            || rmac.exec(ua) 
+            || rwindows.exec(ua) 
+            || [];
 
-        skin = r360se.exec(ua) || r360ee.exec(ua) || rtheworld.exec(ua) || 
-            rmaxthon3.exec(ua) || rmaxthon.exec(ua) ||
-            rtt.exec(ua) || rqq.exec(ua) ||
-            rmetasr.exec(ua) || [];
+        match =  rwebkit.exec(ua) 
+            || ropera.exec(ua) 
+            || rmsie.exec(ua) 
+            || ua.indexOf("compatible") < 0 && rmozilla.exec(ua) 
+            || [];
+
+        is_mobile = rmobilesafari.exec(ua) || (is_webview = rwebview.exec(ua));
+
+        if (match[1] === 'webkit') {
+            var vendor = is_mobile || rsafari.exec(ua);
+            if (vendor) {
+                match[3] = match[1];
+                match[4] = match[2];
+                match[1] = vendor[1] === 'version' 
+                    && ((os[1] === 'iphone' 
+                            || os[1] === 'ipad')
+                            && 'mobilesafari'
+                        || os[1] === 'android' 
+                            && 'aosp' 
+                        || 'safari')
+                    || is_webview && 'webview'
+                    || vendor[1];
+                match[2] = is_webview ? 0 : vendor[2];
+            }
+        }
+
+        skin = r360se.exec(ua) 
+            || r360ee.exec(ua) 
+            || r360phone.exec(ua) 
+            || ruc.exec(ua) 
+            || rtheworld.exec(ua) 
+            || rmaxthon3.exec(ua) 
+            || rmaxthon.exec(ua) 
+            || rwechat.exec(ua)
+            || rtt.exec(ua) 
+            || rqq.exec(ua) 
+            || rbaidu.exec(ua) 
+            || rmetasr.exec(ua) 
+            || [];
 
     } catch (ex) {
         match = [];
@@ -58,8 +104,23 @@ define("mo/browsers", [], function(){
     var result = { 
         browser: match[1] || "", 
         version: match[2] || "0",
-        skin: skin[1] || ""
+        engine: match[3],
+        engineversion: match[4] || "0",
+        os: os[1],
+        osversion: os[2] || "0",
+        isMobile: os[1] === 'iphone'
+            || os[1] === 'android' && !!is_mobile,
+        skin: skin[1] || "",
+        ua: ua
     };
+
+    if (result.os === 'android' && !result.browser) {
+        result.skin = 'ucbrowser';
+        result.browser = 'aosp';
+        result.engine = 'webkit';
+        result.osversion = "0";
+    }
+
     if (match[1]) {
         result[match[1]] = parseInt(result.version, 10) || true;
     }

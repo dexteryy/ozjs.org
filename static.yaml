@@ -1,24 +1,46 @@
 
 repos:
-  dexteryy/OzJS:
-    file:
-      oz.js: js/lib/
-      contrib/adapter.js: js/lib/
-  dexteryy/mo:
-    file:
-      ./: js/mo/
-  dexteryy/ChoreoJS:
-    file:
-      choreo.js: js/
-  dexteryy/DollarJS:
-    file:
-      dollar.js: js/
-  dexteryy/SovietJS:
-    file:
-      soviet.js: js/
-  dexteryy/EventMaster:
-    file:
-      eventmaster.js: js/
-  dexteryy/URLKit:
-    file:
-      urlkit.js: js/
+
+    dexteryy/OzJS:
+      file:
+        oz.js: js/lib/
+        contrib/adapter.js: js/lib/
+
+    dexteryy/mo:
+      file: 
+        ./: js/mo/
+  
+    dexteryy/ChoreoJS:
+      file: 
+        choreo.js: js/ 
+
+    dexteryy/DollarJS:
+      file: 
+        dollar/: js/dollar/
+        dollar.js: js/
+  
+    dexteryy/SovietJS:
+      file: 
+        soviet.js: js/  
+  
+    dexteryy/EventMaster:
+      file: 
+        eventmaster.js: js/
+  
+    dexteryy/URLKit:
+      file: 
+        urlkit.js: js/
+  
+    dexteryy/moui:
+      file: 
+        ./util/: js/moui/util/ 
+        ./control.js: js/moui/ 
+        ./picker.js: js/moui/ 
+        ./overlay.js: js/moui/ 
+        ./actionview.js: js/moui/ 
+        ./modalview.js: js/moui/ 
+        ./growl.js: js/moui/ 
+        ./bubble.js: js/moui/ 
+        ./ranger.js: js/moui/ 
+        css/: css/  
+        asset/: pics/  
