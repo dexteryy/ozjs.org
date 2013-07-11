@@ -12,8 +12,8 @@ define('a', [
         v1: 10
     });
 
-    a.observer.bind('change', function(){
-        console.info('change a');
+    a.observer.bind('change', function(changes){
+        console.info('change a', changes);
     }).bind('v1:new', function(changes){
         console.info('new a.v1', changes);
     }).bind('v1:update', function(changes){
@@ -41,8 +41,8 @@ define('b', [
         v2: 10
     });
 
-    b.observer.bind('change', function(){
-        console.info('change b');
+    b.observer.bind('change', function(changes){
+        console.info('change b', changes);
     }).bind('v2:new', function(changes){
         console.info('new b.v2', changes);
     }).bind('v2:update', function(changes){
@@ -66,15 +66,22 @@ define('c', [
     "nerv" 
 ], function(_, nerv){
 
+    var _uuid = 0;
+
     var cModel = nerv.model({
 
+        init: function(){
+            this.set('cid', ++_uuid);
+        },
+
         defaults: {
+            cid: 0,
             v3: 0,
             v4: 0
         },
 
         getValues: function(){
-            var data = this.get();
+            var data = this.data();
             return Object.keys(data).map(function(k){
                 return this[k];
             }, data);
@@ -86,8 +93,8 @@ define('c', [
         v3: 10
     });
 
-    c.observer.bind('change', function(){
-        console.info('change c');
+    c.observer.bind('change', function(changes){
+        console.info('change c', changes);
     }).bind('v3:new', function(changes){
         console.info('new c.v3', changes);
     }).bind('v3:update', function(changes){
@@ -107,8 +114,8 @@ define('d', [
 
     var d = nerv([1, 2]);
 
-    d.observer.bind('change', function(){
-        console.info('change d');
+    d.observer.bind('change', function(changes){
+        console.info('change d', changes);
     });
 
     return d;
@@ -158,14 +165,14 @@ require([
 
     console.info(HR);
 
-    a.set(function(dataA){
-        dataA.v0 = 0;
+    a.set(function(a_agent){
+        a_agent.v0 = 0;
     });
 
     console.info(HR);
 
-    b.set(function(dataB){
-        _.mix(dataB, {
+    b.set(function(b_agent){
+        _.mix(b_agent, {
             v2: 2,
             m2: c 
         });
@@ -181,23 +188,31 @@ require([
 
     console.info(HR);
 
-    d.set(function(data){
+    d.set(function(d_agent){
         var i = d.find(0);
-        data.splice(i, 1, a);
+        d_agent.splice(i, 1, a);
     });
 
     console.info(HR);
 
-    d.set(function(data){
-        data[data.length - 1].set('m1', function(b){
-            b.set('v2', b.get('v2') * 10);
+    d.set(function(d_agent){
+        d_agent[d_agent.length - 1].set('m1', function(b){
+            b.set('v2', b.data('v2') * 10);
         });
     });
 
     console.info(HR);
 
-    console.info('d:', d.get());
+    var b_members = [];
+    b.each(function(v){
+        this.push(v);
+    }, b_members);
+    console.info('b members:', b_members);
 
-    console.info("c values:", c.getValues());
+    console.info("c.getValues():", c.getValues());
+
+    console.info('d.data():', d.data());
+
+    console.info('d:', d);
 
 });
