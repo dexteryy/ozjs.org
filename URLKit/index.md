@@ -19,10 +19,12 @@ title: URLKit
 
 ### Get the code
 
-* [Download on Github](https://github.com/dexteryy/URLKit/blob/master/urlkit.js)
-* Add to your project as new dependency:
-    * via [istatic](http://ozjs.org/istatic)
-    * via [volo](https://github.com/volojs/volo)
+Add to your project as new dependency
+
+* via [bower](http://bower.io/) - `bower install urlkit`
+* via [istatic](http://ozjs.org/istatic)
+
+Or [download directly from Github](https://github.com/dexteryy/URLKit/blob/master/urlkit.js)
 
 ## Dependencies
 

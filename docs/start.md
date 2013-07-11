@@ -7,9 +7,11 @@ title: OzJS / Getting Started with oz.js and ozma.js
 
 Download [oz.js](https://raw.github.com/dexteryy/OzJS/master/oz.js)
 
+Or install via [bower](http://bower.io/) - `bower install ozjs`
+
 You might also need a domReady module: [domready.js](https://github.com/dexteryy/mo/blob/master/domready.js)
 
-Put them into your project directory, like `./js/lib` and `./js/mo` 
+Put them into your project directory, like `./js/lib` and `./js/mo`.
 
 In your web page:
 
