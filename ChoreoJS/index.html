@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>ChoreoJS</title>
+
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/pygment_trac.css">
+
+</head>
+<body>
+
+
+<header>
+
+<p class="logo">OzJS</p>
+<p class="header">A microkernel for modular javascript, a toolchain for modern front-end, a micro-framework for growable WebApp.</p>
+
+<ul class="buttons">
+  <li><a class="buttons github" href="https://github.com/dexteryy/OzJS">View On GitHub</a></li>
+  <!--<li class="download"><a class="buttons" href="https://github.com/dexteryy/OzJS/zipball/master">Download ZIP</a></li>-->
+  <!--<li class="download"><a class="buttons" href="https://github.com/dexteryy/OzJS/tarball/master">Download TAR</a></li>-->
+  <a href="http://weibo.com/ozjs" target="_blank" class="followme weibo">关注微博</a>
+  <a href="http://site.douban.com/199314/" target="_blank" class="followme doubansite">关注豆瓣小站</a>
+</ul>
+
+</header>
+
+<nav>
+
+<ul>
+    <li><a href="/#overview">Overview</a></li>
+    <li>
+        <a href="/#toolchain">Toolchain</a>
+        <ul>
+            <li><a href="/generator-ozjs/">Generator</a></li>
+            <li><a href="/ozma/">OzmaJS</a></li>
+            <li><a href="/istatic/">iStatic</a></li>
+            <li><a href="/grunt-ozjs">grunt-ozjs</a></li>
+            <li><a href="/grunt-furnace">grunt-furnace</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="/#framework">Micro-framework</a>
+        <ul>
+            <li><a href="/mo/">Mo</a></li>
+            <li><a href="/EventMaster/">EventMaster</a></li>
+            <li><a href="/NervJS/">NervJS</a></li>
+            <li><a href="/DollarJS/">DollarJS</a></li>
+            <li><a href="/SovietJS/">SovietJS</a></li>
+            <li><a href="/URLKit/">URLKit</a></li>
+            <li><a href="/ChoreoJS/">ChoreoJS</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="/#ui">UI</a>
+        <ul>
+            <li><a href="/momo/">Momo</a></li>
+            <li><a href="/moui/">Moui</a></li>
+            <li><a href="/CardKit/">CardKit</a></li>
+        </ul>
+    </li>
+    <li><a href="/#start">Quick Start</a></li>
+    <li><a href="/#demo">Demo</a></li>
+    <li><a href="/#ref">References</a></li>
+    <li><a href="https://github.com/dexteryy/OzJS/wiki/Changelog" target="_blank">Release History</a></li>
+</ul>
+
+</nav>
+
+
+<div class="wrapper">
+<section>
+<h1 id="toc_300">ChoreoJS</h1>
+
+<blockquote>
+<ul>
+<li>An animation library which uses &quot;stage&quot; and &quot;actor&quot; as metaphors</li>
+<li>Automatic switch between CSS transitions and JS tweening</li>
+<li>Provide a flexible way to write asynchronous sequence of actions</li>
+<li>Support CSS transform value</li>
+</ul>
+</blockquote>
+
+<h2 id="toc_301">Usage</h2>
+
+<h3 id="toc_302">AMD and OzJS</h3>
+
+<ul>
+<li>ChoreoJS can either be viewed as an independent library, or as a part of <a href="http://ozjs.org/#framework">OzJS mirco-framework</a>.</li>
+<li>It&#39;s wrapped as an <a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD (Asynchronous Module Definition)</a> module. You should use it with <a href="http://ozjs.org/#start">oz.js</a> (or require.js or <a href="http://wiki.commonjs.org/wiki/Implementations">similar</a> for handling dependencies). </li>
+<li>If you want to make it available for both other AMD code and traditional code based on global namespace. OzJS provides <a href="http://ozjs.org/examples/adapter/">a mini define/require implementation</a> to transform AMD module into traditional <a href="http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth">module pattern</a>.</li>
+<li>See <a href="http://ozjs.org">http://ozjs.org</a> for details.</li>
+</ul>
+
+<h3 id="toc_303">Get the code</h3>
+
+<p>Add to your project as new dependency</p>
+
+<ul>
+<li>via <a href="http://bower.io/">bower</a> - <code>bower install choreo</code></li>
+<li>via <a href="http://ozjs.org/istatic">istatic</a></li>
+</ul>
+
+<p>Or <a href="https://github.com/dexteryy/ChoreoJS/blob/master/choreo.js">download directly from Github</a></p>
+
+<h2 id="toc_304">Dependencies</h2>
+
+<ul>
+<li><a href="https://github.com/dexteryy/mo">mo/lang/es5</a></li>
+<li><a href="https://github.com/dexteryy/mo">mo/lang/mix</a></li>
+<li><a href="https://github.com/dexteryy/mo">mo/mainloop</a></li>
+<li><a href="https://github.com/dexteryy/EventMaster">EventMaster</a></li>
+</ul>
+
+<h2 id="toc_305">Examples</h2>
+
+<ul>
+<li><a href="http://ozjs.org/ChoreoJS/examples/">demo</a></li>
+</ul>
+
+<h2 id="toc_306">API and usage</h2>
+<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">choreo</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;choreo&#39;</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<ul>
+<li><code>choreo.config(opt)</code> -- </li>
+<li><code>choreo.transform(elm, prop, value)</code> -- </li>
+<li><code>choreo.Stage(name)</code> -- </li>
+<li><code>choreo.Actor(opt|actors, stage)</code> -- </li>
+</ul>
+<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">stage</span> <span class="o">=</span> <span class="nx">choreo</span><span class="p">(</span><span class="s1">&#39;stageName[optional]&#39;</span><span class="p">);</span> <span class="c1">// Singleton with stageName</span>
+</code></pre>
+</div>
+
+<ul>
+<li><code>stage.isPlaying()</code> -- </li>
+<li><code>stage.isCompleted()</code> -- </li>
+<li><code>stage.play()</code> -- </li>
+<li><code>stage.pause()</code> -- </li>
+<li><code>stage.complete()</code> -- </li>
+<li><code>stage.cancel()</code> -- </li>
+<li><code>stage.clear()</code> -- </li>
+<li><code>stage.actor(opt)</code> -- </li>
+<li><code>stage.group(actor, actor, ...)</code> -- </li>
+<li><code>stage.follow()</code> -- </li>
+</ul>
+<div class="highlight"><pre><code class="javascript">    <span class="kd">var</span> <span class="nx">actor1</span> <span class="o">=</span> <span class="nx">stage</span><span class="p">.</span><span class="nx">actor</span><span class="p">(</span><span class="nx">elment</span><span class="p">,</span> <span class="nx">prop</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="nx">easeing</span><span class="p">,</span> <span class="nx">delay</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">actor2</span> <span class="o">=</span> <span class="nx">stage</span><span class="p">.</span><span class="nx">actor</span><span class="p">(</span><span class="nx">option</span><span class="p">,</span> <span class="nx">option</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">actorGroup</span> <span class="o">=</span> <span class="nx">stage</span><span class="p">.</span><span class="nx">group</span><span class="p">(</span><span class="nx">actor1</span><span class="p">,</span> <span class="nx">actor2</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<ul>
+<li><code>actor.enter(stage)</code> -- </li>
+<li><code>actor.exit()</code> -- </li>
+<li><code>actor.fork()</code> -- </li>
+<li><code>actor.setto(value)</code> -- </li>
+<li><code>actor.extendto(value)</code> -- </li>
+<li><code>actor.reverse()</code> -- </li>
+<li><code>actor.follow()</code> -- </li>
+</ul>
+<div class="highlight"><pre><code class="javascript">    <span class="kd">var</span> <span class="nx">promise</span> <span class="o">=</span> <span class="nx">stage</span><span class="p">.</span><span class="nx">follow</span><span class="p">();</span> <span class="c1">// or actor1.follow(), actorGroup.follow()</span>
+</code></pre>
+</div>
+
+<ul>
+<li><code>promise.then()</code> -- </li>
+<li><code>promise.done()</code> -- </li>
+<li><code>promise.fail()</code> -- </li>
+<li><code>promise.bind()</code> -- </li>
+<li>... -- see <a href="https://github.com/dexteryy/EventMaster">EventMaster</a></li>
+</ul>
+
+<p>Under construction...</p>
+
+<h2 id="toc_307">More References</h2>
+
+<p>See <a href="http://ozjs.org/">OzJS Project Homepage</a></p>
+
+<h2 id="toc_308">Release History</h2>
+
+<p>See <a href="http://ozjs.org/#release">OzJS Release History</a></p>
+
+<h2 id="toc_309">License</h2>
+
+<p>Copyright (c) 2010 - 2013 dexteryy<br>
+Licensed under the MIT license.</p>
+
+</section>
+</div>
+
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-404086-13']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+</body>
+</html>
+

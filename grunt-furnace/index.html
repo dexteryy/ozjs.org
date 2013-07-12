@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>grunt-furnace</title>
+
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/pygment_trac.css">
+
+</head>
+<body>
+
+
+<header>
+
+<p class="logo">OzJS</p>
+<p class="header">A microkernel for modular javascript, a toolchain for modern front-end, a micro-framework for growable WebApp.</p>
+
+<ul class="buttons">
+  <li><a class="buttons github" href="https://github.com/dexteryy/OzJS">View On GitHub</a></li>
+  <!--<li class="download"><a class="buttons" href="https://github.com/dexteryy/OzJS/zipball/master">Download ZIP</a></li>-->
+  <!--<li class="download"><a class="buttons" href="https://github.com/dexteryy/OzJS/tarball/master">Download TAR</a></li>-->
+  <a href="http://weibo.com/ozjs" target="_blank" class="followme weibo">关注微博</a>
+  <a href="http://site.douban.com/199314/" target="_blank" class="followme doubansite">关注豆瓣小站</a>
+</ul>
+
+</header>
+
+<nav>
+
+<ul>
+    <li><a href="/#overview">Overview</a></li>
+    <li>
+        <a href="/#toolchain">Toolchain</a>
+        <ul>
+            <li><a href="/generator-ozjs/">Generator</a></li>
+            <li><a href="/ozma/">OzmaJS</a></li>
+            <li><a href="/istatic/">iStatic</a></li>
+            <li><a href="/grunt-ozjs">grunt-ozjs</a></li>
+            <li><a href="/grunt-furnace">grunt-furnace</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="/#framework">Micro-framework</a>
+        <ul>
+            <li><a href="/mo/">Mo</a></li>
+            <li><a href="/EventMaster/">EventMaster</a></li>
+            <li><a href="/NervJS/">NervJS</a></li>
+            <li><a href="/DollarJS/">DollarJS</a></li>
+            <li><a href="/SovietJS/">SovietJS</a></li>
+            <li><a href="/URLKit/">URLKit</a></li>
+            <li><a href="/ChoreoJS/">ChoreoJS</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="/#ui">UI</a>
+        <ul>
+            <li><a href="/momo/">Momo</a></li>
+            <li><a href="/moui/">Moui</a></li>
+            <li><a href="/CardKit/">CardKit</a></li>
+        </ul>
+    </li>
+    <li><a href="/#start">Quick Start</a></li>
+    <li><a href="/#demo">Demo</a></li>
+    <li><a href="/#ref">References</a></li>
+    <li><a href="https://github.com/dexteryy/OzJS/wiki/Changelog" target="_blank">Release History</a></li>
+</ul>
+
+</nav>
+
+
+<div class="wrapper">
+<section>
+<h1 id="toc_401">grunt-furnace</h1>
+
+<blockquote>
+<ul>
+<li>Grunt tasks for transforming code from one format to another</li>
+</ul>
+</blockquote>
+
+<h2 id="toc_402">Support</h2>
+
+<ul>
+<li><a href="">TPL</a> &gt; <a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD</a> - Use JS template file as AMD module no matter what syntax </li>
+<li>TPL &gt; <a href="http://wiki.commonjs.org/wiki/Modules/1.1">CJS</a> - Use JS template file as CommonJS module no matter what syntax</li>
+<li>AMD &gt; CJS - Make available AMD module in NodeJS or publish AMD module through NPM</li>
+<li>CJS &gt; AMD - Use <a href="https://github.com/component/component/wiki/Components">Component</a>-based module in your OzJS-based or RequireJS-based project </li>
+<li>AMD &gt; module pattern <em>(coming soon...)</em></li>
+</ul>
+
+<h2 id="toc_403">Config Example</h2>
+<div class="highlight"><pre><code class="javascript"><span class="nx">furnace</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">tplExample</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">importas</span><span class="o">:</span> <span class="s1">&#39;tpl&#39;</span><span class="p">,</span>
+            <span class="nx">exportas</span><span class="o">:</span> <span class="s1">&#39;amd&#39;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="nx">src</span><span class="o">:</span> <span class="s1">&#39;tpl/**/*.tpl&#39;</span><span class="p">,</span>
+        <span class="nx">dest</span><span class="o">:</span> <span class="s1">&#39;js/app/tpl/&#39;</span>
+    <span class="p">},</span>
+    <span class="nx">npmExample</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">importas</span><span class="o">:</span> <span class="s1">&#39;amd&#39;</span><span class="p">,</span>
+            <span class="nx">exportas</span><span class="o">:</span> <span class="s1">&#39;cjs&#39;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="nx">files</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">expand</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="nx">cwd</span><span class="o">:</span> <span class="s1">&#39;./&#39;</span><span class="p">,</span>
+            <span class="nx">src</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;**/*.js&#39;</span><span class="p">,</span> <span class="s1">&#39;!&lt;%= meta.npmPublishDir %&gt;/**&#39;</span><span class="p">,</span> <span class="s1">&#39;!node_modules/**&#39;</span><span class="p">,</span> <span class="s1">&#39;Gruntfile.js&#39;</span><span class="p">],</span>
+            <span class="nx">dest</span><span class="o">:</span> <span class="s1">&#39;&lt;%= meta.npmPublishDir %&gt;/&#39;</span><span class="p">,</span>
+            <span class="nx">ext</span><span class="o">:</span> <span class="s1">&#39;.js&#39;</span>
+        <span class="p">}]</span>
+    <span class="p">}</span>
+<span class="p">},</span>
+</code></pre>
+</div>
+
+<p>See <a href="https://github.com/dexteryy/grunt-furnace/blob/master/Gruntfile.js">Gruntfile.js</a> and <a href="https://github.com/dexteryy/grunt-furnace/blob/master/tests">tests/</a> for more examples.</p>
+
+<h2 id="toc_404">Source code</h2>
+
+<ul>
+<li><a href="https://github.com/dexteryy/grunt-furnace">View on Github</a></li>
+</ul>
+
+<h2 id="toc_405">More References</h2>
+
+<p>See <a href="http://ozjs.org/">OzJS Project Homepage</a></p>
+
+<h2 id="toc_406">Release History</h2>
+
+<p>See <a href="http://ozjs.org/#release">OzJS Release History</a></p>
+
+<h2 id="toc_407">License</h2>
+
+<p>Copyright (c) 2010 - 2013 dexteryy<br>
+Licensed under the MIT license.</p>
+
+</section>
+</div>
+
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-404086-13']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+</body>
+</html>
+

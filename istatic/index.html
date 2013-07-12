@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>iStatic</title>
+
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/pygment_trac.css">
+
+</head>
+<body>
+
+
+<header>
+
+<p class="logo">OzJS</p>
+<p class="header">A microkernel for modular javascript, a toolchain for modern front-end, a micro-framework for growable WebApp.</p>
+
+<ul class="buttons">
+  <li><a class="buttons github" href="https://github.com/dexteryy/OzJS">View On GitHub</a></li>
+  <!--<li class="download"><a class="buttons" href="https://github.com/dexteryy/OzJS/zipball/master">Download ZIP</a></li>-->
+  <!--<li class="download"><a class="buttons" href="https://github.com/dexteryy/OzJS/tarball/master">Download TAR</a></li>-->
+  <a href="http://weibo.com/ozjs" target="_blank" class="followme weibo">关注微博</a>
+  <a href="http://site.douban.com/199314/" target="_blank" class="followme doubansite">关注豆瓣小站</a>
+</ul>
+
+</header>
+
+<nav>
+
+<ul>
+    <li><a href="/#overview">Overview</a></li>
+    <li>
+        <a href="/#toolchain">Toolchain</a>
+        <ul>
+            <li><a href="/generator-ozjs/">Generator</a></li>
+            <li><a href="/ozma/">OzmaJS</a></li>
+            <li><a href="/istatic/">iStatic</a></li>
+            <li><a href="/grunt-ozjs">grunt-ozjs</a></li>
+            <li><a href="/grunt-furnace">grunt-furnace</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="/#framework">Micro-framework</a>
+        <ul>
+            <li><a href="/mo/">Mo</a></li>
+            <li><a href="/EventMaster/">EventMaster</a></li>
+            <li><a href="/NervJS/">NervJS</a></li>
+            <li><a href="/DollarJS/">DollarJS</a></li>
+            <li><a href="/SovietJS/">SovietJS</a></li>
+            <li><a href="/URLKit/">URLKit</a></li>
+            <li><a href="/ChoreoJS/">ChoreoJS</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="/#ui">UI</a>
+        <ul>
+            <li><a href="/momo/">Momo</a></li>
+            <li><a href="/moui/">Moui</a></li>
+            <li><a href="/CardKit/">CardKit</a></li>
+        </ul>
+    </li>
+    <li><a href="/#start">Quick Start</a></li>
+    <li><a href="/#demo">Demo</a></li>
+    <li><a href="/#ref">References</a></li>
+    <li><a href="https://github.com/dexteryy/OzJS/wiki/Changelog" target="_blank">Release History</a></li>
+</ul>
+
+</nav>
+
+
+<div class="wrapper">
+<section>
+<h1 id="toc_448">iStatic</h1>
+
+<p>A static-file dependency manager more than a package manager.</p>
+
+<h3 id="toc_449">Installation</h3>
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>npm install node-istatic -g
+</code></pre>
+</div>
+
+<h3 id="toc_450">Usage</h3>
+
+<p>Put a file named <code>static.yaml</code> (refer to the following <strong>Configuration</strong>) at the root of your project repository.
+And then, run:</p>
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>istatic pull
+</code></pre>
+</div>
+
+<h3 id="toc_451">Configuration</h3>
+
+<p>You can specify any git hosting provider, such as:</p>
+<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">hostDict</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">code</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://code.dapps.douban.com/</span>
+  <span class="l-Scalar-Plain">gitcafe</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">git://gitcafe.com/</span>
+</code></pre>
+</div>
+
+<p>Note: iStatic has been added <strong>github</strong>, <strong>bitbucket</strong> and <strong>local</strong> by default.</p>
+
+<p>Specify the git repos info (including <strong>name</strong>, <strong>host</strong>, <strong>tag</strong> or <strong>commit</strong>) and the path of the files or directories you need.
+The default host is <strong>github</strong>, and the default commit (or tag) is <strong>origin/master</strong>. These two properties can be omitted.
+But you need to specify one <strong>file</strong> mapping (origin: target) at least. It sounds to be a little complicated, here&#39;s a example:</p>
+<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">repos</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">arkui</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">host</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">code</span>
+    <span class="l-Scalar-Plain">file</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">./stylus</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">./public/css/arkui/</span>
+      <span class="l-Scalar-Plain">./pics</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">./public/pics/</span>
+
+  <span class="l-Scalar-Plain">dexteryy/OzJS</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">tag</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">2.5.1</span>
+    <span class="l-Scalar-Plain">file</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">./oz.js</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">./public/js/lib/</span>
+      <span class="l-Scalar-Plain">./eventMaster/eventmaster.js</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">./public/js/lib/mod/event.js</span>
+
+  <span class="l-Scalar-Plain">/Users/mockee/M3</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">host</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">local</span>
+    <span class="l-Scalar-Plain">commit</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">7827c7c605</span>
+    <span class="l-Scalar-Plain">file</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">./define.js</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">./public/js/lib/</span>
+      <span class="l-Scalar-Plain">./mod/touch.js</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">./public/js/mod/</span>
+</code></pre>
+</div>
+
+<h3 id="toc_452">Grunt task</h3>
+
+<p><a href="https://github.com/mockee/grunt-istatic">Grunt-istatic</a> task now available.</p>
+
+<h2 id="toc_453">Source code</h2>
+
+<ul>
+<li><a href="https://github.com/mockee/istatic">View on Github</a></li>
+</ul>
+
+<h2 id="toc_454">Release History</h2>
+
+<ul>
+<li>2013-02-22 - v0.3.1 - Support async callback for <code>grunt-istatic</code>.</li>
+<li>2013-02-07 - v0.2.7 - Support local git repos. Format logs. Add <code>--version</code> &amp; <code>clear</code> options.</li>
+<li>2012-12-06 - v0.2.5 - Bugfix for <code>pulldown</code> &amp;&amp; checking local files modification.</li>
+</ul>
+
+<h2 id="toc_455">License</h2>
+
+<p>Copyright (c) 2013 mockee
+Licensed under the MIT license.</p>
+
+</section>
+</div>
+
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-404086-13']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+</body>
+</html>
+

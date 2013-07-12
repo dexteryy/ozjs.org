@@ -1,16 +1,76 @@
----
-title: Ozma / Demo1
----
 <!DOCTYPE html>
 <html>
 <head>
-{% include header.html %}
+<meta charset="utf-8">
+
+<title>Ozma / Demo1</title>
+
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/pygment_trac.css">
+
 <style>
 </style>
 </head>
 <body>
 
-{% include nav.html %}
+
+<header>
+
+<p class="logo">OzJS</p>
+<p class="header">A microkernel for modular javascript, a toolchain for modern front-end, a micro-framework for growable WebApp.</p>
+
+<ul class="buttons">
+  <li><a class="buttons github" href="https://github.com/dexteryy/OzJS">View On GitHub</a></li>
+  <!--<li class="download"><a class="buttons" href="https://github.com/dexteryy/OzJS/zipball/master">Download ZIP</a></li>-->
+  <!--<li class="download"><a class="buttons" href="https://github.com/dexteryy/OzJS/tarball/master">Download TAR</a></li>-->
+  <a href="http://weibo.com/ozjs" target="_blank" class="followme weibo">关注微博</a>
+  <a href="http://site.douban.com/199314/" target="_blank" class="followme doubansite">关注豆瓣小站</a>
+</ul>
+
+</header>
+
+<nav>
+
+<ul>
+    <li><a href="/#overview">Overview</a></li>
+    <li>
+        <a href="/#toolchain">Toolchain</a>
+        <ul>
+            <li><a href="/generator-ozjs/">Generator</a></li>
+            <li><a href="/ozma/">OzmaJS</a></li>
+            <li><a href="/istatic/">iStatic</a></li>
+            <li><a href="/grunt-ozjs">grunt-ozjs</a></li>
+            <li><a href="/grunt-furnace">grunt-furnace</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="/#framework">Micro-framework</a>
+        <ul>
+            <li><a href="/mo/">Mo</a></li>
+            <li><a href="/EventMaster/">EventMaster</a></li>
+            <li><a href="/NervJS/">NervJS</a></li>
+            <li><a href="/DollarJS/">DollarJS</a></li>
+            <li><a href="/SovietJS/">SovietJS</a></li>
+            <li><a href="/URLKit/">URLKit</a></li>
+            <li><a href="/ChoreoJS/">ChoreoJS</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="/#ui">UI</a>
+        <ul>
+            <li><a href="/momo/">Momo</a></li>
+            <li><a href="/moui/">Moui</a></li>
+            <li><a href="/CardKit/">CardKit</a></li>
+        </ul>
+    </li>
+    <li><a href="/#start">Quick Start</a></li>
+    <li><a href="/#demo">Demo</a></li>
+    <li><a href="/#ref">References</a></li>
+    <li><a href="https://github.com/dexteryy/OzJS/wiki/Changelog" target="_blank">Release History</a></li>
+</ul>
+
+</nav>
+
 
 <div class="wrapper">
 <section>
@@ -23,10 +83,9 @@ title: Ozma / Demo1
 
 <h2>How to build distribution file of the demo: </h2>
 <p><a href="../">How to install Ozma.js</a></p>
-{% highlight bash %}
-cd examples/buildtool/
+<div class="highlight"><pre><code class="bash"><span class="nb">cd </span>examples/buildtool/
 ozma js/main_standalone.js --config js/ozconfig_standalone.json
-{% endhighlight %}
+</code></pre></div>
 
 <h2>Running result of the demo: </h2>
 <ol>
@@ -95,4 +154,18 @@ define('lazy/E', 'lazy/E_pack.js');
 define('non_AMD/script_1', 'non_AMD/script_1_pack.js');
 </script>
 
-{% include footer.html %}
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-404086-13']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>Moui</title>
+
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/pygment_trac.css">
+
+</head>
+<body>
+
+
+<header>
+
+<p class="logo">OzJS</p>
+<p class="header">A microkernel for modular javascript, a toolchain for modern front-end, a micro-framework for growable WebApp.</p>
+
+<ul class="buttons">
+  <li><a class="buttons github" href="https://github.com/dexteryy/OzJS">View On GitHub</a></li>
+  <!--<li class="download"><a class="buttons" href="https://github.com/dexteryy/OzJS/zipball/master">Download ZIP</a></li>-->
+  <!--<li class="download"><a class="buttons" href="https://github.com/dexteryy/OzJS/tarball/master">Download TAR</a></li>-->
+  <a href="http://weibo.com/ozjs" target="_blank" class="followme weibo">关注微博</a>
+  <a href="http://site.douban.com/199314/" target="_blank" class="followme doubansite">关注豆瓣小站</a>
+</ul>
+
+</header>
+
+<nav>
+
+<ul>
+    <li><a href="/#overview">Overview</a></li>
+    <li>
+        <a href="/#toolchain">Toolchain</a>
+        <ul>
+            <li><a href="/generator-ozjs/">Generator</a></li>
+            <li><a href="/ozma/">OzmaJS</a></li>
+            <li><a href="/istatic/">iStatic</a></li>
+            <li><a href="/grunt-ozjs">grunt-ozjs</a></li>
+            <li><a href="/grunt-furnace">grunt-furnace</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="/#framework">Micro-framework</a>
+        <ul>
+            <li><a href="/mo/">Mo</a></li>
+            <li><a href="/EventMaster/">EventMaster</a></li>
+            <li><a href="/NervJS/">NervJS</a></li>
+            <li><a href="/DollarJS/">DollarJS</a></li>
+            <li><a href="/SovietJS/">SovietJS</a></li>
+            <li><a href="/URLKit/">URLKit</a></li>
+            <li><a href="/ChoreoJS/">ChoreoJS</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="/#ui">UI</a>
+        <ul>
+            <li><a href="/momo/">Momo</a></li>
+            <li><a href="/moui/">Moui</a></li>
+            <li><a href="/CardKit/">CardKit</a></li>
+        </ul>
+    </li>
+    <li><a href="/#start">Quick Start</a></li>
+    <li><a href="/#demo">Demo</a></li>
+    <li><a href="/#ref">References</a></li>
+    <li><a href="https://github.com/dexteryy/OzJS/wiki/Changelog" target="_blank">Release History</a></li>
+</ul>
+
+</nav>
+
+
+<div class="wrapper">
+<section>
+<h1 id="toc_507">Moui</h1>
+
+<blockquote>
+<ul>
+<li>OO-based UI behavior modules behind <a href="http://ozjs.org/CardKit/">CardKit</a>&#39;s view components</li>
+<li>&#39;mobile first&#39;</li>
+<li>Independent of particular appearance and specific business</li>
+<li>Use HTML as configurations that is equal to JS API</li>
+</ul>
+</blockquote>
+
+<h2 id="toc_508">Usage</h2>
+
+<h3 id="toc_509">AMD and OzJS</h3>
+
+<ul>
+<li>Moui can either be viewed as an independent library, or as a part of <a href="http://ozjs.org/#framework">OzJS mirco-framework</a>.</li>
+<li>It&#39;s wrapped as an <a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD (Asynchronous Module Definition)</a> module. You should use it with <a href="http://ozjs.org/#start">oz.js</a> (or require.js or <a href="http://wiki.commonjs.org/wiki/Implementations">similar</a> for handling dependencies). </li>
+<li>If you want to make it available for both other AMD code and traditional code based on global namespace. OzJS provides <a href="http://ozjs.org/examples/adapter/">a mini define/require implementation</a> to transform AMD module into traditional <a href="http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth">module pattern</a>.</li>
+<li>See <a href="http://ozjs.org">http://ozjs.org</a> for details.</li>
+</ul>
+
+<h3 id="toc_510">Get the code</h3>
+
+<p>Add to your project as new dependency</p>
+
+<ul>
+<li>via <a href="http://bower.io/">bower</a> - <code>bower install moui</code></li>
+<li>via <a href="http://ozjs.org/istatic">istatic</a></li>
+</ul>
+
+<p>Or <a href="https://github.com/dexteryy/moui/">download directly from Github</a></p>
+
+<h2 id="toc_511">Dependencies</h2>
+
+<ul>
+<li><a href="https://github.com/dexteryy/mo">mo</a></li>
+<li><a href="https://github.com/dexteryy/DollarJS">dollar</a> or other jQuery-compatible library</li>
+</ul>
+
+<h2 id="toc_512">Examples</h2>
+
+<p><a href="http://ozjs.org/CardKit/refapp">CardKit demo app</a></p>
+
+<h2 id="toc_513">Modules Overview</h2>
+
+<h4 id="toc_514"><a href="https://github.com/dexteryy/moui/blob/master/control.js">moui/control</a>:</h4>
+
+<blockquote>
+<ul>
+<li>Minimal stateful component</li>
+</ul>
+</blockquote>
+
+<h4 id="toc_515"><a href="https://github.com/dexteryy/moui/blob/master/picker.js">moui/picker</a>:</h4>
+
+<blockquote>
+<ul>
+<li>Compose of <code>Control</code> objects</li>
+</ul>
+</blockquote>
+
+<h4 id="toc_516"><a href="https://github.com/dexteryy/moui/blob/master/overlay.js">moui/overlay</a>:</h4>
+
+<blockquote>
+<ul>
+<li>Minimal overlay component</li>
+</ul>
+</blockquote>
+
+<h4 id="toc_517"><a href="https://github.com/dexteryy/moui/blob/master/actionview.js">moui/actionview</a>:</h4>
+
+<blockquote>
+<ul>
+<li>Inherit from <code>Overlay</code></li>
+<li>Compose of <code>Picker</code> objects</li>
+</ul>
+</blockquote>
+
+<h4 id="toc_518"><a href="https://github.com/dexteryy/moui/blob/master/modalview.js">moui/modalview</a>:</h4>
+
+<blockquote>
+<ul>
+<li>Inherit from <code>Overlay</code></li>
+</ul>
+</blockquote>
+
+<h4 id="toc_519"><code>moui/imageview</code> (Comming soon)</h4>
+
+<blockquote>
+<ul>
+<li>Inherit from <code>ModalView</code></li>
+</ul>
+</blockquote>
+
+<h4 id="toc_520"><a href="https://github.com/dexteryy/moui/blob/master/growl.js">moui/growl</a>:</h4>
+
+<blockquote>
+<ul>
+<li>Inherit from <code>Overlay</code></li>
+</ul>
+</blockquote>
+
+<h4 id="toc_521"><code>moui/bubble</code> (Plan to refactor)</h4>
+
+<blockquote>
+<ul>
+<li>Inherit from <code>Growl</code></li>
+</ul>
+</blockquote>
+
+<h4 id="toc_522"><a href="https://github.com/dexteryy/moui/blob/master/ranger.js">moui/ranger</a>:</h4>
+
+<blockquote>
+<ul>
+<li>Minimal range component</li>
+</ul>
+</blockquote>
+
+<h4 id="toc_523"><code>moui/slider</code> (Plan to refactor)</h4>
+
+<blockquote>
+<ul>
+<li>Inherit from <code>Ranger</code></li>
+</ul>
+</blockquote>
+
+<h4 id="toc_524"><a href="https://github.com/dexteryy/moui/blob/master/util/stick.js">moui/util/stick</a>:</h4>
+
+<blockquote>
+<ul>
+<li>Stick a DOM element to anther from any clock position </li>
+</ul>
+</blockquote>
+
+<h2 id="toc_525">API and usage</h2>
+
+<p>Comming soon...</p>
+
+<h2 id="toc_526">More References</h2>
+
+<p>See <a href="http://ozjs.org/">OzJS Project Homepage</a></p>
+
+<h2 id="toc_527">Release History</h2>
+
+<p>See <a href="http://ozjs.org/#release">OzJS Release History</a></p>
+
+<h2 id="toc_528">License</h2>
+
+<p>Copyright (c) 2010 - 2013 dexteryy<br>
+Licensed under the MIT license.</p>
+
+</section>
+</div>
+
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-404086-13']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+</body>
+</html>
+

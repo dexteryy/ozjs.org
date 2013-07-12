@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>OzJS - a microkernel for modular javascript, a toolchain for modern front-end, a micro-framework for growable WebApp.</title>
+
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/pygment_trac.css">
+
+</head>
+<body>
+
+
+<header>
+
+<p class="logo">OzJS</p>
+<p class="header">A microkernel for modular javascript, a toolchain for modern front-end, a micro-framework for growable WebApp.</p>
+
+<ul class="buttons">
+  <li><a class="buttons github" href="https://github.com/dexteryy/OzJS">View On GitHub</a></li>
+  <!--<li class="download"><a class="buttons" href="https://github.com/dexteryy/OzJS/zipball/master">Download ZIP</a></li>-->
+  <!--<li class="download"><a class="buttons" href="https://github.com/dexteryy/OzJS/tarball/master">Download TAR</a></li>-->
+  <a href="http://weibo.com/ozjs" target="_blank" class="followme weibo">关注微博</a>
+  <a href="http://site.douban.com/199314/" target="_blank" class="followme doubansite">关注豆瓣小站</a>
+</ul>
+
+</header>
+
+<nav>
+
+<ul>
+    <li><a href="/#overview">Overview</a></li>
+    <li>
+        <a href="/#toolchain">Toolchain</a>
+        <ul>
+            <li><a href="/generator-ozjs/">Generator</a></li>
+            <li><a href="/ozma/">OzmaJS</a></li>
+            <li><a href="/istatic/">iStatic</a></li>
+            <li><a href="/grunt-ozjs">grunt-ozjs</a></li>
+            <li><a href="/grunt-furnace">grunt-furnace</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="/#framework">Micro-framework</a>
+        <ul>
+            <li><a href="/mo/">Mo</a></li>
+            <li><a href="/EventMaster/">EventMaster</a></li>
+            <li><a href="/NervJS/">NervJS</a></li>
+            <li><a href="/DollarJS/">DollarJS</a></li>
+            <li><a href="/SovietJS/">SovietJS</a></li>
+            <li><a href="/URLKit/">URLKit</a></li>
+            <li><a href="/ChoreoJS/">ChoreoJS</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="/#ui">UI</a>
+        <ul>
+            <li><a href="/momo/">Momo</a></li>
+            <li><a href="/moui/">Moui</a></li>
+            <li><a href="/CardKit/">CardKit</a></li>
+        </ul>
+    </li>
+    <li><a href="/#start">Quick Start</a></li>
+    <li><a href="/#demo">Demo</a></li>
+    <li><a href="/#ref">References</a></li>
+    <li><a href="https://github.com/dexteryy/OzJS/wiki/Changelog" target="_blank">Release History</a></li>
+</ul>
+
+</nav>
+
+
+<div class="wrapper">
+<section>
+<h6 id="toc_310"><a href="http://ozjs.org">&gt;&gt; English version</a> <a id="overview">&nbsp;</a></h6>
+
+<h1 id="toc_311">OzJS</h1>
+
+<p>OzJS才不是神马脚本加载器呢！人家是一个在浏览器端运行时中（就是说它主要服务于语言层级，而不是文件层级。<a href="http://ozjs.org/ozma/">ozma.js</a>可以在静态构建环节中基于同等机制更好的处理文件）为大型或复杂JS程序提供长期以来严重缺失（你懂得！）的模块机制的微！内！核！它兼容当前的事实标准（<a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD</a>，<a href="http://www.commonjs.org/specs/modules/1.0/">NodeJS/CommonJS</a> 和传统的 <a href="http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth">module pattern</a>）。</p>
+
+<p>更妙的是！它比大名鼎鼎的RequireJS实现的更早！所以虽然表面上<a href="http://ozjs.org/docs/define.html">用法类似</a>，只是443行 vs 1232行、5K vs 24K的区别，实践中Oz的设计和实现能带来更强大的能力和更便捷的体验，理念上则差别更大，改日详述…XD </p>
+
+<p>oz.js的API和代码都是极简和稳定的，不会轻易加新功能（对一个实现模块机制的库来说，通过加入新配置选项或新插件的方式来满足新需求是多么可怕的故事啊！）。Oz项目现在专注于开发一大票能用于自由组合微框架、便于搭建WebApp的通用模块，代码都在<code>/mod</code>目录里，正在逐个发布和完善文档，一个<a href="http://ww4.sinaimg.cn/large/62651c14jw1dvpfdi27o7j.jpg">真实世界中的例子</a>。</p>
+
+<p><em>----------- 以上是傲娇版简介，下面是价值观总结版 -----------</em></p>
+
+<p>OzJS是一个为“现代JS开发”提供支持的开源项目，反对臃肿冗余的、大而无当的、捆绑强塞的、封闭体系的、重复实现的、脱离实践的工具/库/框架，推崇单一目的、单一方案、单一层次、体积最小化、依赖最小化、重复最小化、自由选择、自由混搭、自由替换的模块，自底向上的提供当前欠缺的实现和工具，帮助JS开发者轻松构建传统网页脚本、大型或复杂JS程序、桌面或移动web应用。</p>
+
+<h2 id="toc_312">Toolchain <a id="toolchain">&nbsp;</a></h2>
+
+<h4 id="toc_313"><a href="http://ozjs.org/generator-ozjs">generator-ozjs</a></h4>
+
+<blockquote>
+<ul>
+<li>Scaffolding tool for OzJS which offers a packaging workflow integrates toolchain, micro-framework and many best practices</li>
+<li>oz.js + iStatic + Grunt + Yo + ...</li>
+<li><a href="https://github.com/dexteryy/generator-ozjs">Source code</a></li>
+</ul>
+</blockquote>
+
+<h4 id="toc_314"><a href="http://ozjs.org/ozma">OzmaJS</a></h4>
+
+<blockquote>
+<ul>
+<li>Intelligent autobuild tool for OzJS</li>
+<li>Unique ability to support transparent dynamic dependence</li>
+<li><a href="https://github.com/dexteryy/ozma.js">Source code</a></li>
+</ul>
+</blockquote>
+
+<h4 id="toc_315"><a href="http://ozjs.org/istatic">iStatic</a></h4>
+
+<blockquote>
+<ul>
+<li>A static-file dependency manager more than a package manager</li>
+<li>Let you quickly and automatically add modules of specified (or latest) version to your project</li>
+<li><a href="https://github.com/mockee/istatic">Source code</a></li>
+</ul>
+</blockquote>
+
+<h4 id="toc_316"><a href="http://ozjs.org/grunt-ozjs">grunt-ozjs</a></h4>
+
+<blockquote>
+<ul>
+<li>Grunt tasks for oz.js and ozma.js</li>
+<li><a href="https://github.com/dexteryy/grunt-ozjs">Source code</a></li>
+</ul>
+</blockquote>
+
+<h4 id="toc_317"><a href="http://ozjs.org/grunt-furnace">grunt-furnace</a></h4>
+
+<blockquote>
+<ul>
+<li>Transform code from one format to another</li>
+<li>template &gt; AMD, AMD &gt; CJS, CJS &gt; AMD...</li>
+<li><a href="https://github.com/dexteryy/grunt-furnace">Source code</a></li>
+</ul>
+</blockquote>
+
+<h4 id="toc_318"><a href="http://ozjs.org/adapter">OzJS Adapter</a>:</h4>
+
+<blockquote>
+<ul>
+<li>Mini define/require mplementation for old web page</li>
+<li>Transform AMD module into traditional module pattern</li>
+<li><a href="https://github.com/dexteryy/OzJS/blob/master/contrib/adapter.js">Source code</a></li>
+</ul>
+</blockquote>
+
+<h2 id="toc_319">Micro-framework <a id="framework">&nbsp;</a></h2>
+
+<p>It is time to stop using All-in-One JavaScript library or framework which bundle all functionalities and solutions within a single global namespace. </p>
+
+<p>OzJS Project provides plenty of tiny, mutually independent, single purpose modules to help you build(mix and match) your own MVC(or suchlike) framework.</p>
+
+<h4 id="toc_320"><a href="http://ozjs.org/EventMaster">EventMaster</a></h4>
+
+<blockquote>
+<ul>
+<li>A simple, compact and consistent implementation of a variant of CommonJS&#39;s Promises and Events</li>
+<li><a href="https://github.com/dexteryy/EventMaster">Source code</a></li>
+</ul>
+</blockquote>
+
+<h4 id="toc_321"><a href="http://ozjs.org/NervJS">NervJS</a></h4>
+
+<blockquote>
+<ul>
+<li>A tiny, pure, event-based model wrapper for the MVC or MDV (Model-driven Views) pattern.</li>
+<li><a href="https://github.com/dexteryy/NervJS">Source code</a></li>
+</ul>
+</blockquote>
+
+<h4 id="toc_322"><a href="http://ozjs.org/DollarJS">DollarJS</a></h4>
+
+<blockquote>
+<ul>
+<li>A jQuery-compatible and non-All-in-One library which is more &quot;Zepto&quot; than Zepto.js</li>
+<li><a href="https://github.com/dexteryy/DollarJS">Source code</a></li>
+</ul>
+</blockquote>
+
+<h4 id="toc_323"><a href="http://ozjs.org/SovietJS">SovietJS</a></h4>
+
+<blockquote>
+<ul>
+<li>Standalone UI event delegate implementation</li>
+<li><a href="https://github.com/dexteryy/SovietJS">Source code</a></li>
+</ul>
+</blockquote>
+
+<h4 id="toc_324"><a href="http://ozjs.org/URLKit">URLKit</a></h4>
+
+<blockquote>
+<ul>
+<li>A lightweight implementation of routing and URL manager</li>
+<li><a href="https://github.com/dexteryy/URLKit">Source code</a></li>
+</ul>
+</blockquote>
+
+<h4 id="toc_325"><a href="http://ozjs.org/ChoreoJS">ChoreoJS</a></h4>
+
+<blockquote>
+<ul>
+<li>An animation library which uses &quot;stage&quot; and &quot;actor&quot; as metaphors</li>
+<li><a href="https://github.com/dexteryy/ChoreoJS">Source code</a></li>
+</ul>
+</blockquote>
+
+<h4 id="toc_326"><a href="http://ozjs.org/mo">Mo</a></h4>
+
+<blockquote>
+<ul>
+<li>A collection of OzJS core modules that form a library called &quot;Mo&quot; </li>
+<li>Modules overview
+
+<ul>
+<li><code>mo/lang</code>
+
+<ul>
+<li>ES5/6 shim and minimum utilities for language enhancement</li>
+</ul></li>
+<li><code>mo/domready</code>
+
+<ul>
+<li>Non-plugin implementation of cross-browser DOM ready event</li>
+<li>Based on OzJS&#39;s built-in module -- &#39;finish&#39;</li>
+</ul></li>
+<li><code>mo/browsers</code>
+
+<ul>
+<li>Standalone jQuery.browsers supports skin browsers popular in China </li>
+</ul></li>
+<li><code>mo/cookie</code>
+
+<ul>
+<li>Simple wrapping for managing cookie </li>
+</ul></li>
+<li><code>mo/template</code>
+
+<ul>
+<li>A lightweight and enhanced micro-template implementation, and minimum utilities</li>
+</ul></li>
+<li><code>mo/network</code>
+
+<ul>
+<li>Standalone jQuery.ajax API and enhanced getJSON, and so on</li>
+</ul></li>
+<li><code>mo/easing</code>
+
+<ul>
+<li>An easing library supports jquery.js, standalone module and CSS timing functions</li>
+</ul></li>
+<li><code>mo/mainloop</code>
+
+<ul>
+<li>Implement and manage single loop for WebApp life cycle</li>
+<li>Provide tweening API for both property animation and frame animation(canvas or css)</li>
+</ul></li>
+<li><code>mod/uiproxy</code>
+
+<ul>
+<li>Standalone and most efficient implementation of UI event delegation</li>
+<li>Coming soon...</li>
+</ul></li>
+<li><code>mo/key</code>
+
+<ul>
+<li>Wrapping API for keyboard events</li>
+<li>Support key sequence, multiple key press, ...</li>
+</ul></li>
+</ul></li>
+<li><a href="https://github.com/dexteryy/mo">Source code</a></li>
+</ul>
+</blockquote>
+
+<h2 id="toc_327">UI Components <a id="ui">&nbsp;</a></h2>
+
+<h4 id="toc_328"><a href="http://ozjs.org/momo">Momo (MoMotion)</a></h4>
+
+<blockquote>
+<ul>
+<li>A framework and a collection for separate and simple implementation of touch gestures</li>
+<li><a href="https://github.com/dexteryy/momo">Source code</a></li>
+</ul>
+</blockquote>
+
+<h4 id="toc_329"><a href="http://ozjs.org/moui">Moui</a></h4>
+
+<blockquote>
+<ul>
+<li>OO-based UI behavior modules behind <a href="http://ozjs.org/CardKit/">CardKit</a>&#39;s view components</li>
+<li>Modules overview
+
+<ul>
+<li><code>moui/control</code>
+
+<ul>
+<li>Minimal stateful component</li>
+</ul></li>
+<li><code>moui/picker</code>
+
+<ul>
+<li>Compose of <code>Control</code> objects</li>
+</ul></li>
+<li><code>moui/overlay</code>
+
+<ul>
+<li>Minimal overlay component</li>
+</ul></li>
+<li><code>moui/actionview</code>
+
+<ul>
+<li>Inherit from <code>Overlay</code></li>
+<li>Compose of <code>Picker</code> objects</li>
+</ul></li>
+<li><code>moui/modalview</code>
+
+<ul>
+<li>Inherit from <code>Overlay</code></li>
+</ul></li>
+<li><code>moui/growl</code>
+
+<ul>
+<li>Inherit from <code>Overlay</code></li>
+</ul></li>
+<li><code>moui/ranger</code>
+
+<ul>
+<li>Minimal range component</li>
+</ul></li>
+<li><code>moui/util/stick</code>
+
+<ul>
+<li>Stick a DOM element to anther from any clock position </li>
+</ul></li>
+<li><a href="http://ozjs.org/moui">More</a></li>
+</ul></li>
+<li><a href="https://github.com/dexteryy/moui">Source code</a></li>
+</ul>
+</blockquote>
+
+<h2 id="toc_330">App Framework</h2>
+
+<h4 id="toc_331"><a href="http://ozjs.org/CardKit">CardKit</a></h4>
+
+<blockquote>
+<ul>
+<li>A mobile UI framework provides building blocks which are classified as &quot;Card&quot;, &quot;Unit&quot; and &quot;Component&quot; to help you build mobile web apps quickly and simply, or transfer entire website to native-like web app for touch devices.</li>
+<li><a href="https://github.com/douban-f2e/CardKit">Source code</a></li>
+</ul>
+</blockquote>
+
+<h2 id="toc_332">Game Engine</h2>
+
+<p>Under construction...</p>
+
+<h2 id="toc_333">Tutorials <a id="start">&nbsp;</a></h2>
+
+<ul>
+<li><a href="http://ozjs.org/docs/start.html">Getting Started with oz.js and ozma.js</a></li>
+<li><a href="http://ozjs.org/docs/define.html">define &amp; require</a></li>
+</ul>
+
+<h2 id="toc_334">Quick Start</h2>
+
+<p>Install the <a href="http://ozjs.org/generator-ozjs">scaffolding/workflow tool</a> then try the <a href="http://ozjs.org/generator-ozjs#app">ozjs:app</a> generator.</p>
+
+<h2 id="toc_335">Demo App <a id="demo">&nbsp;</a></h2>
+
+<ul>
+<li><a href="https://github.com/dexteryy/doubanchou">Doubanchou</a> - Lottery / Draft app</li>
+<li><a href="https://github.com/dexteryy/pachislot">Doubanchou II: Pachislot</a> - Lottery app</li>
+<li><a href="https://github.com/dexteryy/BugHunter">BugHunter</a> - Multiplayer &quot;answer first game&quot; or a competition responder system</li>
+<li><a href="https://github.com/douban-f2e/demonstory">Demonstory</a> -  real time movie acts by web page elements</li>
+<li>TodoMVC: coming soon...</li>
+</ul>
+
+<h2 id="toc_336">In the Real World</h2>
+
+<ul>
+<li><a href="http://alphatown.com">Alphatown</a> - <em>2D browser based virtual world</em></li>
+<li><a href="http://read.douban.com/reader">Douban Reader</a> - <em>Web browser based e-book reader</em></li>
+<li><a href="http://read.douban.com/submit/">Douban&#39;s contributor system</a> - <em>Online self-publishing tool for Douban Reader</em></li>
+<li><a href="http://bubbler.labs.douban.com/">Bubbler</a> - <em>Webapp to explore social music technology</em></li>
+<li>Code - <em>Douban&#39;s Github clone for internal use</em></li>
+</ul>
+
+<h2 id="toc_337">Follow @ozjs <a id="ref">&nbsp;</a></h2>
+
+<ul>
+<li><a href="http://weibo.com/ozjs">新浪微博</a></li>
+<li><a href="http://site.douban.com/199314/">豆瓣小站</a></li>
+</ul>
+
+<h2 id="toc_338">More References</h2>
+
+<ul>
+<li><a href="http://www.slideshare.net/dexter_yy/js-6228773">d2forum2010: 通用JS时代的模块机制和编译工具(slide)</a></li>
+<li><a href="http://www.slideshare.net/dexter_yy/mvc-8554206">d2forum2011: 新版阿尔法城背后的前端MVC实践(slide)</a></li>
+</ul>
+
+<h2 id="toc_339">Release History</h2>
+
+<p>See <a href="https://github.com/dexteryy/OzJS/wiki/Changelog">changelog</a></p>
+
+<h2 id="toc_340">License</h2>
+
+<p>Copyright (c) 2010 - 2013 dexteryy<br>
+Licensed under the MIT license.</p>
+
+</section>
+</div>
+
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-404086-13']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+</body>
+</html>
+

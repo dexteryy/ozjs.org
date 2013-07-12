@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>OzJS / Getting Started with oz.js and ozma.js</title>
+
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/pygment_trac.css">
+
+</head>
+<body>
+
+
+<header>
+
+<p class="logo">OzJS</p>
+<p class="header">A microkernel for modular javascript, a toolchain for modern front-end, a micro-framework for growable WebApp.</p>
+
+<ul class="buttons">
+  <li><a class="buttons github" href="https://github.com/dexteryy/OzJS">View On GitHub</a></li>
+  <!--<li class="download"><a class="buttons" href="https://github.com/dexteryy/OzJS/zipball/master">Download ZIP</a></li>-->
+  <!--<li class="download"><a class="buttons" href="https://github.com/dexteryy/OzJS/tarball/master">Download TAR</a></li>-->
+  <a href="http://weibo.com/ozjs" target="_blank" class="followme weibo">关注微博</a>
+  <a href="http://site.douban.com/199314/" target="_blank" class="followme doubansite">关注豆瓣小站</a>
+</ul>
+
+</header>
+
+<nav>
+
+<ul>
+    <li><a href="/#overview">Overview</a></li>
+    <li>
+        <a href="/#toolchain">Toolchain</a>
+        <ul>
+            <li><a href="/generator-ozjs/">Generator</a></li>
+            <li><a href="/ozma/">OzmaJS</a></li>
+            <li><a href="/istatic/">iStatic</a></li>
+            <li><a href="/grunt-ozjs">grunt-ozjs</a></li>
+            <li><a href="/grunt-furnace">grunt-furnace</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="/#framework">Micro-framework</a>
+        <ul>
+            <li><a href="/mo/">Mo</a></li>
+            <li><a href="/EventMaster/">EventMaster</a></li>
+            <li><a href="/NervJS/">NervJS</a></li>
+            <li><a href="/DollarJS/">DollarJS</a></li>
+            <li><a href="/SovietJS/">SovietJS</a></li>
+            <li><a href="/URLKit/">URLKit</a></li>
+            <li><a href="/ChoreoJS/">ChoreoJS</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="/#ui">UI</a>
+        <ul>
+            <li><a href="/momo/">Momo</a></li>
+            <li><a href="/moui/">Moui</a></li>
+            <li><a href="/CardKit/">CardKit</a></li>
+        </ul>
+    </li>
+    <li><a href="/#start">Quick Start</a></li>
+    <li><a href="/#demo">Demo</a></li>
+    <li><a href="/#ref">References</a></li>
+    <li><a href="https://github.com/dexteryy/OzJS/wiki/Changelog" target="_blank">Release History</a></li>
+</ul>
+
+</nav>
+
+
+<div class="wrapper">
+<section>
+<h1 id="toc_357"><a href="/">OzJS</a> / Getting Started with oz.js and ozma.js</h1>
+
+<p>Download <a href="https://raw.github.com/dexteryy/OzJS/master/oz.js">oz.js</a></p>
+
+<p>Or install via <a href="http://bower.io/">bower</a> - <code>bower install ozjs</code></p>
+
+<p>You might also need a domReady module: <a href="https://github.com/dexteryy/mo/blob/master/domready.js">domready.js</a></p>
+
+<p>Put them into your project directory, like <code>./js/lib</code> and <code>./js/mo</code>.</p>
+
+<p>In your web page:</p>
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;js/lib/oz.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+<span class="nx">require</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span>
+    <span class="nx">baseUrl</span><span class="o">:</span> <span class="s1">&#39;js/&#39;</span>
+<span class="p">});</span>
+
+<span class="nx">define</span><span class="p">(</span><span class="s1">&#39;jquery&#39;</span><span class="p">,</span> <span class="s1">&#39;lib/jquery.js&#39;</span><span class="p">);</span>
+
+<span class="nx">define</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;jquery&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;mo/domready&#39;</span>
+<span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="c1">// do something with jquery</span>
+    <span class="p">};</span>
+    <span class="k">return</span> <span class="nx">app</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="nx">require</span><span class="p">([</span><span class="s1">&#39;app&#39;</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">app</span><span class="p">){</span>
+    <span class="c1">// do something with app </span>
+<span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre>
+</div>
+
+<p>That&#39;s all! But for development environments only.</p>
+
+<p>Better practice for real production environments:</p>
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;dist/js/main.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+<span class="c1">// define modules need demand loading outside main.js</span>
+<span class="nx">define</span><span class="p">(</span><span class="s1">&#39;module(dynamic dependence)&#39;</span><span class="p">,</span> <span class="s1">&#39;CDN_URL/filename_with_timestamp.js&#39;</span><span class="p">);</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre>
+</div>
+
+<p>Put <code>main.js</code> into <code>./js</code> (not <code>./dist/js</code>)</p>
+<div class="highlight"><pre><code class="javascript"><span class="nx">require</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span>
+    <span class="nx">baseUrl</span><span class="o">:</span> <span class="s1">&#39;js/&#39;</span><span class="p">,</span>
+    <span class="nx">distUrl</span><span class="o">:</span> <span class="s1">&#39;dist/js/&#39;</span>
+<span class="p">});</span>
+
+<span class="c1">// same as above</span>
+</code></pre>
+</div>
+
+<p>Install <code>ozma.js</code> through NPM: </p>
+<div class="highlight"><pre><code class="text">npm install ozma -g
+</code></pre>
+</div>
+
+<p>Create a configure file for <code>ozma</code>. The default file name is <code>ozconfig.js</code>, located under the same directory as <code>main.js</code>. In this way you can omit <code>--config</code> parameter for <code>ozma</code>.</p>
+<div class="highlight"><pre><code class="javascript"><span class="p">{</span>
+    <span class="s2">&quot;baseUrl&quot;</span><span class="o">:</span> <span class="s2">&quot;./js/&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;distUrl&quot;</span><span class="o">:</span> <span class="s2">&quot;./dist/js/&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;loader&quot;</span><span class="o">:</span> <span class="s2">&quot;lib/oz.js&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;disableAutoSuffix&quot;</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Build distribution files (one or more): </p>
+<div class="highlight"><pre><code class="text">ozma js/main.js
+</code></pre>
+</div>
+
+<p>GRATS! That&#39;s all you need! See <code>./dist/js/main.js</code> for build results, then refresh the web page, see Network Panel in your browser&#39;s developer console. </p>
+
+<p><br>
+See usage for more detail:</p>
+
+<ul>
+<li>Usage with oz.js &amp; ozma.js: 
+
+<ul>
+<li><a href="http://ozjs.org/ozma/examples/demo1.html">demo1: for production or development</a> </li>
+<li><a href="http://ozjs.org/ozma/examples/demo2.html">demo2: for development</a> </li>
+<li><a href="http://ozjs.org/ozma/examples/demo3.html">demo3: for production</a> </li>
+<li><a href="http://ozjs.org/ozma/examples/demo4.html">demo4: for third party package manager</a></li>
+</ul></li>
+<li>Config example for grunt: <a href="http://ozjs.org/grunt-ozjs/">doc</a> </li>
+</ul>
+
+</section>
+</div>
+
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-404086-13']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+</body>
+</html>
+

@@ -3,13 +3,11 @@
 <head>
 <meta charset="utf-8">
 
-<title>NervJS / Demo</title>
+<title>generator-ozjs</title>
 
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/pygment_trac.css">
 
-<style>
-</style>
 </head>
 <body>
 
@@ -74,24 +72,89 @@
 
 <div class="wrapper">
 <section>
+<h1 id="toc_389">OzJS generator</h1>
 
-<h1><a href="../">NervJS</a> / Demo</h1>
+<p>Scaffolding tool for <a href="https://github.com/dexteryy/OzJS">OzJS</a> which offers a packaging workflow integrates <a href="http://ozjs.org/ozma">Ozma</a>, <a href="https://ozjs.org/istatic">istatic</a>, <a href="http://gruntjs.com/">Grunt</a>, <a href="http://yeoman.io/gettingstarted_1.0.html">Yo</a>, <a href="http://compass-style.org">Compass</a>/<a href="http://learnboost.github.com/stylus/">Stylus</a>, <a href="http://ozjs.org/#framework">micro-framework</a> and many best practices.</p>
 
-<h2>Source code for the demo: </h2>
-<p><a href="https://github.com/dexteryy/OzJS/tree/gh-pages/NervJS/examples/">View on Github</a></p>
+<p>Available generators:</p>
 
-<h2>Running result of the demo: </h2>
+<ul>
+<li><a href="#app">ozjs</a> (aka <a href="#app">ozjs:app</a>) - create a OzJS-based web app project</li>
+<li><a href="#npm">ozjs:npm</a> - create configure files to publish AMD module to NPM without tears</li>
+<li>more coming soon...</li>
+</ul>
+
+<h2 id="toc_390">Getting Started</h2>
+
+<h3 id="toc_391">Require</h3>
 
 <ol>
-<li>Open the developer console of the browser</li>
-<li>Refresh</li>
+<li>node, npm</li>
+<li><a href="http://gruntjs.com/getting-started">grunt v0.4</a> - <code>npm install grunt-cli -g</code></li>
+<li><a href="https://ozjs.org/istatic">istatic</a> - <code>node install node-istatic -g</code></li>
+<li><a href="http://yeoman.io/gettingstarted_1.0.html">Yo</a> - <code>npm install yo -g</code></li>
+<li>ruby, gem, <a href="http://gembundler.com/">bundler</a> (if you need Scss)</li>
 </ol>
+
+<h3 id="toc_392">Install</h3>
+<div class="highlight"><pre><code class="text">cd ~
+npm install generator-ozjs
+</code></pre>
+</div>
+
+<h3 id="toc_393">Usage</h3>
+
+<h4 id="toc_394">App</h4>
+<div class="highlight"><pre><code class="text">cd empty_project_directory
+yo ozjs 
+npm install
+bundle install
+istatic pull
+grunt
+</code></pre>
+</div>
+
+<p>or</p>
+<div class="highlight"><pre><code class="text">yo ozjs project_name
+cd project_name
+npm install
+bundle install
+istatic pull
+grunt
+</code></pre>
+</div>
+
+<h4 id="toc_395">NPM</h4>
+<div class="highlight"><pre><code class="text">yo ozjs:npm [project_directory]
+npm install
+grunt
+grunt publish
+</code></pre>
+</div>
+
+<h3 id="toc_396">More coming soon...</h3>
+
+<h2 id="toc_397">Source code</h2>
+
+<ul>
+<li><a href="https://github.com/dexteryy/generator-ozjs">View on Github</a></li>
+</ul>
+
+<h2 id="toc_398">More References</h2>
+
+<p>See <a href="http://ozjs.org/">OzJS Project Homepage</a></p>
+
+<h2 id="toc_399">Release History</h2>
+
+<p>See <a href="http://ozjs.org/#release">OzJS Release History</a></p>
+
+<h2 id="toc_400">License</h2>
+
+<p>Copyright (c) 2010 - 2013 dexteryy<br>
+Licensed under the MIT license.</p>
 
 </section>
 </div>
-
-<script src="/js/lib/oz.js"></script>
-<script src="demo.js"></script>
 
 <script type="text/javascript">
 var _gaq = _gaq || [];
