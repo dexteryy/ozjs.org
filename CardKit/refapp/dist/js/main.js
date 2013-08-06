@@ -1,4 +1,4 @@
-/*! cardkit - v1.3.1 */
+/*! cardkit - v1.4.2 */
 ;
 
 /**
@@ -642,9 +642,10 @@ define("mo/browsers", [], function(){
             riphone = /(iphone) os ([\w._]+)/,
             ripad = /(ipad) os ([\w.]+)/,
             randroid = /(android)[ ;]([\w.]*)/,
-            rmobilesafari = /(\w+)[ \/]([\w.]+)[ \/]mobile.*safari/,
-            rsafari = /(\w+)[ \/]([\w.]+) safari/,
-            rwebview = /(.)([^\/]+)[ \/]mobile\//,
+            rmobilewebkit = /(\w+)[ \/]([\w.]+)[ \/]mobile/,
+            rsafari = /(\w+)[ \/]([\w.]+)[ \/]safari/,
+            rmobilesafari = /[ \/]mobile.*safari/,
+            rwebview = /[ \/]mobile/,
             rwebkit = /(webkit)[ \/]([\w.]+)/,
             ropera = /(opera)(?:.*version)?[ \/]([\w.]+)/,
             rmsie = /(msie) ([\w.]+)/,
@@ -660,7 +661,8 @@ define("mo/browsers", [], function(){
             rtt = /(tencenttraveler)/,
             rqq = /(qqbrowser)/,
             rbaidu = /(baidubrowser)/,
-            ruc = /(ucbrowser)/,
+            ruc = /(ucbrowser|ucweb)/,
+            rsogou = /(sogou\w*browser)/,
             rmetasr = /(metasr)/;
 
         os = riphone.exec(ua) 
@@ -669,32 +671,6 @@ define("mo/browsers", [], function(){
             || rmac.exec(ua) 
             || rwindows.exec(ua) 
             || [];
-
-        match =  rwebkit.exec(ua) 
-            || ropera.exec(ua) 
-            || rmsie.exec(ua) 
-            || ua.indexOf("compatible") < 0 && rmozilla.exec(ua) 
-            || [];
-
-        is_mobile = rmobilesafari.exec(ua) || (is_webview = rwebview.exec(ua));
-
-        if (match[1] === 'webkit') {
-            var vendor = is_mobile || rsafari.exec(ua);
-            if (vendor) {
-                match[3] = match[1];
-                match[4] = match[2];
-                match[1] = vendor[1] === 'version' 
-                    && ((os[1] === 'iphone' 
-                            || os[1] === 'ipad')
-                            && 'mobilesafari'
-                        || os[1] === 'android' 
-                            && 'aosp' 
-                        || 'safari')
-                    || is_webview && 'webview'
-                    || vendor[1];
-                match[2] = is_webview ? 0 : vendor[2];
-            }
-        }
 
         skin = r360se.exec(ua) 
             || r360ee.exec(ua) 
@@ -707,8 +683,36 @@ define("mo/browsers", [], function(){
             || rtt.exec(ua) 
             || rqq.exec(ua) 
             || rbaidu.exec(ua) 
+            || rsogou.exec(ua) 
             || rmetasr.exec(ua) 
             || [];
+
+        match =  rwebkit.exec(ua) 
+            || ropera.exec(ua) 
+            || rmsie.exec(ua) 
+            || ua.indexOf("compatible") < 0 && rmozilla.exec(ua) 
+            || [];
+
+        is_mobile = rmobilesafari.exec(ua) 
+            || (is_webview = rwebview.exec(ua));
+
+        if (match[1] === 'webkit') {
+            var vendor = (is_mobile ? rmobilewebkit.exec(ua)
+                : rsafari.exec(ua)) || [];
+            match[3] = match[1];
+            match[4] = match[2];
+            match[1] = vendor[1] === 'version' 
+                && ((os[1] === 'iphone' 
+                        || os[1] === 'ipad')
+                        && 'mobilesafari'
+                    || os[1] === 'android' 
+                        && 'aosp' 
+                    || 'safari')
+                || skin[1]
+                || is_webview && 'webview'
+                || vendor[1];
+            match[2] = vendor[2];
+        }
 
     } catch (ex) {
         match = [];
@@ -716,7 +720,7 @@ define("mo/browsers", [], function(){
     }
 
     var result = { 
-        browser: match[1] || "", 
+        browser: match[1] || skin[1] || "", 
         version: match[2] || "0",
         engine: match[3],
         engineversion: match[4] || "0",
@@ -727,13 +731,6 @@ define("mo/browsers", [], function(){
         skin: skin[1] || "",
         ua: ua
     };
-
-    if (result.os === 'android' && !result.browser) {
-        result.skin = 'ucbrowser';
-        result.browser = 'aosp';
-        result.engine = 'webkit';
-        result.osversion = "0";
-    }
 
     if (match[1]) {
         result[match[1]] = parseInt(result.version, 10) || true;
@@ -822,9 +819,7 @@ define("../cardkit/supports", [
         body = document.body,
         is_android = browsers.os === 'android',
         is_ios = browsers.os === 'iphone' || browsers.os === 'ipad',
-        is_ios5 = is_ios
-            && browsers.engine === 'webkit'
-            && parseFloat(browsers.engineversion) < 536,
+        is_ios5 = is_ios && parseFloat(browsers.osversion) < 6,
         is_ios7 = parseFloat(browsers.osversion) >= 7,
         is_mobilefirefox = browsers.mozilla && is_android,
         is_desktop = browsers.os === 'mac'
@@ -847,7 +842,7 @@ define("../cardkit/supports", [
 
         BROWSER_CONTROL: is_desktop
             || browsers.mobilesafari
-            //|| browsers.shell === 'micromessenger'
+            || browsers.webview
             //|| browsers.aosp
             || is_android && browsers.chrome,
 
@@ -867,7 +862,9 @@ define("../cardkit/supports", [
 
         PREVENT_WINDOW_SCROLL: !!browsers.mobilesafari,
 
-        FULLSCREEN_MODE: browsers.webview || env.fullscreenMode,
+        FULLSCREEN_MODE: typeof env.fullscreenMode !== 'undefined' 
+            ? env.fullscreenMode 
+            : browsers.webview,
 
         FOLDABLE_URLBAR: browsers.mobilesafari && !is_ios7
 
@@ -911,8 +908,7 @@ define("mo/lang/es5", [], function(){
         //window = host.window,
         _objproto = Object.prototype,
         _arrayproto = Array.prototype,
-        _fnproto = Function.prototype,
-        _toString = _objproto.toString;
+        _fnproto = Function.prototype;
 
     function Empty() {}
 
@@ -1040,7 +1036,7 @@ define("mo/lang/es5", [], function(){
 
     if (!Array.isArray) {
         Array.isArray = function(obj) {
-            return _toString.call(obj) === "[object Array]";
+            return _toString(obj) === "[object Array]";
         };
     }
 
@@ -1196,7 +1192,13 @@ define("mo/lang/mix", [
         }
         for (var n = 1; n < ol; n++) {
             obj = objs[n];
+            if (typeof obj !== 'object') {
+                continue;
+            }
             if (Array.isArray(origin)) {
+                if (!Array.isArray(obj)) {
+                    continue;
+                }
                 origin = origin || [];
                 lib = {};
                 marked = [];
@@ -1253,7 +1255,13 @@ define("mo/lang/mix", [
         }
         for (var n = 1; n < ol; n++) {
             obj = objs[n];
+            if (typeof obj !== 'object') {
+                continue;
+            }
             if (Array.isArray(origin)) {
+                if (!Array.isArray(obj)) {
+                    continue;
+                }
                 origin = origin || [];
                 lib = {};
                 marked = [];
@@ -1523,6 +1531,7 @@ define("dollar/origin", [
             }, doc.body).filter(pick)[0],
         MOUSE_EVENTS = { click: 1, mousedown: 1, mouseup: 1, mousemove: 1 },
         TOUCH_EVENTS = { touchstart: 1, touchmove: 1, touchend: 1, touchcancel: 1 },
+        SPECIAL_TRIGGERS = { submit: 1, focus: 1, blur: 1 },
         CSS_NUMBER = { 
             'column-count': 1, 'columns': 1, 'font-weight': 1, 
             'line-height': 1, 'opacity': 1, 'z-index': 1, 'zoom': 1 
@@ -1769,6 +1778,9 @@ define("dollar/origin", [
             node.dataset[css_method(name)] = value;
         }, function(node, name){
             var data = (node || {}).dataset;
+            if (!data) {
+                return null;
+            }
             return name ? data[css_method(name)] 
                 : _.mix({}, data);
         }),
@@ -1965,7 +1977,7 @@ define("dollar/origin", [
                 $(this).off(subject, fn);
                 return cb.apply(this, arguments);
             };
-            $(this).on(subject, fn);
+            return $(this).on(subject, fn);
         },
 
         trigger: trigger,
@@ -1998,7 +2010,7 @@ define("dollar/origin", [
     }
 
     function matches_selector(elm, selector){
-        return elm && elm[MATCHES_SELECTOR](selector);
+        return elm && elm.nodeType === 1 && elm[MATCHES_SELECTOR](selector);
     }
 
     function find_selector(selector, attr){
@@ -2140,15 +2152,15 @@ define("dollar/origin", [
             event = Event(event);
         }
         _.mix(event, data);
-        me.forEach(event.type == 'submit' 
-            && !event.defaultPrevented 
-                ? function(node){
-                    node.submit();
-                } : function(node){
-                    if ('dispatchEvent' in node) {
-                        node.dispatchEvent(this);
-                    }
-                }, event);
+        me.forEach((SPECIAL_TRIGGERS[event.type]
+                && !event.defaultPrevented) 
+            ? function(node){
+                node[event.type]();
+            } : function(node){
+                if ('dispatchEvent' in node) {
+                    node.dispatchEvent(this);
+                }
+            }, event);
         return this;
     }
 
@@ -2277,8 +2289,6 @@ define("dollar/origin", [
     $.trigger = trigger;
     $._kvAccess = kv_access;
     $._eachNode = each_node;
-
-    $.VERSION = '1.2.0';
 
     return $;
 
@@ -2918,421 +2928,9 @@ define("../cardkit/tpl/unit/list", [], function(){
 
 define("../cardkit/tpl/unit/box", [], function(){
 
-    return {"template":"\n{% function hd(){ %}\n    {% if (data.hd) { %}\n    <header class=\"ck-hd-wrap\">\n\n        <span class=\"ck-hd {%= (data.hd_url && 'clickable' || '') %}\">\n            {% if (data.hd_url) { %}\n            <a href=\"{%= data.hd_url %}\" class=\"ck-link ck-link-mask {%= (data.hd_url_extern ? 'ck-link-extern' : '') %}\"></a>\n            {% } %}\n            <span>{%= data.hd %}</span>\n        </span>\n\n        {% if (data.hd_opt) { %}\n        <div class=\"ck-hdopt-wrap\">{%=data.hd_opt%}</div>\n        {% } %}\n\n    </header>\n    {% } %}\n{% } %}\n\n{% if (data.config.plain || data.config.plainhd) { %}\n    {%= hd() %}\n{% } %}\n\n<article class=\"ck-unit-wrap\">\n\n    {% if (!data.config.plain && !data.config.plainhd) { %}\n        {%= hd() %}\n    {% } %}\n\n    {% if (data.hasContent) { %}\n    <section>\n        {%= data.content %}\n    </section>\n    {% } %}\n\n    {% if (data.ft) { %}\n    <footer>{%= data.ft %}</footer>\n    {% } %}\n\n</article>\n"}; 
+    return {"template":"\n{% function hd(){ %}\n    {% if (data.hd) { %}\n    <header class=\"ck-hd-wrap\">\n\n        <span class=\"ck-hd {%= (data.hd_url && 'clickable' || '') %}\">\n            {% if (data.hd_url) { %}\n            <a href=\"{%= data.hd_url %}\" class=\"ck-link ck-link-mask {%= (data.hd_url_extern ? 'ck-link-extern' : '') %}\"></a>\n            {% } %}\n            <span>{%= data.hd %}</span>\n        </span>\n\n        {% if (data.hd_opt) { %}\n        <div class=\"ck-hdopt-wrap\">{%=data.hd_opt%}</div>\n        {% } %}\n\n    </header>\n    {% } %}\n{% } %}\n\n{% if (data.config.plain || data.config.plainhd) { %}\n    {%= hd() %}\n{% } %}\n\n<article class=\"ck-unit-wrap\">\n\n    {% if (!data.config.plain && !data.config.plainhd) { %}\n        {%= hd() %}\n    {% } %}\n\n    {% if (data.hasContent) { %}\n    <section>\n        {% if (data.config.disableReader === 'true') { %}\n        <script type=\"text/template\" class=\"ckd-delay-content\">\n        {%= data.content %}\n        </script>\n        {% } else { %}\n        {%= data.content %}\n        {% } %}\n    </section>\n    {% } %}\n\n    {% if (data.ft) { %}\n    <footer>{%= data.ft %}</footer>\n    {% } %}\n\n</article>\n"}; 
 
 });
-/* @source mo/template/string.js */;
-
-/**
- * using AMD (Asynchronous Module Definition) API with OzJS
- * see http://ozjs.org for details
- *
- * Copyright (C) 2010-2012, Dexter.Yy, MIT License
- * vim: et:ts=4:sw=4:sts=4
- */
-define("mo/template/string", [], function(require, exports){
-
-    exports.format = function(tpl, op){
-        return tpl.replace(/\{\{(\w+)\}\}/g, function(e1,e2){
-            return op[e2] != null ? op[e2] : "";
-        });
-    };
-
-    exports.escapeHTML = function(str){
-        str = str || '';
-        var xmlchar = {
-            //"&": "&amp;",
-            "<": "&lt;",
-            ">": "&gt;",
-            "'": "&#39;",
-            '"': "&quot;",
-            "{": "&#123;",
-            "}": "&#125;",
-            "@": "&#64;"
-        };
-        return str.replace(/[<>'"\{\}@]/g, function($1){
-            return xmlchar[$1];
-        });
-    };
-
-    exports.substr = function(str, limit, cb){
-        if(!str || typeof str !== "string")
-            return '';
-        var sub = str.substr(0, limit).replace(/([^\x00-\xff])/g, '$1 ').substr(0, limit).replace(/([^\x00-\xff])\s/g, '$1');
-        return cb ? cb.call(sub, sub) : (str.length > sub.length ? sub + '...' : sub);
-    };
-
-    exports.strsize = function(str){
-        return str.replace(/([^\x00-\xff]|[A-Z])/g, '$1 ').length;
-    };
-
-});
-
-
-/* @source mo/template/micro.js */;
-
-/**
- * using AMD (Asynchronous Module Definition) API with OzJS
- * see http://ozjs.org for details
- *
- * Copyright (C) 2010-2012, Dexter.Yy, MIT License
- * vim: et:ts=4:sw=4:sts=4
- */
-define("mo/template/micro", [
-  "mo/lang",
-  "mo/template/string"
-], function(_, stpl, require, exports){
-
-    var document = this.document;
-
-    exports.tplSettings = {
-        _cache: {},
-        evaluate: /\{%([\s\S]+?)%\}/g,
-        interpolate: /\{%=([\s\S]+?)%\}/g
-    };
-    exports.tplHelpers = {
-        mix: _.mix,
-        escapeHTML: stpl.escapeHTML,
-        substr: stpl.substr,
-        include: convertTpl,
-        _has: function(obj){
-            return function(name){
-                return _.ns(name, undefined, obj);
-            };
-        }
-    };
-
-    function convertTpl(str, data, namespace){
-        var func, c  = exports.tplSettings, suffix = namespace ? '#' + namespace : '';
-        if (!/[\t\r\n% ]/.test(str)) {
-            func = c._cache[str + suffix];
-            if (!func) {
-                var tplbox = document.getElementById(str);
-                if (tplbox) {
-                    func = c._cache[str + suffix] = convertTpl(tplbox.innerHTML, false, namespace);
-                }
-            }
-        } else {
-            func = new Function(namespace || 'obj', 'api', 'var __p=[];' 
-                + (namespace ? '' : 'with(obj){')
-                    + 'var mix=api.mix,escapeHTML=api.escapeHTML,substr=api.substr,include=api.include,has=api._has(' + (namespace || 'obj') + ');'
-                    + '__p.push(\'' +
-                    str.replace(/\\/g, '\\\\')
-                        .replace(/'/g, "\\'")
-                        .replace(c.interpolate, function(match, code) {
-                            return "'," + code.replace(/\\'/g, "'") + ",'";
-                        })
-                        .replace(c.evaluate || null, function(match, code) {
-                            return "');" + code.replace(/\\'/g, "'")
-                                                .replace(/[\r\n\t]/g, ' ') + "__p.push('";
-                        })
-                        .replace(/\r/g, '\\r')
-                        .replace(/\n/g, '\\n')
-                        .replace(/\t/g, '\\t')
-                    + "');" 
-                + (namespace ? "" : "}")
-                + "return __p.join('');");
-        }
-        return !func ? '' : (data ? func(data, exports.tplHelpers) : func);
-    }
-
-    exports.convertTpl = convertTpl;
-    exports.reloadTpl = function(str){
-        delete exports.tplSettings._cache[str];
-    };
-
-});
-
-
-/* @source mo/template.js */;
-
-/**
- * A lightweight and enhanced micro-template implementation, and minimum utilities
- *
- * using AMD (Asynchronous Module Definition) API with OzJS
- * see http://ozjs.org for details
- *
- * Copyright (C) 2010-2012, Dexter.Yy, MIT License
- * vim: et:ts=4:sw=4:sts=4
- */
-define("mo/template", [
-  "mo/lang",
-  "mo/template/string",
-  "mo/template/micro"
-], function(_, stpl, microtpl, require, exports){
-
-    _.mix(exports, stpl, microtpl);
-
-    exports.str2html = function(str){ // @TODO 
-        var temp = document.createElement("div");
-        temp.innerHTML = str;
-        var child = temp.firstChild;
-        if (temp.childNodes.length == 1) {
-            return child;
-        }
-        var fragment = document.createDocumentFragment();
-        do {
-            fragment.appendChild(child);
-        } while (child = temp.firstChild);
-        return fragment;
-    };
-
-});
-
-/* @source ../cardkit/render.js */;
-
-
-define("../cardkit/render", [
-  "dollar",
-  "mo/lang",
-  "mo/template",
-  "../cardkit/tpl/unit/box",
-  "../cardkit/tpl/unit/list",
-  "../cardkit/tpl/unit/mini",
-  "../cardkit/tpl/unit/form",
-  "../cardkit/tpl/unit/banner",
-  "../cardkit/tpl/unit/blank",
-  "../cardkit/tpl/layout/navdrawer",
-  "../cardkit/tpl/layout/actionbar",
-  "../cardkit/parser/box",
-  "../cardkit/parser/list",
-  "../cardkit/parser/mini",
-  "../cardkit/parser/form",
-  "../cardkit/parser/banner",
-  "../cardkit/parser/actionbar",
-  "../cardkit/parser/navdrawer"
-], function($, _, tpl, 
-    tpl_box, tpl_list, tpl_mini, tpl_form, tpl_banner, tpl_blank, 
-    tpl_navdrawer, tpl_actionbar,
-    boxParser, listParser, miniParser, formParser, 
-    bannerParser, actionbarParser, navdrawerParser){
-
-    var frame_parts = {
-            'navdrawer': navdrawerParser, 
-            'page-actions': actionbarParser,
-            'card-actions': actionbarParser
-        },
-        slice = Array.prototype.slice,
-
-        SCRIPT_TAG = 'script[type="text/cardscript"]',
-
-        TPL_BLANK_BANNER = '<div class="ck-banner-unit"></div>';
-
-    var exports = {
-
-        initCard: function(card, raw, footer, opt) {
-
-            if (!opt.isModal) {
-
-                card.find(SCRIPT_TAG).forEach(run_script, card[0]);
-                card.trigger('card:loaded', {
-                    card: card
-                });
-
-                var banner_cfg = card.find('.ck-banner-unit');
-                if (!banner_cfg[0]) {
-                    banner_cfg = $(TPL_BLANK_BANNER);
-                }
-                card.prepend(banner_cfg);
-
-            }
-
-            var units = card.find('.ck-box-unit, .ck-mini-unit, .ck-list-unit, .ck-form-unit, .ck-banner-unit'),
-                config = {
-                    blank: card.data('cfgBlank')
-                };
-
-            var has_content = exports.initUnit(units, raw);
-
-            if (!has_content && !opt.isModal && config.blank != 'false') {
-                card.append(tpl.convertTpl(tpl_blank.template, {
-                    config: config
-                }, 'data'));
-            }
-
-            if (!opt.isModal) {
-
-                card.append(footer.clone());
-
-                card.trigger('card:ready', {
-                    card: card
-                });
-
-            }
-
-        },
-
-        openCard: function(card, opt){
-            if (!opt.isModal) {
-                card.trigger('card:open', {
-                    card: card
-                });
-            }
-        },
-
-        closeCard: function(card, opt){
-            if (!opt.isModal) {
-                card.trigger('card:close', {
-                    card: card
-                });
-            }
-        },
-
-        initUnit: function(units, raw){
-            var has_content;
-            $(units).forEach(function(unit){
-                var type = (/ck-(\w+)-unit/.exec(unit.className) || [])[1];
-                if (type) {
-                    if (exports[type](unit, raw)) {
-                        has_content = true;
-                    }
-                }
-            });
-            return has_content;
-        },
-
-        banner: function(unit, raw){
-            var data = bannerParser(unit, raw);
-            unit.innerHTML = tpl.convertTpl(tpl_banner.template, data, 'data');
-        },
-
-        box: function(unit, raw){
-            var data = boxParser(unit, raw);
-            if (data.hasContent || data.hd) {
-                unit.innerHTML = tpl.convertTpl(tpl_box.template, data, 'data');
-                //setTimeout(function(){
-                    //$('.ckd-delay-content', unit).forEach(function(tpl){
-                        //this(tpl).replaceWith(tpl.innerHTML);
-                    //}, $);
-                //}, 100);
-                return true;
-            } else {
-                $(unit).remove();
-            }
-        },
-
-        mini: function(unit, raw){
-            var data = miniParser(unit, raw);
-            data.items = data.items.filter(function(item){
-                if (!item.title && !item.author 
-                        && (!item.content || !item.content.length)) {
-                    return false;
-                }
-                return true;
-            }, data);
-            if (!data.items.length 
-                    && (!data.hd || data.config.blank == 'false')) {
-                $(unit).remove();
-                return;
-            }
-            if (data.config.limit 
-                    && data.config.limit < data.items.length) {
-                data.items.length = data.config.limit;
-            }
-            unit.innerHTML = tpl.convertTpl(tpl_mini.template, data, 'data');
-            return true;
-        },
-
-        list: function(unit, raw){
-            var data = listParser(unit, raw);
-            data.items = data.items.filter(function(item){
-                var style = this.style;
-                if (style === 'more' || style === 'menu') {
-                    if (!item.title) {
-                        return false;
-                    }
-                } else if (style === 'grid') {
-                    if (!item.icon) {
-                        return false;
-                    }
-                } else if (!item.title && !item.author) {
-                    return false;
-                }
-                return true;
-            }, data);
-            if (data.config.limit 
-                    && data.config.limit < data.items.length) {
-                data.items.length = data.config.limit;
-            }
-            if (!data.items.length 
-                    && (!data.hd || data.config.blank == 'false')) {
-                $(unit).remove();
-            } else {
-                unit.innerHTML = tpl.convertTpl(tpl_list.template, data, 'data');
-                return true;
-            }
-        },
-
-        form: function(unit, raw){
-            var data = formParser(unit, raw);
-            if (!data.items.length 
-                    && (!data.hd || data.config.blank == 'false')) {
-                $(unit).remove();
-            } else {
-                unit.innerHTML = tpl.convertTpl(tpl_form.template, data, 'data');
-                return true;
-            }
-        },
-
-        _frameConfig: {},
-        _frameCustomized: {},
-
-        setFrame: function(card, header, navDrawer, raw){
-            var cfg = this._frameConfig,
-                customized = this._frameCustomized,
-                global_cfg,
-                local_cfg,
-                cfg_node,
-                changed = {};
-            for (var part in frame_parts) {
-                if (!cfg[part] || customized[part]) {
-                    global_cfg = header.find('.ckcfg-' + part);
-                    if (global_cfg[0]) {
-                        cfg[part] = frame_parts[part](global_cfg, raw);
-                        if (cfg[part]) {
-                            changed[part] = true;
-                        }
-                    }
-                }
-                cfg_node = card.find('.ckcfg-' + part);
-                customized[part] = !!cfg_node[0];
-                if (customized[part]) {
-                    local_cfg = frame_parts[part](cfg_node, raw);
-                    if (local_cfg) {
-                        cfg[part] = local_cfg;
-                        changed[part] = true;
-                    } else {
-                        customized[part] = false;
-                    }
-                }
-            }
-            if (changed['card-actions']) {
-                var actions = cfg['actionbar'] = cfg['card-actions'],
-                    action_items = actions.items,
-                    action_overflow_items = actions.overflowItems;
-                action_items.push.apply(action_items, 
-                    slice.call(cfg['page-actions'].items));
-                action_overflow_items.push.apply(action_overflow_items, 
-                    slice.call(cfg['page-actions'].overflowItems));
-                action_overflow_items.unshift.apply(actions.overflowItems,
-                    slice.call(action_items.splice(actions.config.limit)));
-                $('.ck-top-actions').html(tpl.convertTpl(tpl_actionbar.template, cfg));
-            }
-            if (changed['navdrawer']) {
-                navDrawer.html(tpl.convertTpl(tpl_navdrawer.template, cfg));
-            }
-        }
-    
-    };
-
-    function run_script(script){
-        new Function('', script.innerHTML).call(this);
-    }
-
-    return exports;
-
-});
-
 /* @source eventmaster.js */;
 
 /**
@@ -3694,6 +3292,435 @@ define("../cardkit/bus", [
 
 });
 
+/* @source mo/template/string.js */;
+
+/**
+ * using AMD (Asynchronous Module Definition) API with OzJS
+ * see http://ozjs.org for details
+ *
+ * Copyright (C) 2010-2012, Dexter.Yy, MIT License
+ * vim: et:ts=4:sw=4:sts=4
+ */
+define("mo/template/string", [], function(require, exports){
+
+    exports.format = function(tpl, op){
+        return tpl.replace(/\{\{(\w+)\}\}/g, function(e1,e2){
+            return op[e2] != null ? op[e2] : "";
+        });
+    };
+
+    exports.escapeHTML = function(str){
+        str = str || '';
+        var xmlchar = {
+            //"&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            "'": "&#39;",
+            '"': "&quot;",
+            "{": "&#123;",
+            "}": "&#125;",
+            "@": "&#64;"
+        };
+        return str.replace(/[<>'"\{\}@]/g, function($1){
+            return xmlchar[$1];
+        });
+    };
+
+    exports.substr = function(str, limit, cb){
+        if(!str || typeof str !== "string")
+            return '';
+        var sub = str.substr(0, limit).replace(/([^\x00-\xff])/g, '$1 ').substr(0, limit).replace(/([^\x00-\xff])\s/g, '$1');
+        return cb ? cb.call(sub, sub) : (str.length > sub.length ? sub + '...' : sub);
+    };
+
+    exports.strsize = function(str){
+        return str.replace(/([^\x00-\xff]|[A-Z])/g, '$1 ').length;
+    };
+
+});
+
+
+/* @source mo/template/micro.js */;
+
+/**
+ * using AMD (Asynchronous Module Definition) API with OzJS
+ * see http://ozjs.org for details
+ *
+ * Copyright (C) 2010-2012, Dexter.Yy, MIT License
+ * vim: et:ts=4:sw=4:sts=4
+ */
+define("mo/template/micro", [
+  "mo/lang",
+  "mo/template/string"
+], function(_, stpl, require, exports){
+
+    var document = this.document;
+
+    exports.tplSettings = {
+        _cache: {},
+        comment: /\{\*([\s\S]+?)\*\}/g,
+        evaluate: /\{%([\s\S]+?)%\}/g,
+        interpolate: /\{%=([\s\S]+?)%\}/g
+    };
+    exports.tplHelpers = {
+        mix: _.mix,
+        escapeHTML: stpl.escapeHTML,
+        substr: stpl.substr,
+        include: convertTpl,
+        _has: function(obj){
+            return function(name){
+                return _.ns(name, undefined, obj);
+            };
+        }
+    };
+
+    function convertTpl(str, data, namespace){
+        var func, c  = exports.tplSettings, suffix = namespace ? '#' + namespace : '';
+        if (!/[\t\r\n% ]/.test(str)) {
+            func = c._cache[str + suffix];
+            if (!func) {
+                var tplbox = document.getElementById(str);
+                if (tplbox) {
+                    func = c._cache[str + suffix] = convertTpl(tplbox.innerHTML, false, namespace);
+                }
+            }
+        } else {
+            func = new Function(namespace || 'obj', 'api', 'var __p=[];' 
+                + (namespace ? '' : 'with(obj){')
+                    + 'var mix=api.mix,escapeHTML=api.escapeHTML,substr=api.substr,include=api.include,has=api._has(' + (namespace || 'obj') + ');'
+                    + '__p.push(\'' +
+                    str.replace(/\\/g, '\\\\')
+                        .replace(/'/g, "\\'")
+                        .replace(c.comment, '')
+                        .replace(c.interpolate, function(match, code) {
+                            return "'," + code.replace(/\\'/g, "'") + ",'";
+                        })
+                        .replace(c.evaluate || null, function(match, code) {
+                            return "');" + code.replace(/\\'/g, "'")
+                                                .replace(/[\r\n\t]/g, ' ') + "__p.push('";
+                        })
+                        .replace(/\r/g, '\\r')
+                        .replace(/\n/g, '\\n')
+                        .replace(/\t/g, '\\t')
+                    + "');" 
+                + (namespace ? "" : "}")
+                + "return __p.join('');");
+        }
+        return !func ? '' : (data ? func(data, exports.tplHelpers) : func);
+    }
+
+    exports.convertTpl = convertTpl;
+    exports.reloadTpl = function(str){
+        delete exports.tplSettings._cache[str];
+    };
+
+});
+
+
+/* @source mo/template.js */;
+
+/**
+ * A lightweight and enhanced micro-template implementation, and minimum utilities
+ *
+ * using AMD (Asynchronous Module Definition) API with OzJS
+ * see http://ozjs.org for details
+ *
+ * Copyright (C) 2010-2012, Dexter.Yy, MIT License
+ * vim: et:ts=4:sw=4:sts=4
+ */
+define("mo/template", [
+  "mo/lang",
+  "mo/template/string",
+  "mo/template/micro"
+], function(_, stpl, microtpl, require, exports){
+
+    _.mix(exports, stpl, microtpl);
+
+    exports.str2html = function(str){ // @TODO 
+        var temp = document.createElement("div");
+        temp.innerHTML = str;
+        var child = temp.firstChild;
+        if (temp.childNodes.length == 1) {
+            return child;
+        }
+        var fragment = document.createDocumentFragment();
+        do {
+            fragment.appendChild(child);
+        } while (child = temp.firstChild);
+        return fragment;
+    };
+
+});
+
+/* @source ../cardkit/render.js */;
+
+
+define("../cardkit/render", [
+  "dollar",
+  "mo/lang",
+  "mo/template",
+  "../cardkit/bus",
+  "../cardkit/tpl/unit/box",
+  "../cardkit/tpl/unit/list",
+  "../cardkit/tpl/unit/mini",
+  "../cardkit/tpl/unit/form",
+  "../cardkit/tpl/unit/banner",
+  "../cardkit/tpl/unit/blank",
+  "../cardkit/tpl/layout/navdrawer",
+  "../cardkit/tpl/layout/actionbar",
+  "../cardkit/parser/box",
+  "../cardkit/parser/list",
+  "../cardkit/parser/mini",
+  "../cardkit/parser/form",
+  "../cardkit/parser/banner",
+  "../cardkit/parser/actionbar",
+  "../cardkit/parser/navdrawer"
+], function($, _, tpl, bus,
+    tpl_box, tpl_list, tpl_mini, tpl_form, tpl_banner, tpl_blank, 
+    tpl_navdrawer, tpl_actionbar,
+    boxParser, listParser, miniParser, formParser, 
+    bannerParser, actionbarParser, navdrawerParser){
+
+    var frame_parts = {
+            'navdrawer': navdrawerParser, 
+            'page-actions': actionbarParser,
+            'card-actions': actionbarParser
+        },
+        slice = Array.prototype.slice,
+        first_render = false,
+
+        SCRIPT_TAG = 'script[type="text/cardscript"]',
+
+        TPL_BLANK_BANNER = '<div class="ck-banner-unit"></div>';
+
+    var exports = {
+
+        initCard: function(card, raw, footer, opt) {
+
+            if (!opt.isModal) {
+
+                card.find(SCRIPT_TAG).forEach(run_script, card[0]);
+                card.trigger('card:loaded', {
+                    card: card
+                });
+
+                var banner_cfg = card.find('.ck-banner-unit');
+                if (!banner_cfg[0]) {
+                    banner_cfg = $(TPL_BLANK_BANNER);
+                }
+                card.prepend(banner_cfg);
+
+            }
+
+            var units = card.find('.ck-box-unit, .ck-mini-unit, .ck-list-unit, .ck-form-unit, .ck-banner-unit'),
+                config = {
+                    blank: card.data('cfgBlank')
+                };
+
+            var has_content = exports.initUnit(units, raw);
+
+            if (!has_content && !opt.isModal && config.blank != 'false') {
+                card.append(tpl.convertTpl(tpl_blank.template, {
+                    config: config
+                }, 'data'));
+            }
+
+            if (!opt.isModal) {
+
+                card.append(footer.clone());
+
+                card.trigger('card:ready', {
+                    card: card
+                });
+
+            }
+
+        },
+
+        openCard: function(card, opt){
+            if (!opt.isModal) {
+                card.trigger('card:open', {
+                    card: card
+                });
+            }
+        },
+
+        closeCard: function(card, opt){
+            if (!opt.isModal) {
+                card.trigger('card:close', {
+                    card: card
+                });
+            }
+        },
+
+        initUnit: function(units, raw){
+            var has_content;
+            $(units).forEach(function(unit){
+                var type = (/ck-(\w+)-unit/.exec(unit.className) || [])[1];
+                if (type) {
+                    if (exports[type](unit, raw)) {
+                        has_content = true;
+                    }
+                }
+            });
+            if (first_render === false) {
+                first_render = true;
+                bus.resolve('firstRender');
+            }
+            return has_content;
+        },
+
+        banner: function(unit, raw){
+            var data = bannerParser(unit, raw);
+            unit.innerHTML = tpl.convertTpl(tpl_banner.template, data, 'data');
+        },
+
+        box: function(unit, raw){
+            var data = boxParser(unit, raw);
+            if (data.hasContent || data.hd) {
+                unit.innerHTML = tpl.convertTpl(tpl_box.template, data, 'data');
+                if (data.config.disableReader === 'true') {
+                    if (first_render === false) {
+                        first_render = 'skip';
+                    }
+                    setTimeout(function(){
+                        $('.ckd-delay-content', unit).forEach(function(tpl){
+                            this(tpl).replaceWith(tpl.innerHTML);
+                        }, $);
+                        if (first_render === 'skip') {
+                            first_render = true;
+                            bus.resolve('firstRender');
+                        }
+                    }, 100);
+                }
+                return true;
+            } else {
+                $(unit).remove();
+            }
+        },
+
+        mini: function(unit, raw){
+            var data = miniParser(unit, raw);
+            data.items = data.items.filter(function(item){
+                if (!item.title && !item.author 
+                        && (!item.content || !item.content.length)) {
+                    return false;
+                }
+                return true;
+            }, data);
+            if (!data.items.length 
+                    && (!data.hd || data.config.blank == 'false')) {
+                $(unit).remove();
+                return;
+            }
+            if (data.config.limit 
+                    && data.config.limit < data.items.length) {
+                data.items.length = data.config.limit;
+            }
+            unit.innerHTML = tpl.convertTpl(tpl_mini.template, data, 'data');
+            return true;
+        },
+
+        list: function(unit, raw){
+            var data = listParser(unit, raw);
+            data.items = data.items.filter(function(item){
+                var style = this.style;
+                if (style === 'more' || style === 'menu') {
+                    if (!item.title) {
+                        return false;
+                    }
+                } else if (style === 'grid') {
+                    if (!item.icon) {
+                        return false;
+                    }
+                } else if (!item.title && !item.author) {
+                    return false;
+                }
+                return true;
+            }, data);
+            if (data.config.limit 
+                    && data.config.limit < data.items.length) {
+                data.items.length = data.config.limit;
+            }
+            if (!data.items.length 
+                    && (!data.hd || data.config.blank == 'false')) {
+                $(unit).remove();
+            } else {
+                unit.innerHTML = tpl.convertTpl(tpl_list.template, data, 'data');
+                return true;
+            }
+        },
+
+        form: function(unit, raw){
+            var data = formParser(unit, raw);
+            if (!data.items.length 
+                    && (!data.hd || data.config.blank == 'false')) {
+                $(unit).remove();
+            } else {
+                unit.innerHTML = tpl.convertTpl(tpl_form.template, data, 'data');
+                return true;
+            }
+        },
+
+        _frameConfig: {},
+        _frameCustomized: {},
+
+        setFrame: function(card, header, navDrawer, raw){
+            var cfg = this._frameConfig,
+                customized = this._frameCustomized,
+                global_cfg,
+                local_cfg,
+                cfg_node,
+                changed = {};
+            for (var part in frame_parts) {
+                if (!cfg[part] || customized[part]) {
+                    global_cfg = header.find('.ckcfg-' + part);
+                    if (global_cfg[0]) {
+                        cfg[part] = frame_parts[part](global_cfg, raw);
+                        if (cfg[part]) {
+                            changed[part] = true;
+                        }
+                    }
+                }
+                cfg_node = card.find('.ckcfg-' + part);
+                customized[part] = !!cfg_node[0];
+                if (customized[part]) {
+                    local_cfg = frame_parts[part](cfg_node, raw);
+                    if (local_cfg) {
+                        cfg[part] = local_cfg;
+                        changed[part] = true;
+                    } else {
+                        customized[part] = false;
+                    }
+                }
+            }
+            if (changed['card-actions']) {
+                var actions = cfg['actionbar'] = cfg['card-actions'],
+                    action_items = actions.items,
+                    action_overflow_items = actions.overflowItems;
+                action_items.push.apply(action_items, 
+                    slice.call(cfg['page-actions'].items));
+                action_overflow_items.push.apply(action_overflow_items, 
+                    slice.call(cfg['page-actions'].overflowItems));
+                action_overflow_items.unshift.apply(actions.overflowItems,
+                    slice.call(action_items.splice(actions.config.limit)));
+                $('.ck-top-actions').html(tpl.convertTpl(tpl_actionbar.template, cfg));
+            }
+            if (changed['navdrawer']) {
+                navDrawer.html(tpl.convertTpl(tpl_navdrawer.template, cfg));
+            }
+        }
+    
+    };
+
+    function run_script(script){
+        new Function('', script.innerHTML).call(this);
+    }
+
+    return exports;
+
+});
+
 /* @source ../cardkit/tpl/layout/ctlbar.js */;
 
 define("../cardkit/tpl/layout/ctlbar", [], function(){
@@ -3882,6 +3909,7 @@ define('moui/overlay', [
 
         applyClose: function() {
             this.isOpened = false;
+            this.hideLoading();
             this._content.empty();
             this._node.removeClass('rendered');
             this.event.fire('close', [this]);
@@ -4338,6 +4366,24 @@ define('moui/picker', [
             return this;
         },
 
+        _watchEnable: function(controller){
+            controller._pickerEnableWatcher = when_enable.bind(this);
+            controller.event.bind('enable', controller._pickerEnableWatcher);
+        },
+
+        _watchDisable: function(controller){
+            controller._pickerDisableWatcher = when_disable.bind(this);
+            controller.event.bind('disable', controller._pickerDisableWatcher);
+        },
+
+        _unwatchEnable: function(controller){
+            controller.event.unbind('enable', controller._pickerEnableWatcher);
+        },
+
+        _unwatchDisable: function(controller){
+            controller.event.unbind('disable', controller._pickerDisableWatcher);
+        },
+
         addOption: function(elm){
             elm = $(elm)[0];
             if (elm[OID]) {
@@ -4348,8 +4394,7 @@ define('moui/picker', [
                 enableVal: elm.value,
                 label: false
             });
-            controller.event.bind('enable', when_enable.bind(this))
-                .bind('disable', when_disable.bind(this));
+            this._watchEnable(controller);
             this._options.push(controller);
             if (controller.isEnabled) {
                 change.call(this, 'enable', controller);
@@ -4405,18 +4450,25 @@ define('moui/picker', [
             }
         },
 
-        val: function(){
-            if (!this._config) {
-                return;
-            }
+        getSelectedData: function() {
+            var list = this.getSelected().map(function(controller){
+                return controller.data();
+            });
             if (this._config.multiselect) {
-                return this._allSelected.map(function(controller){
-                    return controller.val();
-                });
+                return list;
             } else {
-                if (this._lastSelected) {
-                    return this._lastSelected.val();
-                }
+                return list[0];
+            }
+        },
+
+        val: function(){
+            var list = this.getSelected().map(function(controller){
+                return controller.val();
+            });
+            if (this._config.multiselect) {
+                return list;
+            } else {
+                return list[0];
             }
         },
 
@@ -4444,8 +4496,13 @@ define('moui/picker', [
         selectAll: function(){
             if (this._config.multiselect) {
                 this._options.forEach(function(controller){
-                    controller.enable();
-                });
+                    if (!controller.isEnabled) {
+                        this._unwatchEnable(controller);
+                        controller.enable();
+                        change.call(this, 'enable', controller);
+                    }
+                }, this);
+                this.event.fire('change', [this, this._options[0]]);
             }
             this._lastActionTarget = null;
             return this;
@@ -4454,9 +4511,14 @@ define('moui/picker', [
         unselectAll: function(){
             if (this._config.multiselect) {
                 this._options.forEach(function(controller){
-                    controller.disable();
-                });
+                    if (controller.isEnabled) {
+                        this._unwatchDisable(controller);
+                        controller.disable();
+                        change.call(this, 'disable', controller);
+                    }
+                }, this);
                 this._lastActionTarget = null;
+                this.event.fire('change', [this, this._options[0]]);
             } else {
                 this.undo();
             }
@@ -4466,8 +4528,17 @@ define('moui/picker', [
         selectInvert: function(){
             if (this._config.multiselect) {
                 this._options.forEach(function(controller){
-                    controller.toggle();
-                });
+                    if (controller.isEnabled) {
+                        this._unwatchDisable(controller);
+                        controller.toggle();
+                        change.call(this, 'disable', controller);
+                    } else {
+                        this._unwatchEnable(controller);
+                        controller.toggle();
+                        change.call(this, 'enable', controller);
+                    }
+                }, this);
+                this.event.fire('change', [this, this._options[0]]);
             }
             this._lastActionTarget = null;
             return this;
@@ -4520,16 +4591,26 @@ define('moui/picker', [
 
     function change(subject, controller){
         if (subject === 'enable') {
+            if (!this._config.ignoreStatus) {
+                this._unwatchEnable(controller);
+                this._watchDisable(controller);
+            }
             if (this._config.multiselect) {
                 this._allSelected.push(controller);
             } else {
                 var last = this._lastSelected;
                 this._lastSelected = controller;
                 if (last) {
+                    this._unwatchDisable(last);
                     last.disable();
+                    this._watchEnable(last);
                 }
             }
         } else {
+            if (!this._config.ignoreStatus) {
+                this._unwatchDisable(controller);
+                this._watchEnable(controller);
+            }
             if (this._config.multiselect) {
                 var i = this._allSelected.indexOf(controller);
                 if (i !== -1) {
@@ -4673,6 +4754,12 @@ define('moui/actionview', [
         val: function(){
             if (this._picker) {
                 return this._picker.val();
+            }
+        },
+
+        data: function(){
+            if (this._picker) {
+                return this._picker.getSelectedData();
             }
         },
 
@@ -4995,7 +5082,7 @@ define("mo/network/ajax", [
   "mo/browsers"
 ], function(browsers, require, exports){
 
-    var httpParam = function(a) {
+    exports.params = function(a) {
         var s = [];
         if (a.constructor == Array) {
             for (var i = 0; i < a.length; i++)
@@ -5010,7 +5097,7 @@ define("mo/network/ajax", [
     /**
      * From jquery by John Resig
      */ 
-    var ajax = function(s){
+    exports.ajax = function(s){
         var options = {
             type: s.type || "GET",
             url: s.url || "",
@@ -5036,7 +5123,7 @@ define("mo/network/ajax", [
         };
         
         if ( options.data && options.processData && typeof options.data != "string" )
-            options.data = httpParam(options.data);
+            options.data = this.params(options.data);
         if ( options.data && options.type.toLowerCase() == "get" ) {
             options.url += (options.url.match(/\?/) ? "&" : "?") + options.data;
             options.data = null;
@@ -5044,13 +5131,24 @@ define("mo/network/ajax", [
         
         var status, data, requestDone = false, xhr = window.ActiveXObject ? new ActiveXObject("Microsoft.XMLHTTP") : new XMLHttpRequest();
         xhr.open( options.type, options.url, true, options.username, options.password );
+
         try {
-            if ( options.data && options.contentType !== false )
+            var i;
+            if (options.xhrFields) {
+                for (i in options.xhrFields) {
+                    xhr[i] = options.xhrFields[i];
+                }
+            }
+            if ( options.data && options.contentType !== false ) { 
                 xhr.setRequestHeader("Content-Type", options.contentType);
+            }
             xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
             xhr.setRequestHeader("Accept", s.dataType && options.accepts[ s.dataType ] ?
                 options.accepts[ s.dataType ] + ", */*" :
                 options.accepts._default );
+            for (i in options.headers) {
+                xhr.setRequestHeader(i, options.headers[i]);
+            }
         } catch(e){}
         
         if ( options.beforeSend )
@@ -5114,9 +5212,6 @@ define("mo/network/ajax", [
         return xhr;
     };
 
-    exports.ajax = ajax;
-    exports.params = httpParam;
-
 });
 
 /* @source mo/network.js */;
@@ -5133,12 +5228,10 @@ define("mo/network/ajax", [
 define("mo/network", [
   "mo/lang",
   "mo/network/ajax"
-], function(_, net, require, exports){
+], function(_, exports){
 
     var window = this,
         uuid4jsonp = 1;
-
-    _.mix(exports, net);
 
     exports.getScript = function(url, op){
         var doc = _.isWindow(this) ? this.document : document,
@@ -5207,7 +5300,7 @@ define("mo/network", [
         }
         var cbName = op.callbackName || 'jsoncallback';
         data[cbName] = op.callback;
-        url = [url, /\?/.test(url) ? "&" : "?", exports.httpParam(data)].join("");
+        url = [url, /\?/.test(url) ? "&" : "?", exports.params(data)].join("");
         if (fn) {
             _.ns(op.callback, fn);
         }
@@ -5218,7 +5311,7 @@ define("mo/network", [
     exports.getRequest = function(url, params){
         var img = new Image();
         img.onload = function(){ img = null; }; //阻止IE下的自动垃圾回收引起的请求未发出状况
-        img.src = !params ? url : [url, /\?/.test(url) ? "&" : "?", typeof params == "string" ? params : exports.httpParam(params)].join('');
+        img.src = !params ? url : [url, /\?/.test(url) ? "&" : "?", typeof params == "string" ? params : exports.params(params)].join('');
     };
 
     exports.parseJSON = function(json){
@@ -5232,6 +5325,10 @@ define("mo/network", [
         }
         return json;
     };
+
+    exports.httpParam = exports.params; // deprecated
+
+    return exports;
 
 });
 
@@ -5248,6 +5345,7 @@ define("../cardkit/view/modalcard", [
             className: 'ck-modalview',
             closeDelay: 400
         }),
+        _tm,
         _content_filter,
         origin_set_content = modalCard.setContent,
         origin_set = modalCard.set;
@@ -5256,22 +5354,22 @@ define("../cardkit/view/modalcard", [
         if (!opt) {
             return this;
         }
+
         var self = this,
+            tm = +new Date(),
             url = opt.jsonUrl || opt.url;
         if (url) {
             opt.content = '';
             self.showLoading();
-            net.ajax({
-                url: url,
-                dataType: opt.jsonUrl ? 'json' : 'text',
-                success: function(data){
-                    if (opt.jsonUrl) {
-                        data = data.html;
-                    }
-                    self.setContent(data);
-                    self.hideLoading();
-                }
-            });
+            _tm = tm;
+            if (opt.jsonUrl) {
+                net.getJSON(url, callback);
+            } else if (opt.url) {
+                net.ajax({
+                    url: url,
+                    success: callback
+                });
+            }
         }
 
         _content_filter = opt.contentFilter;
@@ -5289,6 +5387,17 @@ define("../cardkit/view/modalcard", [
                     return elm.innerHTML;
                 }
             }).join('');
+        }
+
+        function callback(data){
+            if (tm !== _tm) {
+                return;
+            }
+            if (opt.jsonUrl) {
+                data = data.html;
+            }
+            self.setContent(data);
+            self.hideLoading();
         }
 
         return origin_set.call(this, opt);
@@ -5311,6 +5420,7 @@ define("../cardkit/view/modalcard", [
     modalCard.event.bind('confirm', function(modal){
         modal.event.fire('confirmOnThis', arguments);
     }).bind('close', function(modal){
+        _tm = 0;
         modal.event.unbind('confirmOnThis');
     });
 
@@ -5934,7 +6044,7 @@ define('momo/base', [
     
     };
 
-    function nothing(){}
+    function nothing(){ return this; }
 
     function exports(elm, opt, cb){
         return new exports.Class(elm, opt, cb);
@@ -7636,7 +7746,7 @@ define("../cardkit/app", [
                 me = me.parent();
             }
             ck.confirm('', function(){
-                open_url(me.attr('href'), me);
+                open_url(me.attr('href'), me[0]);
             }, me.data());
         },
 
@@ -7692,15 +7802,32 @@ define("../cardkit/app", [
             show_actions(me);
         },
 
-        '.ck-modal-button': open_modal_card,
-        '.ck-modal-link': open_modal_card,
+        '.ck-modal-button, .ck-modal-button *': function(){
+            var me = $(this);
+            if (!me.hasClass('ck-modal-button')) {
+              me = me.closest('.ck-modal-button');
+            }
+            ck.openModal(me.data());
+        },
+
+        '.ck-modal-link, .ck-modal-link *': function(){
+            var me = $(this);
+            if (!me.hasClass('ck-modal-link')) {
+                me = me.closest('.ck-modal-link');
+            }
+            ck.openModal(me.data());
+        },
 
         '.ck-growl-button': function(){
             growl(this).open();
         },
 
-        '.ck-actionview article > .ck-option': function(){
-            actionView.current.select(this);
+        '.ck-actionview article > .ck-option, .ck-actionview article > .ck-option > *': function(){
+            var me = $(this);
+            if (!me.hasClass('ck-option')) {
+                me = me.parent();
+            }
+            actionView.current.select(me);
         },
 
         '.ck-actionview > footer .confirm': function(){
@@ -7735,9 +7862,13 @@ define("../cardkit/app", [
             var selector = '.ck-top-overflow-items .ck-item,'
                     + '.ck-top-overflow-items .ck-overflow-item',
                 options = $(selector).map(function(item, i){
+                    var label = $(item).data('label');
+                    if (label) {
+                        label = $(label, item)[0];
+                    }
                     return $(tpl.convertTpl(this, {
                         i: i,
-                        text: $(item).html()
+                        text:  $(label || item).text()
                     }, 'item'))[0];
                 }, tpl_overflowmenu.template);
             actionView(this, {
@@ -7767,10 +7898,6 @@ define("../cardkit/app", [
         }
 
     };
-
-    function open_modal_card(){
-        ck.openModal($(this).data());
-    }
 
     function handle_control(){
         var controller = control(this),
@@ -7877,6 +8004,7 @@ define("../cardkit/app", [
         ck.changeView(current, { 
             isModal: true 
         });
+        ck.enableControl();
         if (modalCard._iframeContent) {
             modalCard.event.done('frameOnload', function(){
                 var iframe_body = $(modalCard._iframeWindow[0].document.body);
@@ -7884,23 +8012,9 @@ define("../cardkit/app", [
                 ck.initView(iframe_body, {
                     isModal: true
                 });
-                setTimeout(function(){
-                    ck.enableControl();
-                }, 400);
             });
         } else if (!modalCard._content.html()) { // @TODO 换更靠谱的方法
-            modalCard.event.done('contentchange', function(){
-                ck.initView(current, {
-                    isModal: true
-                });
-                setTimeout(function(){
-                    ck.enableControl();
-                }, 400);
-            });
-        } else {
-            setTimeout(function(){
-                ck.enableControl();
-            }, 400);
+            modalCard.event.done('contentchange', when_modal_content_loaded);
         }
     }).bind('prepareClose', function(){
         ck.disableView = false;
@@ -7909,12 +8023,14 @@ define("../cardkit/app", [
         ck.disableView = true;
         $(body).addClass('modal-view');
     }).bind('close', function(){
+        modalCard.event.cancel('contentchange', when_modal_content_loaded);
         ck.changeView(last_view_for_modal, {
             preventRender: ck._navDrawerLastView,
             isModal: ck._navDrawerLastView,
             isNotPrev: true
         });
         $(body).removeClass('bg');
+        ck.enableControl();
     //}).bind('needclose', function(){
         //ck.closeModal();
     });
@@ -7982,7 +8098,7 @@ define("../cardkit/app", [
             this.header = $('.ck-header', root);
             if (!supports.BROWSER_CONTROL) {
                 this.ctlbar = $(tpl_ctlbar.template).appendTo(this.wrapper);
-                $(body).addClass('has_ctlbar');
+                $(body).addClass('has-ctlbar');
             }
             this.footer = $('.ck-footer', root);
             this.raw = $('.ck-raw', root);
@@ -8248,9 +8364,11 @@ define("../cardkit/app", [
         showView: function(){
             $(body).addClass('ck-inited');
             ck.hideAddressbar();
-            ck.hideLoadingCard();
-            ck.enableControl();
-            bus.resolve('inited');
+            bus.once('firstRender', function(){
+                ck.hideLoadingCard();
+                ck.enableControl();
+                bus.resolve('inited');
+            });
         },
 
         initWindow: function(){
@@ -8338,11 +8456,12 @@ define("../cardkit/app", [
                         //alert(10 +': ' + location.href + ', ' + ck._backFromSameUrl)
                         ck._sessionLocked = false;
                         ck._backFromOtherpage = true;
-                        if (supports.GOBACK_WHEN_POP
-                                && !ck._unexpectStateWhenGoback) {
-                            history.back();
-                        } else {
-                            window.location.reload(true);
+                        if (!ck._unexpectStateWhenGoback) {
+                            if (supports.GOBACK_WHEN_POP) {
+                                history.back();
+                            } else {
+                                window.location.reload(true);
+                            }
                         }
                     }
                 }, 100);
@@ -8756,6 +8875,12 @@ define("../cardkit/app", [
 
     function nothing(){}
 
+    function when_modal_content_loaded(){
+        ck.initView(modalCard._contentWrapper, {
+            isModal: true
+        });
+    }
+
     function stick_item(is_forward){
         var self = $(this).closest('.ck-list-wrap'),
             aid = self.data('ckSlideAnime');
@@ -8831,8 +8956,11 @@ define("../cardkit/app", [
 
     function link_handler(e){
         var me = e.target;
-        while (!me.href) {
+        while (me && !me.href) {
             me = me.parentNode;
+        }
+        if (!me) {
+            return;
         }
         var next_id = check_inner_link(me.href);
         if (next_id === false) {
@@ -8853,6 +8981,7 @@ define("../cardkit/app", [
         } else if ($(me).hasClass('ck-link')
                 || $(me).hasClass('ck-link-img')) {
         } else if (/(^|\s)ck-\w+/.test(me.className)) {
+            // eg. ck-link-native
             return;
         } else if (me.target) {
             if (next_id && me.target === '_self') {
@@ -9155,8 +9284,8 @@ define("../cardkit/app", [
 
 
 require.config({
-    baseUrl: 'js/mod/',
-    distUrl: 'dist/js/mod/',
+    baseUrl: 'js/component/',
+    distUrl: 'dist/js/component/',
     aliases: {
         'cardkit': '../cardkit/'
     }
