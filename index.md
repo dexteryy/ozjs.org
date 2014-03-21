@@ -3,41 +3,47 @@ layout: intro
 title: OzJS - a microkernel for modular javascript, a toolchain for modern front-end, a micro-framework for growable WebApp.
 ---
 
-###### [>> 中文版](http://ozjs.org/cn/) <a id="overview">&nbsp;</a>
-
-# OzJS
+# OzJS Project <a id="overview">&nbsp;</a>
 
 OzJS is NOT yet another script loader, but a microkernel that provides sorely-missing module mechanism at runtime (that means it mainly works at language-level, not file-level. Use [Ozma.js](http://ozjs.org/ozma/) to process files statically at build time based on the same mechanism) for large/complex javascript program, compatible with the de facto standards ([AMD](https://github.com/amdjs/amdjs-api/wiki/AMD), [NodeJS/CommonJS](http://www.commonjs.org/specs/modules/1.0/) and traditional [module pattern](http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth)). 
 
 Even better, it was implemented earlier than the well-known RequireJS, so there are differences between [similar APIs](http://ozjs.org/docs/define.html) in philosophy and approach, which bring more value.
 
-The API and code of oz.js are minimalist and stable. It won’t add new features that aren't truly needed (It's absolutely bad practice to meet new requirements through new configuration options or new plugins for a module mechanism provider!). The Oz project now focuses on providing bundles of powerful and yet micro-framework friendly AMD modules.
+The API and code of oz.js are minimalist and stable. It won’t add new features that aren't truly needed (It's absolutely bad practice to meet new requirements through new configuration options or new plugins for a module mechanism provider!). 
+
+The OzJS Project now focuses on providing bundles of powerful and yet micro-framework friendly AMD modules.
 
 ## Toolchain <a id="toolchain">&nbsp;</a>
 
 #### [generator-ozjs](http://ozjs.org/generator-ozjs) 
 > * Scaffolding tool for OzJS which offers a packaging workflow integrates toolchain, micro-framework and many best practices
-> * oz.js + iStatic + Grunt + Yo + ...
+> * oz.js + bower + Grunt + Mo + Moui + ...
 > * [Source code](https://github.com/dexteryy/generator-ozjs)
+> * [OzJS app template](https://github.com/dexteryy/ozjs-app-template)
 
 #### [OzmaJS](http://ozjs.org/ozma)
 > * Intelligent autobuild tool for OzJS
 > * Unique ability to support transparent dynamic dependence
 > * [Source code](https://github.com/dexteryy/ozma.js)
 
-#### [iStatic](http://ozjs.org/istatic)
-> * A static-file dependency manager more than a package manager
-> * Let you quickly and automatically add modules of specified (or latest) version to your project
-> * [Source code](https://github.com/mockee/istatic)
-
 #### [grunt-ozjs](http://ozjs.org/grunt-ozjs)
 > * Grunt tasks for oz.js and ozma.js
 > * [Source code](https://github.com/dexteryy/grunt-ozjs)
+> * [gulp-ozjs](https://github.com/kebot/gulp-ozjs) - gulp tasks for oz.js and ozma.js
+
+#### [karma-ozjs](http://ozjs.org/karma-ozjs)
+> * A Karma plugin. Adapter for OzJS framework
+> * [Source code](https://github.com/dexteryy/karma-ozjs)
+
+#### [grunt-dispatch](http://ozjs.org/grunt-dispatch)
+> * Bower mate, copy the necessary files of package(like `bower\_components/`) directory to your `src/` directory
+> * [Source code](https://github.com/dexteryy/grunt-dispatch)
 
 #### [grunt-furnace](http://ozjs.org/grunt-furnace)
 > * Transform code from one format to another
 > * template > AMD, AMD > CJS, CJS > AMD...
 > * [Source code](https://github.com/dexteryy/grunt-furnace)
+> * [karma-furnace-preprocessor](https://github.com/dexteryy/karma-furnace-preprocessor) - A Karma plugin. Convert code from one format to another (like grunt-furnace)
 
 #### [OzJS Adapter](http://ozjs.org/adapter): 
 > * Mini define/require mplementation for old web page
@@ -103,7 +109,7 @@ OzJS Project provides plenty of tiny, mutually independent, single purpose modul
 >         * Support key sequence, multiple key press, ...
 > * [Source code](https://github.com/dexteryy/mo)
 
-## UI Components <a id="ui">&nbsp;</a>
+## UI Toolkit<a id="ui">&nbsp;</a>
 
 #### [Momo (MoMotion)](http://ozjs.org/momo)
 > * A framework and a collection for separate and simple implementation of touch gestures
@@ -132,10 +138,16 @@ OzJS Project provides plenty of tiny, mutually independent, single purpose modul
 >     * [More](http://ozjs.org/moui)
 > * [Source code](https://github.com/dexteryy/moui)
 
+#### [DarkDOM](http://ozjs.org/DarkDOM)
+> * Design your own markup languages on a higher level of abstraction than HTML
+> * Build responsive cross-screen UI components
+> * [Source code](https://github.com/dexteryy/DarkDOM)
+
 ## App Framework
 
 #### [CardKit](http://ozjs.org/CardKit)
-> * A mobile UI framework provides building blocks which are classified as "Card", "Unit" and "Component" to help you build mobile web apps quickly and simply, or transfer entire website to native-like web app for touch devices.
+> * A mobile UI library provides a series of building blocks to help you build mobile web apps quickly and simply, or transfer entire website to mobile-first web app for touch devices. 
+> * CardKit building blocks are all _use-html-as-configure-style_ (like Custom Elements, directive...) components built on [DarkDOM](https://github.com/dexteryy/DarkDOM) and [Moui](https://github.com/dexteryy/moui).
 > * [Source code](https://github.com/douban-f2e/CardKit)
 
 ## Game Engine
@@ -177,11 +189,7 @@ Install the [scaffolding/workflow tool](http://ozjs.org/generator-ozjs) then try
 * [d2forum2010: 通用JS时代的模块机制和编译工具(slide)](http://www.slideshare.net/dexter_yy/js-6228773)
 * [d2forum2011: 新版阿尔法城背后的前端MVC实践(slide)](http://www.slideshare.net/dexter_yy/mvc-8554206)
 
-## Release History
-
-See [changelog](https://github.com/dexteryy/OzJS/wiki/Changelog)
-
 ## License
 
-Copyright (c) 2010 - 2013 dexteryy  
+Copyright (c) 2010 - 2014 dexteryy  
 Licensed under the MIT license.

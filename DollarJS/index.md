@@ -8,7 +8,21 @@ title: DollarJS
 > * A jQuery-compatible and non-All-in-One library which is more "Zepto" than Zepto.js
 > * Focus on DOM operations and mobile platform, wrap native API wherever possible.
 
-[Adapter for Android 2.x](https://github.com/dexteryy/DollarJS/blob/master/dollar/android23.js)
+### For Android 2.x or ie9+ (beta)
+
+```javascript
+define("dollar", ["dollar/android23"], function($){
+    return $;
+});
+```
+
+### For jQuery
+
+```javascript
+define("dollar", ["dollar/jquery"], function($){
+    return $;
+});
+```
 
 ## Usage
 
@@ -55,6 +69,7 @@ var $ = require('dollar');
 * `find()` -- 
 * `eq()` -- 
 * `not()` -- 
+* `matches()` -- 
 * `has()` -- 
 * `parent()` -- 
 * `parents()` -- 
@@ -98,6 +113,8 @@ var $ = require('dollar');
 * `offset()` -- 
 * `width()` -- 
 * `height()` -- 
+* `scrollLeft()` -- 
+* `scrollTop()` -- 
 
 ### API for manipulation
 
@@ -120,9 +137,9 @@ var $ = require('dollar');
 
 ### API for event
 
-* `once()` -- 
-* `bind()` -- 
-* `unbind()` -- 
+* `one()` -- 
+* `on()` -- 
+* `off()` -- 
 * `trigger()` -- 
 
 ### API for miscellaneous
@@ -132,7 +149,8 @@ var $ = require('dollar');
 
 ### Public static API
 
-* `$.matchesSelector` -- 
+* `$.matchesSelector | $.matches` -- 
+* `$.contains` -- 
 * `$.createNodes` -- 
 * `$.camelize` -- 
 * `$.dasherize` -- 
@@ -149,7 +167,6 @@ var $ = require('dollar');
 * `$.fn.ready()` -- 
 * `$.fn.animate()` -- 
 * `$.fn.delegate()` -- 
-* `$.fn.on()` -- 
 * `$.fn.map()` -- 
 * `$.fn.data(object)` -- 
 * `$.fn.detach(object)` -- 
