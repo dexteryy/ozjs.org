@@ -134,7 +134,45 @@ var soviet = require(&#39;soviet&#39;);
 </code></pre>
 
 <ul>
-<li><code>soviet(elm/*, options */)</code> – * options: * <code>preventDefault</code> – false * <code>matchesSelector</code> – false * <code>autoOverride</code> – false * <code>aliasEvents</code> – {} * <code>trace</code> – false * <code>traceStack</code> – null * API: * <code>on(event/*, selector */, handler)</code> – * <code>on(event, { &#39;selector&#39;: handler, ... })</code> – * <code>off(event, selector, handler)</code> – * <code>matches(event, selector)</code> – * <code>reset(event)</code> – * <code>disable(event, selector)</code> – * <code>enable(event, selector)</code> – * <code>trigger(ev)</code> </li>
+<li><code>soviet(elm/*, options */)</code> 
+<ul>
+<li>options:
+<ul>
+<li><code>preventDefault</code> – false</li>
+
+<li><code>matchesSelector</code> – false</li>
+
+<li><code>autoOverride</code> – false</li>
+
+<li><code>aliasEvents</code> – {}</li>
+
+<li><code>trace</code> – false</li>
+
+<li><code>traceStack</code> – null</li>
+</ul>
+</li>
+
+<li>API:
+<ul>
+<li><code>on(event/*, selector */, handler)</code> </li>
+
+<li><code>on(event, { &#39;selector&#39;: handler, ... })</code> </li>
+
+<li><code>off(event, selector, handler)</code> </li>
+
+<li><code>matches(event, selector)</code> </li>
+
+<li><code>reset(event)</code> </li>
+
+<li><code>disable(event, selector)</code> </li>
+
+<li><code>enable(event, selector)</code> </li>
+
+<li><code>trigger(ev)</code> </li>
+</ul>
+</li>
+</ul>
+</li>
 
 <li><code>soviet.Soviet</code> </li>
 </ul>

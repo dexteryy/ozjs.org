@@ -171,7 +171,33 @@ var component = darkdom(options); // see component.set(options)
 </code></pre>
 
 <ul>
-<li><code>component.set(options)</code> – * options – * <code>unique: false</code> – * <code>enableSource: false</code> – * <code>entireAsContent: false</code> – * <code>sourceAsContent: false</code> – * <code>render: function(data){ return &#39;&lt;...&gt;...&lt;/...&gt;&#39;; }</code> – * <code>data.state</code> * <code>data.content</code> * <code>data.component</code> * <code>data.context</code></li>
+<li><code>component.set(options)</code> 
+<ul>
+<li>options 
+<ul>
+<li><code>unique: false</code> </li>
+
+<li><code>enableSource: false</code> </li>
+
+<li><code>entireAsContent: false</code> </li>
+
+<li><code>sourceAsContent: false</code> </li>
+
+<li><code>render: function(data){ return &#39;&lt;...&gt;...&lt;/...&gt;&#39;; }</code> 
+<ul>
+<li><code>data.state</code></li>
+
+<li><code>data.content</code></li>
+
+<li><code>data.component</code></li>
+
+<li><code>data.context</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 
 <li><code>component.state(stateName, attrName)</code> </li>
 
@@ -266,7 +292,15 @@ guard.watch(root);
 
 <li><code>root.getDarkState(name)</code> </li>
 
-<li><code>root.setDarkState(name, value, options)</code> – * options – * <code>update: false</code> </li>
+<li><code>root.setDarkState(name, value, options)</code> 
+<ul>
+<li>options 
+<ul>
+<li><code>update: false</code> </li>
+</ul>
+</li>
+</ul>
+</li>
 
 <li><code>root.updateDarkStates()</code> </li>
 
@@ -278,7 +312,25 @@ guard.watch(root);
 
 <li><code>root.responseDarkDOM(updateEvent, function(changes){...})</code> – see <code>component.response</code></li>
 
-<li><code>root.addEventListener(darkEvent, handler)</code> * darkEvent – * <code>darkdom:willMount</code> – * <code>darkdom:mounted</code> – * <code>darkdom:willUpdate</code> – * <code>darkdom:updated</code> – * <code>darkdom:rendered</code> – * <code>darkdom:removed</code> </li>
+<li><code>root.addEventListener(darkEvent, handler)</code>
+<ul>
+<li>darkEvent 
+<ul>
+<li><code>darkdom:willMount</code> </li>
+
+<li><code>darkdom:mounted</code> </li>
+
+<li><code>darkdom:willUpdate</code> </li>
+
+<li><code>darkdom:updated</code> </li>
+
+<li><code>darkdom:rendered</code> </li>
+
+<li><code>darkdom:removed</code> </li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
 <p>More coming soon</p>
