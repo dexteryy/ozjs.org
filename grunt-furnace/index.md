@@ -17,7 +17,7 @@ title: grunt-furnace
 
 ## Config Example
 
-``` javascript
+```javascript
 furnace: {
     tplExample: {
         options: {

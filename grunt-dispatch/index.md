@@ -10,7 +10,7 @@ title: grunt-dispatch
 
 ## Config Example
 
-``` javascript
+```javascript
 dispatch: {
     options: {
         directory: "bower_components"
@@ -39,7 +39,7 @@ dispatch: {
             dest: "js/mod/moui/"
         }]
     }
-}
+},
 ```
 
 ## Source code
