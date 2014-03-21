@@ -3,7 +3,7 @@ layout: intro
 title: OzJS - a microkernel for modular javascript, a toolchain for modern front-end, a micro-framework for growable WebApp.
 ---
 
-<a id="overview"></a>
+<a id="overview"> </a>
 # OzJS Project 
 
 OzJS is NOT yet another script loader, but a microkernel that provides sorely-missing module mechanism at runtime (that means it mainly works at language-level, not file-level. Use [Ozma.js](http://ozjs.org/ozma/) to process files statically at build time based on the same mechanism) for large/complex javascript program, compatible with the de facto standards ([AMD](https://github.com/amdjs/amdjs-api/wiki/AMD), [NodeJS/CommonJS](http://www.commonjs.org/specs/modules/1.0/) and traditional [module pattern](http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth)). 
@@ -14,7 +14,7 @@ The API and code of oz.js are minimalist and stable. It won’t add new features
 
 The OzJS Project now focuses on providing bundles of powerful and yet micro-framework friendly AMD modules.
 
-<a id="toolchain"></a>
+<a id="toolchain"> </a>
 ## Toolchain
 
 #### [generator-ozjs](http://ozjs.org/generator-ozjs) 
@@ -52,8 +52,8 @@ The OzJS Project now focuses on providing bundles of powerful and yet micro-fram
 > * Transform AMD module into traditional module pattern
 > * [Source code](https://github.com/dexteryy/OzJS/blob/master/contrib/adapter.js)
 
-<a id="framework"></a>
-## Micro-framework 
+<a id="framework"> </a>
+## Micro-framework
 
 It is time to stop using All-in-One JavaScript library or framework which bundle all functionalities and solutions within a single global namespace. 
 
@@ -86,34 +86,33 @@ OzJS Project provides plenty of tiny, mutually independent, single purpose modul
 #### [Mo](http://ozjs.org/mo)
 > * A collection of OzJS core modules that form a library called "Mo" 
 > * Modules overview
->
->     * `mo/lang`
->         * ES5/6 shim and minimum utilities for language enhancement
->     * `mo/domready`
->         * Non-plugin implementation of cross-browser DOM ready event
->         * Based on OzJS's built-in module -- 'finish'
->     * `mo/browsers`
->         * Standalone jQuery.browsers supports skin browsers popular in China 
->     * `mo/cookie`
->         * Simple wrapping for managing cookie 
->     * `mo/template`
->         * A lightweight and enhanced micro-template implementation, and minimum utilities
->     * `mo/network`
->         * Standalone jQuery.ajax API and enhanced getJSON, and so on
->     * `mo/easing`
->         * An easing library supports jquery.js, standalone module and CSS timing functions
->     * `mo/mainloop`
->         * Implement and manage single loop for WebApp life cycle
->         * Provide tweening API for both property animation and frame animation(canvas or css)
->     * `mod/uiproxy`
->         * Standalone and most efficient implementation of UI event delegation
->         * Coming soon...
->     * `mo/key`
->         * Wrapping API for keyboard events
->         * Support key sequence, multiple key press, ...
+>   * `mo/lang`
+>     * ES5/6 shim and minimum utilities for language enhancement
+>   * `mo/domready`
+>     * Non-plugin implementation of cross-browser DOM ready event
+>     * Based on OzJS's built-in module -- 'finish'
+>   * `mo/browsers`
+>     * Standalone jQuery.browsers supports skin browsers popular in China 
+>   * `mo/cookie`
+>     * Simple wrapping for managing cookie 
+>   * `mo/template`
+>     * A lightweight and enhanced micro-template implementation, and minimum utilities
+>   * `mo/network`
+>     * Standalone jQuery.ajax API and enhanced getJSON, and so on
+>   * `mo/easing`
+>     * An easing library supports jquery.js, standalone module and CSS timing functions
+>   * `mo/mainloop`
+>     * Implement and manage single loop for WebApp life cycle
+>     * Provide tweening API for both property animation and frame animation(canvas or css)
+>   * `mod/uiproxy`
+>     * Standalone and most efficient implementation of UI event delegation
+>     * Coming soon...
+>   * `mo/key`
+>     * Wrapping API for keyboard events
+>     * Support key sequence, multiple key press, ...
 > * [Source code](https://github.com/dexteryy/mo)
 
-<a id="ui"></a>
+<a id="ui"> </a>
 ## UI Toolkit
 
 #### [DarkDOM](http://ozjs.org/DarkDOM)
@@ -124,25 +123,24 @@ OzJS Project provides plenty of tiny, mutually independent, single purpose modul
 #### [Moui](http://ozjs.org/moui)
 > * OO-based UI behavior modules behind [CardKit](http://ozjs.org/CardKit/)'s view components
 > * Modules overview
->
->     * `moui/control`
->         * Minimal stateful component
->     * `moui/picker`
->         * Compose of `Control` objects
->     * `moui/overlay`
->         * Minimal overlay component
->     * `moui/actionview`
->         * Inherit from `Overlay`
->         * Compose of `Picker` objects
->     * `moui/modalview`
->         * Inherit from `Overlay`
->     * `moui/growl`
->         * Inherit from `Overlay`
->     * `moui/ranger`
->         * Minimal range component
->     * `moui/util/stick`
->         * Stick a DOM element to anther from any clock position 
->     * [More](http://ozjs.org/moui)
+>   * `moui/control`
+>     * Minimal stateful component
+>   * `moui/picker`
+>     * Compose of `Control` objects
+>   * `moui/overlay`
+>     * Minimal overlay component
+>   * `moui/actionview`
+>     * Inherit from `Overlay`
+>     * Compose of `Picker` objects
+>   * `moui/modalview`
+>     * Inherit from `Overlay`
+>   * `moui/growl`
+>     * Inherit from `Overlay`
+>   * `moui/ranger`
+>     * Minimal range component
+>   * `moui/util/stick`
+>     * Stick a DOM element to anther from any clock position 
+>   * [More](http://ozjs.org/moui)
 > * [Source code](https://github.com/dexteryy/moui)
 
 #### [Momo (MoMotion)](http://ozjs.org/momo)
@@ -160,7 +158,7 @@ OzJS Project provides plenty of tiny, mutually independent, single purpose modul
 
 Under construction...
 
-<a id="start"></a>
+<a id="start"> </a>
 ## Tutorials 
 
 * [Getting Started with oz.js and ozma.js](http://ozjs.org/docs/start.html)
@@ -170,7 +168,7 @@ Under construction...
 
 Install the [scaffolding/workflow tool](http://ozjs.org/generator-ozjs) then try the [ozjs:app](http://ozjs.org/generator-ozjs#app) generator.
 
-<a id="demo"></a>
+<a id="demo"> </a>
 ## Demo App 
 
 * [Doubanchou](https://github.com/dexteryy/doubanchou) - Lottery / Draft app
@@ -187,7 +185,7 @@ Install the [scaffolding/workflow tool](http://ozjs.org/generator-ozjs) then try
 * [Bubbler](http://bubbler.labs.douban.com/) - *Webapp to explore social music technology*
 * Code - *Douban's Github clone for internal use*
 
-<a id="ref"></a>
+<a id="ref"> </a>
 ## Follow @ozjs 
 
 * [新浪微博](http://weibo.com/ozjs)

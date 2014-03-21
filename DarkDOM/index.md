@@ -65,16 +65,16 @@ var component = darkdom(options); // see component.set(options)
 ```
 
 * `component.set(options)` -- 
-    * options --
-        * `unique: false` -- 
-        * `enableSource: false` --
-        * `entireAsContent: false` --
-        * `sourceAsContent: false` --
-        * `render: function(data){ return '<...>...</...>'; }` -- 
-            * `data.state`
-            * `data.content` 
-            * `data.component`
-            * `data.context`
+  * options --
+    * `unique: false` -- 
+    * `enableSource: false` --
+    * `entireAsContent: false` --
+    * `sourceAsContent: false` --
+    * `render: function(data){ return '<...>...</...>'; }` -- 
+      * `data.state`
+      * `data.content` 
+      * `data.component`
+      * `data.context`
 * `component.state(stateName, attrName)` --
 * `component.state(stateName, getter, setter)` --
 * `component.state({ stateName: attrName, stateName: getter, stateName: [getter, setter], ... })` --
@@ -83,9 +83,9 @@ var component = darkdom(options); // see component.set(options)
 * `component.contain({ childComponentName: otherComponent, ... })` --
 * `component.forward('eventType selector', eventName)` --
 * `component.response(updateEvent, function(changes){ ...; return resolved; })` --
-    * updateEvent -- "state:name", "component:name", "content", "remove"...
-    * changes --
-    * resolved -- 
+  * updateEvent -- "state:name", "component:name", "content", "remove"...
+  * changes --
+  * resolved -- 
 * `component.component(childComponentName)` --
 * `component.createGuard()` --
 
@@ -128,21 +128,21 @@ guard.watch(root);
 * `root.resetDarkDOM()` --
 * `root.getDarkState(name)` --
 * `root.setDarkState(name, value, options)` --
-    * options --
-        * `update: false` -- 
+  * options --
+    * `update: false` -- 
 * `root.updateDarkStates()` --
 * `root.updateDarkDOM()` --
 * `root.feedDarkDOM(sourceData)` --
 * `root.feedDarkDOM(function(sourceData){...})` --
 * `root.responseDarkDOM(updateEvent, function(changes){...})` -- see `component.response`
 * `root.addEventListener(darkEvent, handler)`
-    * darkEvent --
-        * `darkdom:willMount` --
-        * `darkdom:mounted` --
-        * `darkdom:willUpdate` --
-        * `darkdom:updated` --
-        * `darkdom:rendered` --
-        * `darkdom:removed` --
+  * darkEvent --
+    * `darkdom:willMount` --
+    * `darkdom:mounted` --
+    * `darkdom:willUpdate` --
+    * `darkdom:updated` --
+    * `darkdom:rendered` --
+    * `darkdom:removed` --
 
 More coming soon...
 

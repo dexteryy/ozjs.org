@@ -45,22 +45,22 @@ var soviet = require('soviet');
 ```
 
 * `soviet(elm/*, options */)` -- 
-    * options:
-        * `preventDefault` -- false
-        * `matchesSelector` -- false
-        * `autoOverride` -- false
-        * `aliasEvents` -- {}
-        * `trace` -- false
-        * `traceStack` -- null
-    * API:
-        * `on(event/*, selector */, handler)` -- 
-        * `on(event, { 'selector': handler, ... })` -- 
-        * `off(event, selector, handler)` -- 
-        * `matches(event, selector)` -- 
-        * `reset(event)` -- 
-        * `disable(event, selector)` -- 
-        * `enable(event, selector)` -- 
-        * `trigger(ev)` -- 
+  * options:
+    * `preventDefault` -- false
+    * `matchesSelector` -- false
+    * `autoOverride` -- false
+    * `aliasEvents` -- {}
+    * `trace` -- false
+    * `traceStack` -- null
+  * API:
+    * `on(event/*, selector */, handler)` -- 
+    * `on(event, { 'selector': handler, ... })` -- 
+    * `off(event, selector, handler)` -- 
+    * `matches(event, selector)` -- 
+    * `reset(event)` -- 
+    * `disable(event, selector)` -- 
+    * `enable(event, selector)` -- 
+    * `trigger(ev)` -- 
 * `soviet.Soviet` -- 
 
 Under construction...
