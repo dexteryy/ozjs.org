@@ -36,8 +36,9 @@
         <ul>
             <li><a href="/generator-ozjs/">Generator</a></li>
             <li><a href="/ozma/">OzmaJS</a></li>
-            <li><a href="/istatic/">iStatic</a></li>
             <li><a href="/grunt-ozjs">grunt-ozjs</a></li>
+            <li><a href="/karma-ozjs">karma-ozjs</a></li>
+            <li><a href="/grunt-dispatch">grunt-dispatch</a></li>
             <li><a href="/grunt-furnace">grunt-furnace</a></li>
         </ul>
     </li>
@@ -56,15 +57,15 @@
     <li>
         <a href="/#ui">UI</a>
         <ul>
-            <li><a href="/momo/">Momo</a></li>
+            <li><a href="/DarkDOM/">DarkDOM</a></li>
             <li><a href="/moui/">Moui</a></li>
+            <li><a href="/momo/">Momo</a></li>
             <li><a href="/CardKit/">CardKit</a></li>
         </ul>
     </li>
     <li><a href="/#start">Quick Start</a></li>
     <li><a href="/#demo">Demo</a></li>
     <li><a href="/#ref">References</a></li>
-    <li><a href="https://github.com/dexteryy/OzJS/wiki/Changelog" target="_blank">Release History</a></li>
 </ul>
 
 </nav>
@@ -72,53 +73,61 @@
 
 <div class="wrapper">
 <section>
-<h1 id="toc_221">Moui</h1>
+<h1 id="moui">Moui</h1>
 
 <blockquote>
 <ul>
-<li>OO-based UI behavior modules behind <a href="http://ozjs.org/CardKit/">CardKit</a>&#39;s view components</li>
-<li>&#39;mobile first&#39;</li>
+<li>OO-based UI behavior modules behind <a href="http://ozjs.org/CardKit/">CardKit</a>’s view components</li>
+
+<li>‘mobile first’</li>
+
 <li>Independent of particular appearance and specific business</li>
+
 <li>Use HTML as configurations that is equal to JS API</li>
 </ul>
 </blockquote>
 
-<h2 id="toc_222">Usage</h2>
+<h2 id="usage">Usage</h2>
 
-<h3 id="toc_223">AMD and OzJS</h3>
+<h3 id="amd_and_ozjs">AMD and OzJS</h3>
 
 <ul>
 <li>Moui can either be viewed as an independent library, or as a part of <a href="http://ozjs.org/#framework">OzJS mirco-framework</a>.</li>
-<li>It&#39;s wrapped as an <a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD (Asynchronous Module Definition)</a> module. You should use it with <a href="http://ozjs.org/#start">oz.js</a> (or require.js or <a href="http://wiki.commonjs.org/wiki/Implementations">similar</a> for handling dependencies). </li>
+
+<li>It’s wrapped as an <a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD (Asynchronous Module Definition)</a> module. You should use it with <a href="http://ozjs.org/#start">oz.js</a> (or require.js or <a href="http://wiki.commonjs.org/wiki/Implementations">similar</a> for handling dependencies).</li>
+
 <li>If you want to make it available for both other AMD code and traditional code based on global namespace. OzJS provides <a href="http://ozjs.org/examples/adapter/">a mini define/require implementation</a> to transform AMD module into traditional <a href="http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth">module pattern</a>.</li>
+
 <li>See <a href="http://ozjs.org">http://ozjs.org</a> for details.</li>
 </ul>
 
-<h3 id="toc_224">Get the code</h3>
+<h3 id="get_the_code">Get the code</h3>
 
 <p>Add to your project as new dependency</p>
 
 <ul>
 <li>via <a href="http://bower.io/">bower</a> - <code>bower install moui</code></li>
+
 <li>via <a href="http://ozjs.org/istatic">istatic</a></li>
 </ul>
 
 <p>Or <a href="https://github.com/dexteryy/moui/">download directly from Github</a></p>
 
-<h2 id="toc_225">Dependencies</h2>
+<h2 id="dependencies">Dependencies</h2>
 
 <ul>
 <li><a href="https://github.com/dexteryy/mo">mo</a></li>
+
 <li><a href="https://github.com/dexteryy/DollarJS">dollar</a> or other jQuery-compatible library</li>
 </ul>
 
-<h2 id="toc_226">Examples</h2>
+<h2 id="examples">Examples</h2>
 
 <p><a href="http://ozjs.org/CardKit/refapp">CardKit demo app</a></p>
 
-<h2 id="toc_227">Modules Overview</h2>
+<h2 id="modules_overview">Modules Overview</h2>
 
-<h4 id="toc_228"><a href="https://github.com/dexteryy/moui/blob/master/control.js">moui/control</a>:</h4>
+<h4 id="mouicontrol"><a href="https://github.com/dexteryy/moui/blob/master/control.js">moui/control</a>:</h4>
 
 <blockquote>
 <ul>
@@ -126,7 +135,7 @@
 </ul>
 </blockquote>
 
-<h4 id="toc_229"><a href="https://github.com/dexteryy/moui/blob/master/picker.js">moui/picker</a>:</h4>
+<h4 id="mouipicker"><a href="https://github.com/dexteryy/moui/blob/master/picker.js">moui/picker</a>:</h4>
 
 <blockquote>
 <ul>
@@ -134,7 +143,7 @@
 </ul>
 </blockquote>
 
-<h4 id="toc_230"><a href="https://github.com/dexteryy/moui/blob/master/overlay.js">moui/overlay</a>:</h4>
+<h4 id="mouioverlay"><a href="https://github.com/dexteryy/moui/blob/master/overlay.js">moui/overlay</a>:</h4>
 
 <blockquote>
 <ul>
@@ -142,16 +151,17 @@
 </ul>
 </blockquote>
 
-<h4 id="toc_231"><a href="https://github.com/dexteryy/moui/blob/master/actionview.js">moui/actionview</a>:</h4>
+<h4 id="mouiactionview"><a href="https://github.com/dexteryy/moui/blob/master/actionview.js">moui/actionview</a>:</h4>
 
 <blockquote>
 <ul>
 <li>Inherit from <code>Overlay</code></li>
+
 <li>Compose of <code>Picker</code> objects</li>
 </ul>
 </blockquote>
 
-<h4 id="toc_232"><a href="https://github.com/dexteryy/moui/blob/master/modalview.js">moui/modalview</a>:</h4>
+<h4 id="mouimodalview"><a href="https://github.com/dexteryy/moui/blob/master/modalview.js">moui/modalview</a>:</h4>
 
 <blockquote>
 <ul>
@@ -159,15 +169,15 @@
 </ul>
 </blockquote>
 
-<h4 id="toc_233"><code>moui/imageview</code> (Comming soon)</h4>
+<h4 id="mouiimageview"><a href="https://github.com/dexteryy/moui/blob/master/imageview.js">moui/imageview</a>:</h4>
 
 <blockquote>
 <ul>
-<li>Inherit from <code>ModalView</code></li>
+<li>Inherit from <code>ActionView</code></li>
 </ul>
 </blockquote>
 
-<h4 id="toc_234"><a href="https://github.com/dexteryy/moui/blob/master/growl.js">moui/growl</a>:</h4>
+<h4 id="mouigrowl"><a href="https://github.com/dexteryy/moui/blob/master/growl.js">moui/growl</a>:</h4>
 
 <blockquote>
 <ul>
@@ -175,7 +185,7 @@
 </ul>
 </blockquote>
 
-<h4 id="toc_235"><code>moui/bubble</code> (Plan to refactor)</h4>
+<h4 id="_plan_to_refactor"><code>moui/bubble</code> (Plan to refactor)</h4>
 
 <blockquote>
 <ul>
@@ -183,7 +193,7 @@
 </ul>
 </blockquote>
 
-<h4 id="toc_236"><a href="https://github.com/dexteryy/moui/blob/master/ranger.js">moui/ranger</a>:</h4>
+<h4 id="mouiranger"><a href="https://github.com/dexteryy/moui/blob/master/ranger.js">moui/ranger</a>:</h4>
 
 <blockquote>
 <ul>
@@ -191,7 +201,7 @@
 </ul>
 </blockquote>
 
-<h4 id="toc_237"><code>moui/slider</code> (Plan to refactor)</h4>
+<h4 id="_plan_to_refactor_2"><code>moui/slider</code> (Plan to refactor)</h4>
 
 <blockquote>
 <ul>
@@ -199,31 +209,29 @@
 </ul>
 </blockquote>
 
-<h4 id="toc_238"><a href="https://github.com/dexteryy/moui/blob/master/util/stick.js">moui/util/stick</a>:</h4>
+<h4 id="mouiutilstick"><a href="https://github.com/dexteryy/moui/blob/master/util/stick.js">moui/util/stick</a>:</h4>
 
 <blockquote>
 <ul>
-<li>Stick a DOM element to anther from any clock position </li>
+<li>Stick a DOM element to anther from any clock position</li>
 </ul>
 </blockquote>
 
-<h2 id="toc_239">API and usage</h2>
+<h2 id="api_and_usage">API and usage</h2>
 
-<p>Comming soon...</p>
+<p>Comming soon</p>
 
-<h2 id="toc_240">More References</h2>
+<h2 id="more_references">More References</h2>
 
 <p>See <a href="http://ozjs.org/">OzJS Project Homepage</a></p>
 
-<h2 id="toc_241">Release History</h2>
+<h2 id="release_history">Release History</h2>
 
 <p>See <a href="http://ozjs.org/#release">OzJS Release History</a></p>
 
-<h2 id="toc_242">License</h2>
+<h2 id="license">License</h2>
 
-<p>Copyright (c) 2010 - 2013 dexteryy<br>
-Licensed under the MIT license.</p>
-
+<p>Copyright (c) 2010 - 2013 dexteryy<br />Licensed under the MIT license.</p>
 </section>
 </div>
 

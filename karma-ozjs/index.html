@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>OzmaJS</title>
+<title>karma-ozjs</title>
 
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/pygment_trac.css">
@@ -73,65 +73,117 @@
 
 <div class="wrapper">
 <section>
-<h1 id="ozmajs">OzmaJS</h1>
+<h1 id="karmaozjs">karma-ozjs</h1>
 
 <blockquote>
-<ul>
-<li>Intelligent autobuild tool for <a href="http://ozjs.org">OzJS</a></li>
-</ul>
+<p>A Karma plugin. Adapter for the <a href="https://github.com/dexteryy/OzJS">OzJS</a> framework.</p>
 </blockquote>
 
-<h2 id="install">Install</h2>
+<h2 id="installation">Installation</h2>
 
-<pre><code>
-npm install -g ozma
+<p>The easiest way is to keep <code>karma-ozjs</code> as a devDependency in your <code>package.json</code>.</p>
+
+<pre class="json"><code class="json">
+{
+  &quot;devDependencies&quot;: {
+    &quot;karma&quot;: &quot;~0.10&quot;,
+    &quot;karma-ozjs&quot;: &quot;~0.4.0&quot;
+  }
+}
 </code></pre>
 
-<h2 id="usage">Usage</h2>
+<p>You can simple do it by:</p>
 
-<pre><code>
-ozma [build script] --config [configuration file]
+<pre class="bash"><code class="bash">
+npm install karma-ozjs --save-dev
 </code></pre>
 
-<h2 id="supported_options">Supported options</h2>
+<h2 id="configuring_karma">Configuring Karma</h2>
 
-<ul>
-<li><code>-c</code> or <code>--config</code> — 指定配置文件，可省略，默认读取输入文件(<code>build script</code>)同级目录下的<code>ozconfig.json</code>作为配置文件</li>
+<pre class="js"><code class="js">
+// karma.conf.js
+module.exports = function(config) {
+    config.set({
+        // frameworks to use
+        frameworks: [
+            &#39;mocha&#39;,
+            &#39;chai-sinon&#39;,
+            &#39;ozjs&#39;, // ozjs must be executed last
+        ],
+        // list of files / patterns to load in the browser
+        files: [
+            { pattern: &#39;js/vendor/**/*.js&#39;, included: false },
+            { pattern: &#39;js/appname/**/*.js&#39;, included: false },
+            &quot;test/config.js&quot;,
+            &quot;test/tests.js&quot;,
+            &quot;test/spec_model_A.js&quot;,
+            &quot;test/spec_view_B.js&quot;
+            // ...
+        ],
+        // ...
+</code></pre>
 
-<li><code>-s</code> or <code>--silent</code> — 不打印任何提示信息</li>
+<h2 id="configuring_ozjs">Configuring oz.js</h2>
 
-<li><code>--jam</code> — 基于Jam的package目录自动生成配置和发布文件</li>
+<pre class="js"><code class="js">
+// test/config.js
+require.config({
+    // Karma serves files from &#39;/base&#39;
+    baseUrl: &#39;base/js/vendor/&#39;,
+    aliases: {
+        &#39;test&#39;: &#39;../../test/&#39;,
+        &#39;appname&#39;: &#39;../appname/&#39;
+    }
+});
 
-<li><code>--enable-modulelog</code> — 允许js文件中的console信息打印在终端里</li>
-</ul>
+define.amd = {}; // the default is null in karma-ozjs
+</code></pre>
 
-<h2 id="examples_with_docs">Examples (with docs)</h2>
+<h2 id="using_ozjs_in_tests">Using oz.js in tests</h2>
 
-<ul>
-<li><a href="http://ozjs.org/ozma/examples/demo1.html">demo1: for production or development</a></li>
+<pre class="js"><code class="js">
+// test/tests.js
+require([
+    &#39;dollar&#39;,
+    &#39;appname/app&#39;
+], function($, app){
 
-<li><a href="http://ozjs.org/ozma/examples/demo2.html">demo2: for development</a></li>
+    describe(&#39;app.wrapper&#39;, function(){
+        it(&#39;sould be an Dollar object&#39;, function(){
+            expect(app.wrapper).to.be.an.instanceof($);
+        });
+    });
 
-<li><a href="http://ozjs.org/ozma/examples/demo3.html">demo3: for production</a></li>
+});
 
-<li><a href="http://ozjs.org/ozma/examples/demo4.html">demo4: for third party package manager</a></li>
-</ul>
+// `describe` is invalid here
+</code></pre>
 
-<h2 id="grunt_plugin">Grunt plugin</h2>
+<pre class="js"><code class="js">
+// test/spec_model_A.js
+require([
+    &#39;dollar&#39;,
+    &#39;appname/model/A&#39;
+], function($, model_A){
 
-<ul>
-<li><a href="https://github.com/dexteryy/grunt-ozjs">grunt-ozjs</a> enables you to use <a href="https://github.com/gruntjs/grunt/blob/master/docs/getting_started.md">grunt.js gruntfile</a> to configure <code>ozma</code> and integrate with other <a href="http://gruntjs.com/">grunt tasks</a></li>
-</ul>
+    // describe(...
+
+});
+</code></pre>
 
 <h2 id="source_code">Source code</h2>
 
 <ul>
-<li><a href="https://github.com/dexteryy/ozma.js">View on Github</a></li>
+<li><a href="https://github.com/dexteryy/karma-ozjs">View on Github</a></li>
 </ul>
 
 <h2 id="more_references">More References</h2>
 
-<p>See <a href="http://ozjs.org/">OzJS Project Homepage</a></p>
+<ul>
+<li><a href="http://karma-runner.github.io/">Karma homepage</a></li>
+
+<li><a href="http://ozjs.org/">OzJS Project Homepage</a></li>
+</ul>
 
 <h2 id="release_history">Release History</h2>
 

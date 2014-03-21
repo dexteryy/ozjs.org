@@ -36,8 +36,9 @@
         <ul>
             <li><a href="/generator-ozjs/">Generator</a></li>
             <li><a href="/ozma/">OzmaJS</a></li>
-            <li><a href="/istatic/">iStatic</a></li>
             <li><a href="/grunt-ozjs">grunt-ozjs</a></li>
+            <li><a href="/karma-ozjs">karma-ozjs</a></li>
+            <li><a href="/grunt-dispatch">grunt-dispatch</a></li>
             <li><a href="/grunt-furnace">grunt-furnace</a></li>
         </ul>
     </li>
@@ -56,15 +57,15 @@
     <li>
         <a href="/#ui">UI</a>
         <ul>
-            <li><a href="/momo/">Momo</a></li>
+            <li><a href="/DarkDOM/">DarkDOM</a></li>
             <li><a href="/moui/">Moui</a></li>
+            <li><a href="/momo/">Momo</a></li>
             <li><a href="/CardKit/">CardKit</a></li>
         </ul>
     </li>
     <li><a href="/#start">Quick Start</a></li>
     <li><a href="/#demo">Demo</a></li>
     <li><a href="/#ref">References</a></li>
-    <li><a href="https://github.com/dexteryy/OzJS/wiki/Changelog" target="_blank">Release History</a></li>
 </ul>
 
 </nav>
@@ -72,146 +73,161 @@
 
 <div class="wrapper">
 <section>
-<h1 id="toc_243">NervJS</h1>
+<h1 id="nervjs">NervJS</h1>
 
 <blockquote>
 <ul>
 <li>A tiny, pure, event-based model wrapper for the MVC or MDV (Model-driven Views) pattern.</li>
+
 <li>It is far thinner than Backbone. None of View, Controller or Router is involved.</li>
+
 <li>Strict data hiding but straightforward way to use.</li>
+
 <li>Provides minimal built-in APIs but supports all external and conventional methods to access the model.</li>
+
 <li>Model can be nested and supports bubbling events.</li>
 </ul>
 </blockquote>
 
-<h2 id="toc_244">In NodeJS</h2>
-<div class="highlight"><pre><code class="text">npm install nerv
+<h2 id="in_nodejs">In NodeJS</h2>
+
+<pre><code>
+npm install nerv
 </code></pre>
-</div>
 
-<h2 id="toc_245">In browser</h2>
+<h2 id="in_browser">In browser</h2>
 
-<h3 id="toc_246">AMD and OzJS</h3>
+<h3 id="amd_and_ozjs">AMD and OzJS</h3>
 
 <ul>
 <li>NervJS can either be viewed as an independent library, or as a part of <a href="http://ozjs.org/#framework">OzJS mirco-framework</a>.</li>
-<li>It&#39;s wrapped as an <a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD (Asynchronous Module Definition)</a> module. You should use it with <a href="http://ozjs.org/#start">oz.js</a> (or require.js or <a href="http://wiki.commonjs.org/wiki/Implementations">similar</a> for handling dependencies). </li>
+
+<li>It’s wrapped as an <a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD (Asynchronous Module Definition)</a> module. You should use it with <a href="http://ozjs.org/#start">oz.js</a> (or require.js or <a href="http://wiki.commonjs.org/wiki/Implementations">similar</a> for handling dependencies).</li>
+
 <li>If you want to make it available for both other AMD code and traditional code based on global namespace. OzJS provides <a href="http://ozjs.org/examples/adapter/">a mini define/require implementation</a> to transform AMD module into traditional <a href="http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth">module pattern</a>.</li>
+
 <li>See <a href="http://ozjs.org">http://ozjs.org</a> for details.</li>
 </ul>
 
-<h3 id="toc_247">Get the code</h3>
+<h3 id="get_the_code">Get the code</h3>
 
 <p>Add to your project as new dependency</p>
 
 <ul>
 <li>via <a href="http://bower.io/">bower</a> - <code>bower install nerv</code></li>
+
 <li>via <a href="http://ozjs.org/istatic">istatic</a></li>
 </ul>
 
 <p>Or <a href="https://github.com/dexteryy/NervJS/blob/master/nerv.js">download directly from Github</a></p>
 
-<h2 id="toc_248">Dependencies</h2>
+<h2 id="dependencies">Dependencies</h2>
 
 <ul>
 <li><a href="https://github.com/dexteryy/mo">mo/lang/type</a></li>
+
 <li><a href="https://github.com/dexteryy/mo">mo/lang/mix</a></li>
+
 <li><a href="https://github.com/dexteryy/mo">mo/lang/oop</a></li>
+
 <li><a href="https://github.com/dexteryy/EventMaster">EventMaster</a></li>
 </ul>
 
-<h2 id="toc_249">Examples</h2>
+<h2 id="examples">Examples</h2>
 
 <ul>
 <li><a href="http://ozjs.org/NervJS/examples/">demo</a></li>
 </ul>
 
-<h2 id="toc_250">API and usage</h2>
-<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">nerv</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;nerv&#39;</span><span class="p">);</span>
+<h2 id="api_and_usage">API and usage</h2>
+
+<pre class="javascript"><code class="javascript">
+var nerv = require(&#39;nerv&#39;);
 </code></pre>
-</div>
 
-<h3 id="toc_251">nerv.Model</h3>
-<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">papercover</span> <span class="o">=</span> <span class="nx">nerv</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">hardcover</span> <span class="o">=</span> <span class="nx">nerv</span><span class="p">({</span>
-    <span class="nx">isHard</span><span class="o">:</span> <span class="kc">true</span>
-<span class="p">});</span>
-<span class="kd">var</span> <span class="nx">pageModel</span> <span class="o">=</span> <span class="nx">nerv</span><span class="p">.</span><span class="nx">model</span><span class="p">({</span>
-    <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){...},</span>
-    <span class="nx">defaults</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-        <span class="nx">number</span><span class="o">:</span> <span class="mi">0</span>
-    <span class="p">},</span>
-    <span class="nx">mark</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){...}</span>
-<span class="p">});</span>
-<span class="kd">var</span> <span class="nx">page</span> <span class="o">=</span> <span class="nx">pageModel</span><span class="p">({</span> <span class="nx">number</span><span class="o">:</span> <span class="mi">1</span> <span class="p">});</span>
-<span class="kd">var</span> <span class="nx">page2</span> <span class="o">=</span> <span class="nx">pageModel</span><span class="p">({</span> <span class="nx">number</span><span class="o">:</span> <span class="mi">2</span> <span class="p">});</span>
+<h3 id="nervmodel">nerv.Model</h3>
+
+<pre class="javascript"><code class="javascript">
+var papercover = nerv();
+var hardcover = nerv({
+    isHard: true
+});
+var pageModel = nerv.model({
+    init: function(){...},
+    defaults: {
+        text: &#39;&#39;,
+        number: 0
+    },
+    mark: function(){...}
+});
+var page = pageModel({ number: 1 });
+var page2 = pageModel({ number: 2 });
 </code></pre>
-</div>
 
 <ul>
-<li><code>page.each(function(member){}, context)</code> -- </li>
-<li><code>page.get(key)</code> -- </li>
-<li><code>page.data()</code> -- </li>
-<li><code>page.data(key)</code> -- </li>
-<li><code>page.set(key, function(value){ }, context)</code> -- </li>
-<li><code>page.set(key, function(model){ }, context)</code> -- </li>
-<li><code>page.set(key, value, context)</code> -- </li>
-<li><code>page.set(key, model, context)</code> -- </li>
-<li><code>page.set(function(agent){ }, context)</code> -- </li>
-<li><code>page.set(model, context)</code> -- </li>
-<li><code>page.remove(key)</code> -- </li>
-<li><code>page.reset()</code> -- </li>
-<li><code>page.find(value)</code> -- </li>
-<li><code>page.find(model)</code> -- </li>
-<li><code>page.setter(key, function(){})</code> -- </li>
-<li><code>page.observer</code> -- 
+<li><code>page.each(function(member){}, context)</code> </li>
 
-<ul>
-<li>API:
+<li><code>page.get(key)</code> </li>
 
-<ul>
-<li>Same as <a href="http://ozjs.org/EventMaster/">EventMaster</a></li>
-</ul></li>
-<li>Event:
+<li><code>page.data()</code> </li>
 
-<ul>
-<li><code>{key}:new</code> -- </li>
-<li><code>{key}:update</code> --</li>
-<li><code>{key}:delete</code> --</li>
-<li><code>change</code> --</li>
-</ul></li>
-</ul></li>
+<li><code>page.data(key)</code> </li>
+
+<li><code>page.set(key, function(value){ }, context)</code> </li>
+
+<li><code>page.set(key, function(model){ }, context)</code> </li>
+
+<li><code>page.set(key, value, context)</code> </li>
+
+<li><code>page.set(key, model, context)</code> </li>
+
+<li><code>page.set(function(agent){ }, context)</code> </li>
+
+<li><code>page.set(model, context)</code> </li>
+
+<li><code>page.remove(key)</code> </li>
+
+<li><code>page.reset()</code> </li>
+
+<li><code>page.find(value)</code> </li>
+
+<li><code>page.find(model)</code> </li>
+
+<li><code>page.setter(key, function(){})</code> </li>
+
+<li><code>page.observer</code> – * API: * Same as <a href="http://ozjs.org/EventMaster/">EventMaster</a> * Event: * <code>{key}:new</code> – * <code>{key}:update</code> – * <code>{key}:delete</code> – * <code>change</code> </li>
 </ul>
 
-<h3 id="toc_252">nerv.Collection</h3>
-<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">book</span> <span class="o">=</span> <span class="nx">nerv</span><span class="p">([]);</span>
-<span class="kd">var</span> <span class="nx">bookB</span> <span class="o">=</span> <span class="nx">nerv</span><span class="p">.</span><span class="nx">collection</span><span class="p">({</span>
-    <span class="nx">selectPage</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">number</span><span class="p">){...}</span>
-<span class="p">});</span>
+<h3 id="nervcollection">nerv.Collection</h3>
+
+<pre class="javascript"><code class="javascript">
+var book = nerv([]);
+var bookB = nerv.collection({
+    selectPage: function(number){...}
+});
 </code></pre>
-</div>
 
 <ul>
-<li><code>book.add(value)</code> -- </li>
-<li><code>book.add(model)</code> -- </li>
-<li><code>book.size()</code> -- </li>
+<li><code>book.add(value)</code> </li>
+
+<li><code>book.add(model)</code> </li>
+
+<li><code>book.size()</code> </li>
+
 <li>Same as <code>nerv.Model</code></li>
 </ul>
 
-<h2 id="toc_253">More References</h2>
+<h2 id="more_references">More References</h2>
 
 <p>See <a href="http://ozjs.org/">OzJS Project Homepage</a></p>
 
-<h2 id="toc_254">Release History</h2>
+<h2 id="release_history">Release History</h2>
 
 <p>See <a href="http://ozjs.org/#release">OzJS Release History</a></p>
 
-<h2 id="toc_255">License</h2>
+<h2 id="license">License</h2>
 
-<p>Copyright (c) 2010 - 2013 dexteryy<br>
-Licensed under the MIT license.</p>
-
+<p>Copyright (c) 2010 - 2013 dexteryy<br />Licensed under the MIT license.</p>
 </section>
 </div>
 

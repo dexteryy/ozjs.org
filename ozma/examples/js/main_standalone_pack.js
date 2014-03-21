@@ -286,7 +286,7 @@ var fetch = function(m, cb){
         var mname = m.name, delays = _delays;
         if (m.deps && m.deps.length && delays[mname] !== 1) {
             delays[mname] = [m.deps.length, cb];
-            m.deps.forEach(function(dep){
+            forEach.call(m.deps, function(dep){
                 var d = _config.mods[realname(dep)];
                 if (this[dep] !== 1 && d.url && d.loaded !== 2) {
                     if (!this[dep]) {
@@ -313,7 +313,7 @@ var fetch = function(m, cb){
             });
             _scripts[url] = 1;
             if (_refers[mname] && _refers[mname] !== 1) {
-                _refers[mname].forEach(function(dm){
+                forEach.call(_refers[mname], function(dm){
                     var b = this[dm.name];
                     if (--b[0] <= 0) {
                         this[dm.name] = 1;
@@ -564,7 +564,7 @@ function clone(obj) { // be careful of using `delete`
 }
 
 var oz = {
-    VERSION: '2.5.1',
+    VERSION: '2.5.2',
     define: define,
     require: require,
     config: config,
@@ -10251,7 +10251,7 @@ define("lib/jquery.mousewheel", [
   "lib/jquery_src"
 ], function(){});
 
-/* @source ../../../js/mo/easing.js */;
+/* @source mod/easing.js */;
 
 /**
  * An easing library supports jquery.js, standalone module and CSS timing functions
@@ -10262,7 +10262,7 @@ define("lib/jquery.mousewheel", [
  * Copyright (C) 2010-2012, Dexter.Yy, MIT License
  * vim: et:ts=4:sw=4:sts=4
  */
-define("mo/easing", [], function(require, exports){
+define("mod/easing", [], function(require, exports){
 
     var def = 'easeOutQuad';
 
@@ -10314,43 +10314,43 @@ define("mo/easing", [], function(require, exports){
             return timing_functions[def](x, t, b, c, d);
         },
         easeInQuad: function (x, t, b, c, d) {
-            return c*(t /= d)*t + b;
+            return c*(t/=d)*t + b;
         },
         easeOutQuad: function (x, t, b, c, d) {
-            return -c *(t /= d)*(t-2) + b;
+            return -c *(t/=d)*(t-2) + b;
         },
         easeInOutQuad: function (x, t, b, c, d) {
-            if ((t /= d/2) < 1) return c/2*t*t + b;
+            if ((t/=d/2) < 1) return c/2*t*t + b;
             return -c/2 * ((--t)*(t-2) - 1) + b;
         },
         easeInCubic: function (x, t, b, c, d) {
-            return c*(t /= d)*t*t + b;
+            return c*(t/=d)*t*t + b;
         },
         easeOutCubic: function (x, t, b, c, d) {
             return c*((t=t/d-1)*t*t + 1) + b;
         },
         easeInOutCubic: function (x, t, b, c, d) {
-            if ((t /= d/2) < 1) return c/2*t*t*t + b;
+            if ((t/=d/2) < 1) return c/2*t*t*t + b;
             return c/2*((t-=2)*t*t + 2) + b;
         },
         easeInQuart: function (x, t, b, c, d) {
-            return c*(t /= d)*t*t*t + b;
+            return c*(t/=d)*t*t*t + b;
         },
         easeOutQuart: function (x, t, b, c, d) {
             return -c * ((t=t/d-1)*t*t*t - 1) + b;
         },
         easeInOutQuart: function (x, t, b, c, d) {
-            if ((t /= d/2) < 1) return c/2*t*t*t*t + b;
+            if ((t/=d/2) < 1) return c/2*t*t*t*t + b;
             return -c/2 * ((t-=2)*t*t*t - 2) + b;
         },
         easeInQuint: function (x, t, b, c, d) {
-            return c*(t /= d)*t*t*t*t + b;
+            return c*(t/=d)*t*t*t*t + b;
         },
         easeOutQuint: function (x, t, b, c, d) {
             return c*((t=t/d-1)*t*t*t*t + 1) + b;
         },
         easeInOutQuint: function (x, t, b, c, d) {
-            if ((t /= d/2) < 1) return c/2*t*t*t*t*t + b;
+            if ((t/=d/2) < 1) return c/2*t*t*t*t*t + b;
             return c/2*((t-=2)*t*t*t*t + 2) + b;
         },
         easeInSine: function (x, t, b, c, d) {
@@ -10363,79 +10363,79 @@ define("mo/easing", [], function(require, exports){
             return -c/2 * (Math.cos(Math.PI*t/d) - 1) + b;
         },
         easeInExpo: function (x, t, b, c, d) {
-            return (t===0) ? b : c * Math.pow(2, 10 * (t/d - 1)) + b;
+            return (t==0) ? b : c * Math.pow(2, 10 * (t/d - 1)) + b;
         },
         easeOutExpo: function (x, t, b, c, d) {
             return (t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
         },
         easeInOutExpo: function (x, t, b, c, d) {
-            if (t===0) return b;
+            if (t==0) return b;
             if (t==d) return b+c;
-            if ((t /= d/2) < 1) return c/2 * Math.pow(2, 10 * (t - 1)) + b;
+            if ((t/=d/2) < 1) return c/2 * Math.pow(2, 10 * (t - 1)) + b;
             return c/2 * (-Math.pow(2, -10 * --t) + 2) + b;
         },
         easeInCirc: function (x, t, b, c, d) {
-            return -c * (Math.sqrt(1 - (t /= d)*t) - 1) + b;
+            return -c * (Math.sqrt(1 - (t/=d)*t) - 1) + b;
         },
         easeOutCirc: function (x, t, b, c, d) {
             return c * Math.sqrt(1 - (t=t/d-1)*t) + b;
         },
         easeInOutCirc: function (x, t, b, c, d) {
-            if ((t /= d/2) < 1) return -c/2 * (Math.sqrt(1 - t*t) - 1) + b;
+            if ((t/=d/2) < 1) return -c/2 * (Math.sqrt(1 - t*t) - 1) + b;
             return c/2 * (Math.sqrt(1 - (t-=2)*t) + 1) + b;
         },
         easeInElastic: function (x, t, b, c, d) {
             var s=1.70158;var p=0;var a=c;
-            if (t===0) return b;  if ((t /= d)==1) return b+c;  if (!p) p=d*0.3;
+            if (t==0) return b;  if ((t/=d)==1) return b+c;  if (!p) p=d*.3;
             if (a < Math.abs(c)) { a=c; var s=p/4; }
             else var s = p/(2*Math.PI) * Math.asin (c/a);
             return -(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
         },
         easeOutElastic: function (x, t, b, c, d) {
             var s=1.70158;var p=0;var a=c;
-            if (t===0) return b;  if ((t /= d)==1) return b+c;  if (!p) p=d*0.3;
+            if (t==0) return b;  if ((t/=d)==1) return b+c;  if (!p) p=d*.3;
             if (a < Math.abs(c)) { a=c; var s=p/4; }
             else var s = p/(2*Math.PI) * Math.asin (c/a);
             return a*Math.pow(2,-10*t) * Math.sin( (t*d-s)*(2*Math.PI)/p ) + c + b;
         },
         easeInOutElastic: function (x, t, b, c, d) {
             var s=1.70158;var p=0;var a=c;
-            if (t===0) return b;  if ((t /= d/2)==2) return b+c;  if (!p) p=d*(0.3*1.5);
+            if (t==0) return b;  if ((t/=d/2)==2) return b+c;  if (!p) p=d*(.3*1.5);
             if (a < Math.abs(c)) { a=c; var s=p/4; }
             else var s = p/(2*Math.PI) * Math.asin (c/a);
-            if (t < 1) return -0.5*(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
-            return a*Math.pow(2,-10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )*0.5 + c + b;
+            if (t < 1) return -.5*(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
+            return a*Math.pow(2,-10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )*.5 + c + b;
         },
         easeInBack: function (x, t, b, c, d, s) {
-            if (s == null) s = 1.70158;
-            return c*(t /= d)*t*((s+1)*t - s) + b;
+            if (s == undefined) s = 1.70158;
+            return c*(t/=d)*t*((s+1)*t - s) + b;
         },
         easeOutBack: function (x, t, b, c, d, s) {
-            if (s == null) s = 1.70158;
+            if (s == undefined) s = 1.70158;
             return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
         },
         easeInOutBack: function (x, t, b, c, d, s) {
-            if (s == null) s = 1.70158; 
-            if ((t /= d/2) < 1) return c/2*(t*t*(((s*=(1.525))+1)*t - s)) + b;
+            if (s == undefined) s = 1.70158; 
+            if ((t/=d/2) < 1) return c/2*(t*t*(((s*=(1.525))+1)*t - s)) + b;
             return c/2*((t-=2)*t*(((s*=(1.525))+1)*t + s) + 2) + b;
         },
         easeInBounce: function (x, t, b, c, d) {
             return c - timing_functions.easeOutBounce (x, d-t, 0, c, d) + b;
         },
         easeOutBounce: function (x, t, b, c, d) {
-            if ((t /= d) < (1/2.75)) {
+            if ((t/=d) < (1/2.75)) {
                 return c*(7.5625*t*t) + b;
             } else if (t < (2/2.75)) {
-                return c*(7.5625*(t-=(1.5/2.75))*t + 0.75) + b;
+                return c*(7.5625*(t-=(1.5/2.75))*t + .75) + b;
             } else if (t < (2.5/2.75)) {
-                return c*(7.5625*(t-=(2.25/2.75))*t + 0.9375) + b;
+                return c*(7.5625*(t-=(2.25/2.75))*t + .9375) + b;
             } else {
-                return c*(7.5625*(t-=(2.625/2.75))*t + 0.984375) + b;
+                return c*(7.5625*(t-=(2.625/2.75))*t + .984375) + b;
             }
         },
         easeInOutBounce: function (x, t, b, c, d) {
-            if (t < d/2) return timing_functions.easeInBounce (x, t*2, 0, c, d) * 0.5 + b;
-            return timing_functions.easeOutBounce (x, t*2-d, 0, c, d) * 0.5 + c*0.5 + b;
+            if (t < d/2) return timing_functions.easeInBounce (x, t*2, 0, c, d) * .5 + b;
+            return timing_functions.easeOutBounce (x, t*2-d, 0, c, d) * .5 + c*.5 + b;
         }
     };
 
@@ -10456,7 +10456,7 @@ define("mo/easing", [], function(require, exports){
 /* @source lib/jquery.js */;
 
 define("lib/jquery", [
-  "mo/easing",
+  "mod/easing",
   "lib/jquery_src",
   "lib/jquery.mousewheel"
 ], function(elib){
@@ -10476,7 +10476,6 @@ require.config({
     // 相对baseUrl的路径，可在远程模块声明的参数中使用（不可在模块名中使用）
     // 构建工具也会重用此处的配置，所以在配置文件中可省略
     aliases: {
-        "mo": "../../../js/mo/", // 此处的用法在lib/jquery.js里
         "external": "../../../js/"
     },
     // 因为此处没有配置distUrl，构建后的发布文件会存放在同级目录下，并自动改名

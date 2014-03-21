@@ -3,13 +3,11 @@
 <head>
 <meta charset="utf-8">
 
-<title>Ozma / Demo2</title>
+<title>grunt-dispatch</title>
 
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/pygment_trac.css">
 
-<style>
-</style>
 </head>
 <body>
 
@@ -75,42 +73,67 @@
 
 <div class="wrapper">
 <section>
+<h1 id="gruntdispatch">grunt-dispatch</h1>
 
-<h1><a href="../">Ozma</a> / Demo2</h1>
-<blockquote>for development<br>适合产品原型或个人小型项目的快速开发和调试，也是<a href="demo3.html">示例3</a>在开发环境中的状态。</blockquote>
-
-<h2>Source code for the demo: </h2>
-<p><a href="https://github.com/dexteryy/ozjs.org/tree/gh-pages/ozma/examples/">View on Github</a></p>
-
-<h2>How to build distribution file of the demo: </h2>
-<p><a href="../">How to install Ozma.js</a></p>
-<p>No build step is required</p>
-
-<h2>Running result of the demo: </h2>
-<ol>
-<li>Open the developer console of the browser</li>
-<li>Refresh</li>
-</ol>
-
-<h2>Notes: </h2>
-<p>Under construction...</p>
-
-<h2>说明：</h2>
+<blockquote>
 <ul>
-    <li>在开发环境中，修改源码后可直接调试，无需构建。</li>
-    <li>由<var>oz.js</var>动态加载所需module的源码文件。每个module的初始化都会产生一次异步请求。</li>
-    <li><var>main.js</var>中配置的<var>distUrl</var>在开发环境（本页）中不产生效果，仍然基于<var>baseUrl</var>来生成所需文件的URL。</li>
-    <li>发布到生产环境时，使用<a href="demo3.html">示例3</a>的方法可以无缝切换：除了增加构建环节，还需要由服务器端模版将<var>js/main.js</var>替换为<var>distUrl</var>路径下的发布文件。</li>
+<li>Grunt tasks for copying the necessary files of package/components directory to your src/build directory</li>
+</ul>
+</blockquote>
+
+<h2 id="config_example">Config Example</h2>
+
+<pre class="javascript"><code class="javascript">
+dispatch: {
+    options: {
+        directory: &quot;bower_components&quot;
+    },
+    &quot;ozjs&quot;: {
+        use: {
+            &quot;js/lib/&quot;: &quot;oz.js&quot;
+        }
+    },
+    &quot;mo&quot;: {
+        use: {
+            &quot;js/mod/mo/&quot;: [&quot;**/*.js&quot;, &quot;!**/Gruntfile.js&quot;]
+        }
+    },
+    &quot;moui&quot;: {
+        use: [{
+            cwd: &quot;css/moui&quot;,
+            src: [&quot;**&quot;],
+            dest: &quot;css/moui/&quot;
+        }, {
+            cwd: &quot;asset&quot;,
+            src: [&quot;**&quot;],
+            dest: &quot;pics/&quot;
+        }, {
+            src: [&quot;**/*.js&quot;, &quot;!**/Gruntfile.js&quot;],
+            dest: &quot;js/mod/moui/&quot;
+        }]
+    }
+},
+</code></pre>
+
+<h2 id="source_code">Source code</h2>
+
+<ul>
+<li><a href="https://github.com/dexteryy/grunt-dispatch">View on Github</a></li>
 </ul>
 
+<h2 id="more_references">More References</h2>
+
+<p>See <a href="http://ozjs.org/">OzJS Project Homepage</a></p>
+
+<h2 id="release_history">Release History</h2>
+
+<p>See <a href="http://ozjs.org/#release">OzJS Release History</a></p>
+
+<h2 id="license">License</h2>
+
+<p>Copyright (c) 2010 - 2013 dexteryy<br />Licensed under the MIT license.</p>
 </section>
 </div>
-
-<script>
-var _main_domain_ = 'http://www.xxx.com';
-</script>
-<script src="../../../js/lib/oz.js"></script>
-<script src="js/main.js"></script>
 
 <script type="text/javascript">
 var _gaq = _gaq || [];

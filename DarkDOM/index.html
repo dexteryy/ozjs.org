@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>DarkDOM</title>
+
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/pygment_trac.css">
+
+</head>
+<body>
+
+
+<header>
+
+<p class="logo">OzJS</p>
+<p class="header">A microkernel for modular javascript, a toolchain for modern front-end, a micro-framework for growable WebApp.</p>
+
+<ul class="buttons">
+  <li><a class="buttons github" href="https://github.com/dexteryy/OzJS">View On GitHub</a></li>
+  <!--<li class="download"><a class="buttons" href="https://github.com/dexteryy/OzJS/zipball/master">Download ZIP</a></li>-->
+  <!--<li class="download"><a class="buttons" href="https://github.com/dexteryy/OzJS/tarball/master">Download TAR</a></li>-->
+  <a href="http://weibo.com/ozjs" target="_blank" class="followme weibo">关注微博</a>
+  <a href="http://site.douban.com/199314/" target="_blank" class="followme doubansite">关注豆瓣小站</a>
+</ul>
+
+</header>
+
+<nav>
+
+<ul>
+    <li><a href="/#overview">Overview</a></li>
+    <li>
+        <a href="/#toolchain">Toolchain</a>
+        <ul>
+            <li><a href="/generator-ozjs/">Generator</a></li>
+            <li><a href="/ozma/">OzmaJS</a></li>
+            <li><a href="/grunt-ozjs">grunt-ozjs</a></li>
+            <li><a href="/karma-ozjs">karma-ozjs</a></li>
+            <li><a href="/grunt-dispatch">grunt-dispatch</a></li>
+            <li><a href="/grunt-furnace">grunt-furnace</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="/#framework">Micro-framework</a>
+        <ul>
+            <li><a href="/mo/">Mo</a></li>
+            <li><a href="/EventMaster/">EventMaster</a></li>
+            <li><a href="/NervJS/">NervJS</a></li>
+            <li><a href="/DollarJS/">DollarJS</a></li>
+            <li><a href="/SovietJS/">SovietJS</a></li>
+            <li><a href="/URLKit/">URLKit</a></li>
+            <li><a href="/ChoreoJS/">ChoreoJS</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="/#ui">UI</a>
+        <ul>
+            <li><a href="/DarkDOM/">DarkDOM</a></li>
+            <li><a href="/moui/">Moui</a></li>
+            <li><a href="/momo/">Momo</a></li>
+            <li><a href="/CardKit/">CardKit</a></li>
+        </ul>
+    </li>
+    <li><a href="/#start">Quick Start</a></li>
+    <li><a href="/#demo">Demo</a></li>
+    <li><a href="/#ref">References</a></li>
+</ul>
+
+</nav>
+
+
+<div class="wrapper">
+<section>
+<h1 id="darkdom">DarkDOM</h1>
+
+<blockquote>
+<ul>
+<li>Design your own markup languages on a higher level of abstraction than HTML</li>
+
+<li>Build responsive cross-screen UI components</li>
+
+<li>Better separation of concerns</li>
+
+<li>Separate the presentation layer and business layer from the traditional content layer</li>
+</ul>
+</blockquote>
+
+<h2 id="usages_and_examples">Usages and Examples</h2>
+
+<ul>
+<li>
+<p>Learning DarkDOM Visually</p>
+
+<p><a href="http://douban-f2e.github.io/cardkit-demo-darkdom/darkdom.pdf"><img src="http://douban-f2e.github.io/cardkit-demo-darkdom/darkdom_thumbnail.png" alt="" /></a></p>
+
+<ul>
+<li><a href="http://douban-f2e.github.io/cardkit-demo-darkdom/darkdom.pdf">PDF version</a></li>
+
+<li><a href="http://douban-f2e.github.io/cardkit-demo-darkdom/darkdom.png">PNG version</a></li>
+
+<li><a href="https://github.com/douban-f2e/cardkit-demo-darkdom">Source code</a></li>
+
+<li><a href="http://douban-f2e.github.io/cardkit-demo-darkdom/folder.html">Online demo (folder)</a></li>
+
+<li><a href="http://douban-f2e.github.io/cardkit-demo-darkdom/index.html">Online demo (list)</a></li>
+
+<li><a href="http://douban-f2e.github.io/cardkit-demo-darkdom/deck.html">Online demo (deck)</a></li>
+</ul>
+</li>
+
+<li>
+<p>codepen</p>
+
+<ul>
+<li><a href="http://codepen.io/dexteryy/pen/niuCG">http://codepen.io/dexteryy/pen/niuCG</a></li>
+</ul>
+</li>
+</ul>
+
+<h2 id="components_library">Components Library</h2>
+
+<blockquote>
+<p><a href="https://github.com/douban-f2e/CardKit">CardKit</a> is a mobile UI library provides a series of building blocks to help you build mobile web apps quickly and simply, or transfer entire website to mobile-first web app for touch devices.</p>
+
+<p>CardKit building blocks are all <em>use-html-as-configure-style</em> (like Custom Elements, directive…) components built on <a href="https://github.com/dexteryy/DarkDOM">DarkDOM</a> and <a href="https://github.com/dexteryy/moui">Moui</a>.</p>
+</blockquote>
+
+<h3 id="amd_and_ozjs">AMD and OzJS</h3>
+
+<ul>
+<li>DarkDOM can either be viewed as an independent library, or as a part of <a href="http://ozjs.org/#framework">OzJS mirco-framework</a>.</li>
+
+<li>It’s wrapped as a number of mutually independent <a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD (Asynchronous Module Definition)</a> modules. You should use them with <a href="http://ozjs.org/#start">oz.js</a> (or require.js or <a href="http://wiki.commonjs.org/wiki/Implementations">similar</a> for handling dependencies).</li>
+
+<li>If you want to make them available for both other AMD code and traditional code based on global namespace. OzJS provides <a href="http://ozjs.org/examples/adapter/">a mini define/require implementation</a> to transform AMD module into traditional <a href="http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth">module pattern</a>.</li>
+
+<li>See <a href="http://ozjs.org">http://ozjs.org</a> for details.</li>
+</ul>
+
+<h3 id="get_the_code">Get the code</h3>
+
+<p>Add to your project as new dependency</p>
+
+<ul>
+<li>via <a href="http://bower.io/">bower</a> - <code>bower install darkdom</code></li>
+
+<li>via <a href="http://ozjs.org/istatic">istatic</a></li>
+</ul>
+
+<p>Or <a href="https://github.com/dexteryy/DarkDOM/blob/master/darkdom.js">download directly from Github</a></p>
+
+<h2 id="dependencies">Dependencies</h2>
+
+<ul>
+<li><a href="https://github.com/dexteryy/mo">mo/lang/es5</a></li>
+
+<li><a href="https://github.com/dexteryy/mo">mo/lang/mix</a></li>
+
+<li><a href="https://github.com/dexteryy/DollarJS">dollar</a> (or other jQuery-compatible library + <a href="https://github.com/dexteryy/DollarJS/blob/master/dollar/jquery.js">dollar/jquery</a>)</li>
+</ul>
+
+<h2 id="api_and_usage">API and Usage</h2>
+
+<h3 id="darkcomponent_api">DarkComponent API</h3>
+
+<pre class="javascript"><code class="javascript">
+var darkdom = require(&#39;darkdom&#39;);
+var component = darkdom(options); // see component.set(options)
+</code></pre>
+
+<ul>
+<li><code>component.set(options)</code> – * options – * <code>unique: false</code> – * <code>enableSource: false</code> – * <code>entireAsContent: false</code> – * <code>sourceAsContent: false</code> – * <code>render: function(data){ return &#39;&lt;...&gt;...&lt;/...&gt;&#39;; }</code> – * <code>data.state</code> * <code>data.content</code> * <code>data.component</code> * <code>data.context</code></li>
+
+<li><code>component.state(stateName, attrName)</code> </li>
+
+<li><code>component.state(stateName, getter, setter)</code> </li>
+
+<li><code>component.state({ stateName: attrName, stateName: getter, stateName: [getter, setter], ... })</code> </li>
+
+<li><code>component.contain(childComponentName, otherComponent)</code> </li>
+
+<li><code>component.contain(childComponentName, function(childComponent){ ...;return childComponent; })</code> </li>
+
+<li><code>component.contain({ childComponentName: otherComponent, ... })</code> </li>
+
+<li><code>component.forward(&#39;eventType selector&#39;, eventName)</code> </li>
+
+<li><code>component.response(updateEvent, function(changes){ ...; return resolved; })</code> 
+<ul>
+<li>updateEvent – “state:name”, “component:name”, “content”, “remove”</li>
+
+<li>changes </li>
+
+<li>resolved </li>
+</ul>
+</li>
+
+<li><code>component.component(childComponentName)</code> </li>
+
+<li><code>component.createGuard()</code> </li>
+</ul>
+
+<h3 id="darkguard_api">DarkGuard API</h3>
+
+<pre class="javascript"><code class="javascript">
+var guard = component.createGuard();
+</code></pre>
+
+<ul>
+<li><code>guard.state()</code> – see <code>component.state</code></li>
+
+<li><code>guard.component(childComponentName, function(childGuard){ /*spec*/  })</code> </li>
+
+<li><code>guard.component({ childComponentName: spec, ... })</code> </li>
+
+<li><code>guard.forward(eventName, &#39;eventType selector&#39;)</code> </li>
+
+<li><code>guard.forward(eventName, handler)</code> </li>
+
+<li><code>guard.source()</code> </li>
+
+<li><code>guard.watch(selector)</code> </li>
+
+<li><code>guard.watch(element)</code> </li>
+
+<li><code>guard.unwatch(selector)</code> </li>
+
+<li><code>guard.unwatch(element)</code> </li>
+
+<li><code>guard.unwatch()</code> </li>
+
+<li><code>guard.mount()</code> </li>
+
+<li><code>guard.unmount()</code> </li>
+
+<li><code>guard.update()</code> </li>
+
+<li><code>guard.render()</code> </li>
+
+<li><code>guard.stateGetter(name)</code> </li>
+
+<li><code>guard.stateSetter(name)</code> </li>
+
+<li><code>guard.createRoot()</code> </li>
+
+<li><code>guard.createSource()</code> </li>
+</ul>
+
+<h3 id="dom_api">DOM API</h3>
+
+<pre class="javascript"><code class="javascript">
+var root = $(selector)[0];
+guard.watch(root);
+</code></pre>
+
+<ul>
+<li><code>root.darkGuard()</code> </li>
+
+<li><code>root.mountDarkDOM()</code> </li>
+
+<li><code>root.unmountDarkDOM()</code> </li>
+
+<li><code>root.resetDarkDOM()</code> </li>
+
+<li><code>root.getDarkState(name)</code> </li>
+
+<li><code>root.setDarkState(name, value, options)</code> – * options – * <code>update: false</code> </li>
+
+<li><code>root.updateDarkStates()</code> </li>
+
+<li><code>root.updateDarkDOM()</code> </li>
+
+<li><code>root.feedDarkDOM(sourceData)</code> </li>
+
+<li><code>root.feedDarkDOM(function(sourceData){...})</code> </li>
+
+<li><code>root.responseDarkDOM(updateEvent, function(changes){...})</code> – see <code>component.response</code></li>
+
+<li><code>root.addEventListener(darkEvent, handler)</code> * darkEvent – * <code>darkdom:willMount</code> – * <code>darkdom:mounted</code> – * <code>darkdom:willUpdate</code> – * <code>darkdom:updated</code> – * <code>darkdom:rendered</code> – * <code>darkdom:removed</code> </li>
+</ul>
+
+<p>More coming soon</p>
+
+<h2 id="more_references">More References</h2>
+
+<p>See <a href="http://ozjs.org/">OzJS Project Homepage</a></p>
+
+<h2 id="release_history">Release History</h2>
+
+<p>See <a href="http://ozjs.org/#release">OzJS Release History</a></p>
+
+<h2 id="license">License</h2>
+
+<p>Copyright (c) 2010 - 2014 dexteryy<br />Licensed under the MIT license.</p>
+</section>
+</div>
+
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-404086-13']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+</body>
+</html>
+

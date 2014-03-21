@@ -36,8 +36,9 @@
         <ul>
             <li><a href="/generator-ozjs/">Generator</a></li>
             <li><a href="/ozma/">OzmaJS</a></li>
-            <li><a href="/istatic/">iStatic</a></li>
             <li><a href="/grunt-ozjs">grunt-ozjs</a></li>
+            <li><a href="/karma-ozjs">karma-ozjs</a></li>
+            <li><a href="/grunt-dispatch">grunt-dispatch</a></li>
             <li><a href="/grunt-furnace">grunt-furnace</a></li>
         </ul>
     </li>
@@ -56,15 +57,15 @@
     <li>
         <a href="/#ui">UI</a>
         <ul>
-            <li><a href="/momo/">Momo</a></li>
+            <li><a href="/DarkDOM/">DarkDOM</a></li>
             <li><a href="/moui/">Moui</a></li>
+            <li><a href="/momo/">Momo</a></li>
             <li><a href="/CardKit/">CardKit</a></li>
         </ul>
     </li>
     <li><a href="/#start">Quick Start</a></li>
     <li><a href="/#demo">Demo</a></li>
     <li><a href="/#ref">References</a></li>
-    <li><a href="https://github.com/dexteryy/OzJS/wiki/Changelog" target="_blank">Release History</a></li>
 </ul>
 
 </nav>
@@ -72,101 +73,85 @@
 
 <div class="wrapper">
 <section>
-<h1 id="toc_266">SovietJS</h1>
+<h1 id="sovietjs">SovietJS</h1>
 
 <blockquote>
 <ul>
 <li>Standalone UI event delegate implementation</li>
-<li>Provide multiple styles/modes: override, automatically preventDefault, partial matching, exact matching...</li>
+
+<li>Provide multiple styles/modes: override, automatically preventDefault, partial matching, exact matching</li>
 </ul>
 </blockquote>
 
-<h2 id="toc_267">Usage</h2>
+<h2 id="usage">Usage</h2>
 
-<h3 id="toc_268">AMD and OzJS</h3>
+<h3 id="amd_and_ozjs">AMD and OzJS</h3>
 
 <ul>
 <li>SovietJS can either be viewed as an independent library, or as a part of <a href="http://ozjs.org/#framework">OzJS mirco-framework</a>.</li>
-<li>It&#39;s wrapped as an <a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD (Asynchronous Module Definition)</a> module. You should use it with <a href="http://ozjs.org/#start">oz.js</a> (or require.js or <a href="http://wiki.commonjs.org/wiki/Implementations">similar</a> for handling dependencies). </li>
+
+<li>It’s wrapped as an <a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD (Asynchronous Module Definition)</a> module. You should use it with <a href="http://ozjs.org/#start">oz.js</a> (or require.js or <a href="http://wiki.commonjs.org/wiki/Implementations">similar</a> for handling dependencies).</li>
+
 <li>If you want to make it available for both other AMD code and traditional code based on global namespace. OzJS provides <a href="http://ozjs.org/examples/adapter/">a mini define/require implementation</a> to transform AMD module into traditional <a href="http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth">module pattern</a>.</li>
+
 <li>See <a href="http://ozjs.org">http://ozjs.org</a> for details.</li>
 </ul>
 
-<h3 id="toc_269">Get the code</h3>
+<h3 id="get_the_code">Get the code</h3>
 
 <p>Add to your project as new dependency</p>
 
 <ul>
 <li>via <a href="http://bower.io/">bower</a> - <code>bower install soviet</code></li>
+
 <li>via <a href="http://ozjs.org/istatic">istatic</a></li>
 </ul>
 
 <p>Or <a href="https://github.com/dexteryy/SovietJS/blob/master/soviet.js">download directly from Github</a></p>
 
-<h2 id="toc_270">Dependencies</h2>
+<h2 id="dependencies">Dependencies</h2>
 
 <ul>
 <li><a href="https://github.com/dexteryy/mo/es5">mo/lang/es5</a></li>
+
 <li><a href="https://github.com/dexteryy/mo/mix">mo/lang/mix</a></li>
+
 <li><a href="https://github.com/dexteryy/mo/type">mo/lang/type</a></li>
+
 <li><a href="https://github.com/dexteryy/mo/struct">mo/lang/struct</a></li>
+
 <li><a href="https://github.com/dexteryy/DollarJS">dollar</a> or other jQuery-compatible library</li>
 </ul>
 
-<h2 id="toc_271">Examples</h2>
+<h2 id="examples">Examples</h2>
 
-<p>Under construction...</p>
+<p>Under construction</p>
 
-<h2 id="toc_272">API and usage</h2>
-<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">soviet</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;soviet&#39;</span><span class="p">);</span>
+<h2 id="api_and_usage">API and usage</h2>
+
+<pre class="javascript"><code class="javascript">
+var soviet = require(&#39;soviet&#39;);
 </code></pre>
-</div>
 
 <ul>
-<li><code>soviet(elm/*, options */)</code> -- 
+<li><code>soviet(elm/*, options */)</code> – * options: * <code>preventDefault</code> – false * <code>matchesSelector</code> – false * <code>autoOverride</code> – false * <code>aliasEvents</code> – {} * <code>trace</code> – false * <code>traceStack</code> – null * API: * <code>on(event/*, selector */, handler)</code> – * <code>on(event, { &#39;selector&#39;: handler, ... })</code> – * <code>off(event, selector, handler)</code> – * <code>matches(event, selector)</code> – * <code>reset(event)</code> – * <code>disable(event, selector)</code> – * <code>enable(event, selector)</code> – * <code>trigger(ev)</code> </li>
 
-<ul>
-<li>options:
-
-<ul>
-<li><code>preventDefault</code> -- false</li>
-<li><code>matchesSelector</code> -- false</li>
-<li><code>autoOverride</code> -- false</li>
-<li><code>aliasEvents</code> -- {}</li>
-<li><code>trace</code> -- false</li>
-<li><code>traceStack</code> -- null</li>
-</ul></li>
-<li>API:
-
-<ul>
-<li><code>on(event/*, selector */, handler)</code> -- </li>
-<li><code>on(event, { &#39;selector&#39;: handler, ... })</code> -- </li>
-<li><code>off(event, selector, handler)</code> -- </li>
-<li><code>matches(event, selector)</code> -- </li>
-<li><code>reset(event)</code> -- </li>
-<li><code>disable(event, selector)</code> -- </li>
-<li><code>enable(event, selector)</code> -- </li>
-<li><code>trigger(ev)</code> -- </li>
-</ul></li>
-</ul></li>
-<li><code>soviet.Soviet</code> -- </li>
+<li><code>soviet.Soviet</code> </li>
 </ul>
 
-<p>Under construction...</p>
+<p>Under construction</p>
 
-<h2 id="toc_273">More References</h2>
+<h2 id="more_references">More References</h2>
 
 <p>See <a href="http://ozjs.org/">OzJS Project Homepage</a></p>
 
-<h2 id="toc_274">Release History</h2>
+<h2 id="release_history">Release History</h2>
 
 <p>See <a href="http://ozjs.org/#release">OzJS Release History</a></p>
 
-<h2 id="toc_275">License</h2>
+<h2 id="license">License</h2>
 
-<p>Copyright (c) 2010 - 2013 dexteryy<br>
-Licensed under the MIT license.</p>
-
+<p>Copyright (c) 2010 - 2013 dexteryy<br />Licensed under the MIT license.</p>
 </section>
 </div>
 

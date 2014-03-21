@@ -36,8 +36,9 @@
         <ul>
             <li><a href="/generator-ozjs/">Generator</a></li>
             <li><a href="/ozma/">OzmaJS</a></li>
-            <li><a href="/istatic/">iStatic</a></li>
             <li><a href="/grunt-ozjs">grunt-ozjs</a></li>
+            <li><a href="/karma-ozjs">karma-ozjs</a></li>
+            <li><a href="/grunt-dispatch">grunt-dispatch</a></li>
             <li><a href="/grunt-furnace">grunt-furnace</a></li>
         </ul>
     </li>
@@ -56,15 +57,15 @@
     <li>
         <a href="/#ui">UI</a>
         <ul>
-            <li><a href="/momo/">Momo</a></li>
+            <li><a href="/DarkDOM/">DarkDOM</a></li>
             <li><a href="/moui/">Moui</a></li>
+            <li><a href="/momo/">Momo</a></li>
             <li><a href="/CardKit/">CardKit</a></li>
         </ul>
     </li>
     <li><a href="/#start">Quick Start</a></li>
     <li><a href="/#demo">Demo</a></li>
     <li><a href="/#ref">References</a></li>
-    <li><a href="https://github.com/dexteryy/OzJS/wiki/Changelog" target="_blank">Release History</a></li>
 </ul>
 
 </nav>
@@ -72,82 +73,83 @@
 
 <div class="wrapper">
 <section>
-<h1 id="toc_162">iStatic</h1>
+<h1 id="istatic">iStatic</h1>
 
 <p>A static-file dependency manager more than a package manager.</p>
 
-<h3 id="toc_163">Installation</h3>
-<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>npm install node-istatic -g
+<h3 id="installation">Installation</h3>
+
+<pre class="bash"><code class="bash">
+$ npm install node-istatic -g
 </code></pre>
-</div>
 
-<h3 id="toc_164">Usage</h3>
+<h3 id="usage">Usage</h3>
 
-<p>Put a file named <code>static.yaml</code> (refer to the following <strong>Configuration</strong>) at the root of your project repository.
-And then, run:</p>
-<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>istatic pull
+<p>Put a file named <code>static.yaml</code> (refer to the following <strong>Configuration</strong>) at the root of your project repository. And then, run:</p>
+
+<pre class="bash"><code class="bash">
+$ istatic pull
 </code></pre>
-</div>
 
-<h3 id="toc_165">Configuration</h3>
+<h3 id="configuration">Configuration</h3>
 
 <p>You can specify any git hosting provider, such as:</p>
-<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">hostDict</span><span class="p-Indicator">:</span>
-  <span class="l-Scalar-Plain">code</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://code.dapps.douban.com/</span>
-  <span class="l-Scalar-Plain">gitcafe</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">git://gitcafe.com/</span>
+
+<pre class="yaml"><code class="yaml">
+hostDict:
+  code: http://code.dapps.douban.com/
+  gitcafe: git://gitcafe.com/
 </code></pre>
-</div>
 
 <p>Note: iStatic has been added <strong>github</strong>, <strong>bitbucket</strong> and <strong>local</strong> by default.</p>
 
-<p>Specify the git repos info (including <strong>name</strong>, <strong>host</strong>, <strong>tag</strong> or <strong>commit</strong>) and the path of the files or directories you need.
-The default host is <strong>github</strong>, and the default commit (or tag) is <strong>origin/master</strong>. These two properties can be omitted.
-But you need to specify one <strong>file</strong> mapping (origin: target) at least. It sounds to be a little complicated, here&#39;s a example:</p>
-<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">repos</span><span class="p-Indicator">:</span>
-  <span class="l-Scalar-Plain">arkui</span><span class="p-Indicator">:</span>
-    <span class="l-Scalar-Plain">host</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">code</span>
-    <span class="l-Scalar-Plain">file</span><span class="p-Indicator">:</span>
-      <span class="l-Scalar-Plain">./stylus</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">./public/css/arkui/</span>
-      <span class="l-Scalar-Plain">./pics</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">./public/pics/</span>
+<p>Specify the git repos info (including <strong>name</strong>, <strong>host</strong>, <strong>tag</strong> or <strong>commit</strong>) and the path of the files or directories you need. The default host is <strong>github</strong>, and the default commit (or tag) is <strong>origin/master</strong>. These two properties can be omitted. But you need to specify one <strong>file</strong> mapping (origin: target) at least. It sounds to be a little complicated, here’s a example:</p>
 
-  <span class="l-Scalar-Plain">dexteryy/OzJS</span><span class="p-Indicator">:</span>
-    <span class="l-Scalar-Plain">tag</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">2.5.1</span>
-    <span class="l-Scalar-Plain">file</span><span class="p-Indicator">:</span>
-      <span class="l-Scalar-Plain">./oz.js</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">./public/js/lib/</span>
-      <span class="l-Scalar-Plain">./eventMaster/eventmaster.js</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">./public/js/lib/mod/event.js</span>
+<pre class="yaml"><code class="yaml">
+repos:
+  arkui:
+    host: code
+    file:
+      ./stylus: ./public/css/arkui/
+      ./pics: ./public/pics/
 
-  <span class="l-Scalar-Plain">/Users/mockee/M3</span><span class="p-Indicator">:</span>
-    <span class="l-Scalar-Plain">host</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">local</span>
-    <span class="l-Scalar-Plain">commit</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">7827c7c605</span>
-    <span class="l-Scalar-Plain">file</span><span class="p-Indicator">:</span>
-      <span class="l-Scalar-Plain">./define.js</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">./public/js/lib/</span>
-      <span class="l-Scalar-Plain">./mod/touch.js</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">./public/js/mod/</span>
+  dexteryy/OzJS:
+    tag: 2.5.1
+    file:
+      ./oz.js: ./public/js/lib/
+      ./eventMaster/eventmaster.js: ./public/js/lib/mod/event.js
+
+  /Users/mockee/M3:
+    host: local
+    commit: 7827c7c605
+    file:
+      ./define.js: ./public/js/lib/
+      ./mod/touch.js: ./public/js/mod/
 </code></pre>
-</div>
 
-<h3 id="toc_166">Grunt task</h3>
+<h3 id="grunt_task">Grunt task</h3>
 
 <p><a href="https://github.com/mockee/grunt-istatic">Grunt-istatic</a> task now available.</p>
 
-<h2 id="toc_167">Source code</h2>
+<h2 id="source_code">Source code</h2>
 
 <ul>
 <li><a href="https://github.com/mockee/istatic">View on Github</a></li>
 </ul>
 
-<h2 id="toc_168">Release History</h2>
+<h2 id="release_history">Release History</h2>
 
 <ul>
 <li>2013-02-22 - v0.3.1 - Support async callback for <code>grunt-istatic</code>.</li>
+
 <li>2013-02-07 - v0.2.7 - Support local git repos. Format logs. Add <code>--version</code> &amp; <code>clear</code> options.</li>
+
 <li>2012-12-06 - v0.2.5 - Bugfix for <code>pulldown</code> &amp;&amp; checking local files modification.</li>
 </ul>
 
-<h2 id="toc_169">License</h2>
+<h2 id="license">License</h2>
 
-<p>Copyright (c) 2013 mockee
-Licensed under the MIT license.</p>
-
+<p>Copyright (c) 2013 mockee Licensed under the MIT license.</p>
 </section>
 </div>
 

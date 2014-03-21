@@ -36,8 +36,9 @@
         <ul>
             <li><a href="/generator-ozjs/">Generator</a></li>
             <li><a href="/ozma/">OzmaJS</a></li>
-            <li><a href="/istatic/">iStatic</a></li>
             <li><a href="/grunt-ozjs">grunt-ozjs</a></li>
+            <li><a href="/karma-ozjs">karma-ozjs</a></li>
+            <li><a href="/grunt-dispatch">grunt-dispatch</a></li>
             <li><a href="/grunt-furnace">grunt-furnace</a></li>
         </ul>
     </li>
@@ -56,15 +57,15 @@
     <li>
         <a href="/#ui">UI</a>
         <ul>
-            <li><a href="/momo/">Momo</a></li>
+            <li><a href="/DarkDOM/">DarkDOM</a></li>
             <li><a href="/moui/">Moui</a></li>
+            <li><a href="/momo/">Momo</a></li>
             <li><a href="/CardKit/">CardKit</a></li>
         </ul>
     </li>
     <li><a href="/#start">Quick Start</a></li>
     <li><a href="/#demo">Demo</a></li>
     <li><a href="/#ref">References</a></li>
-    <li><a href="https://github.com/dexteryy/OzJS/wiki/Changelog" target="_blank">Release History</a></li>
 </ul>
 
 </nav>
@@ -72,104 +73,79 @@
 
 <div class="wrapper">
 <section>
-<h1 id="toc_0">CardKit</h1>
+<h1 id="cardkit_v2">CardKit (v2)</h1>
 
-<p>A mobile UI framework provides building blocks which are classified as &quot;Card&quot;, &quot;Unit&quot; and &quot;Component&quot; to help you build mobile web apps quickly and simply, or transfer entire website to native-like web app for touch devices.</p>
+<p>CardKit is a mobile UI library provides a series of building blocks to help you build mobile web apps quickly and simply, or transfer entire website to mobile-first web app for touch devices.</p>
 
-<h3 id="toc_1">Usages and Examples</h3>
+<p>CardKit building blocks are all <em>use-html-as-configure-style</em> (like Custom Elements, directive…) components built on <a href="https://github.com/dexteryy/DarkDOM">DarkDOM</a> and <a href="https://github.com/dexteryy/moui">Moui</a>.</p>
 
-<p><a href="http://ozjs.org/CardKit/refapp">CardKit Reference App</a> (highly recommend to open in iOS/android device or simulator)</p>
-
-<h3 id="toc_2">In the Real World</h3>
-
-<p><img src="screenshot/doubanapp.png" alt="douban apps"></p>
-
-<h3 id="toc_3">Unsupported Platform</h3>
+<h2 id="usages_and_examples">Usages and Examples</h2>
 
 <ul>
-<li>iOS 4.x or earlier</li>
-<li>Android 3.x or earlier</li>
-<li>Tablet device</li>
-<li>UC and similar browsers</li>
-<li>Some low-end phones</li>
-<li>iOS 7 support coming soon</li>
-<li>Windows Phone support coming soon</li>
+<li><a href="http://douban-f2e.github.io/cardkit-demo-gallery">Components Gallery App</a></li>
+
+<li><a href="https://github.com/douban-f2e/cardkit-demo-todoapp">To-do App</a></li>
+
+<li><a href="https://github.com/douban-f2e/cardkit-demo-darkdom">Custom DarkDOM Components</a></li>
 </ul>
 
-<h2 id="toc_4">Download</h2>
+<h3 id="in_the_real_world">In the Real World</h3>
 
-<p>Compiled and packaged &quot;all in one&quot;  version:</p>
+<p><img src="http://ozjs.org/CardKit/screenshot/doubanapp.png" alt="douban apps" /></p>
+
+<h2 id="download">Download</h2>
+
+<p>Packaged version without dependencies:</p>
 
 <ul>
-<li><a href="https://github.com/douban-f2e/CardKit/blob/master/dist/js/main.js">dist/js/main.js</a></li>
-<li><a href="https://github.com/douban-f2e/CardKit/blob/master/dist/css/main.css">dist/css/main.css</a></li>
+<li><a href="https://github.com/douban-f2e/CardKit/blob/master/dist/cardkit.js">cardkit.js</a></li>
+
+<li><a href="https://github.com/douban-f2e/CardKit/blob/master/dist/cardkit.min.js">cardkit.min.js</a></li>
 </ul>
 
-<p>Minified version:</p>
+<p>Packaged version with dependencies:</p>
 
 <ul>
-<li><a href="https://github.com/douban-f2e/CardKit/blob/master/dist/js/main.min.js">dist/js/main.min.js</a></li>
-<li><a href="https://github.com/douban-f2e/CardKit/blob/master/dist/css/main.min.css">dist/css/main.min.css</a></li>
+<li><a href="https://github.com/douban-f2e/CardKit/blob/master/dist/cardkit-standalone.js">cardkit-standalone.js</a></li>
+
+<li><a href="https://github.com/douban-f2e/CardKit/blob/master/dist/cardkit-standalone.min.js">cardkit-standalone.min.js</a></li>
 </ul>
 
 <p>or build your own:</p>
 
-<h2 id="toc_5">Quick Start for building</h2>
+<h2 id="quick_start_for_building">Quick Start for building</h2>
 
-<h3 id="toc_6">Prepare the environment</h3>
+<h3 id="prepare_the_environment">Prepare the environment</h3>
 
 <ol>
 <li>node, npm</li>
+
 <li><a href="http://gruntjs.com/getting-started">grunt v0.4</a> - <code>npm install grunt-cli -g</code></li>
-<li><a href="http://bower.io/">bower v1.0.0</a> - <code>npm install bower -g</code></li>
+
+<li><a href="http://bower.io/">bower v0.10.0+</a> - <code>npm install bower -g</code></li>
+
 <li>ruby, gem, <a href="http://gembundler.com/">bundler</a></li>
 </ol>
 
-<h3 id="toc_7">Install dependencies</h3>
+<h3 id="install_dependencies">Install dependencies</h3>
 
 <ol>
 <li><code>npm install</code></li>
+
 <li><code>bundle install</code></li>
+
 <li><code>bower install</code></li>
 </ol>
 
-<h3 id="toc_8">Build and use in your mobile project</h3>
+<h3 id="the_first_build">The first build</h3>
 
 <ol>
-<li><code>cp config.js.tmpl config.js</code></li>
-<li>Resolve TODO in config.js</li>
 <li><code>grunt</code></li>
 </ol>
 
-<h2 id="toc_9">Dev Guild</h2>
+<h2 id="license">License</h2>
 
-<ol>
-<li><code>grunt watch</code></li>
-<li>Edit source files in <code>js/</code>, <code>css/</code> and <code>tpl/</code></li>
-</ol>
-
-<h2 id="toc_10">Docs &amp; Demos</h2>
-
-<ol>
-<li><code>grunt connect</code></li>
-<li>See <a href="http://localhost:9001/">http://localhost:9100/</a> (or <a href="http://ozjs.org/CardKit/refapp">official URL</a>) and <code>examples/</code></li>
-</ol>
-
-<p>More coming soon...</p>
-
-<h2 id="toc_11">Release History</h2>
-
-<p>See <a href="https://github.com/douban-f2e/CardKit/wiki/Changelog">changelog</a></p>
-
-<h2 id="toc_12">More References</h2>
-
-<p><a href="https://trello.com/board/mobileweb-instrumentality-project/51357199230922201c0007ef">Mobileweb Instrumentality Project @ trello</a></p>
-
-<h2 id="toc_13">License</h2>
-
-<p>Copyright (c) 2013 douban.com
-Licensed under the MIT license.</p>
-
+<p>Copyright (c) 2013-2014 douban.com Licensed under the MIT license.</p>
 </section>
 </div>
 

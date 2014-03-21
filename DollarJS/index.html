@@ -36,8 +36,9 @@
         <ul>
             <li><a href="/generator-ozjs/">Generator</a></li>
             <li><a href="/ozma/">OzmaJS</a></li>
-            <li><a href="/istatic/">iStatic</a></li>
             <li><a href="/grunt-ozjs">grunt-ozjs</a></li>
+            <li><a href="/karma-ozjs">karma-ozjs</a></li>
+            <li><a href="/grunt-dispatch">grunt-dispatch</a></li>
             <li><a href="/grunt-furnace">grunt-furnace</a></li>
         </ul>
     </li>
@@ -56,15 +57,15 @@
     <li>
         <a href="/#ui">UI</a>
         <ul>
-            <li><a href="/momo/">Momo</a></li>
+            <li><a href="/DarkDOM/">DarkDOM</a></li>
             <li><a href="/moui/">Moui</a></li>
+            <li><a href="/momo/">Momo</a></li>
             <li><a href="/CardKit/">CardKit</a></li>
         </ul>
     </li>
     <li><a href="/#start">Quick Start</a></li>
     <li><a href="/#demo">Demo</a></li>
     <li><a href="/#ref">References</a></li>
-    <li><a href="https://github.com/dexteryy/OzJS/wiki/Changelog" target="_blank">Release History</a></li>
 </ul>
 
 </nav>
@@ -72,203 +73,297 @@
 
 <div class="wrapper">
 <section>
-<h1 id="toc_72">DollarJS</h1>
+<h1 id="dollarjs">DollarJS</h1>
 
 <blockquote>
 <ul>
-<li>A jQuery-compatible and non-All-in-One library which is more &quot;Zepto&quot; than Zepto.js</li>
+<li>A jQuery-compatible and non-All-in-One library which is more “Zepto” than Zepto.js</li>
+
 <li>Focus on DOM operations and mobile platform, wrap native API wherever possible.</li>
 </ul>
 </blockquote>
 
-<p><a href="https://github.com/dexteryy/DollarJS/blob/master/dollar/android23.js">Adapter for Android 2.x</a></p>
+<h3 id="for_android_2x_or_ie9_beta">For Android 2.x or ie9+ (beta)</h3>
 
-<h2 id="toc_73">Usage</h2>
+<pre class="javascript"><code class="javascript">
+define(&quot;dollar&quot;, [&quot;dollar/android23&quot;], function($){
+    return $;
+});
+</code></pre>
 
-<h3 id="toc_74">AMD and OzJS</h3>
+<h3 id="for_jquery">For jQuery</h3>
+
+<pre class="javascript"><code class="javascript">
+define(&quot;dollar&quot;, [&quot;dollar/jquery&quot;], function($){
+    return $;
+});
+</code></pre>
+
+<h2 id="usage">Usage</h2>
+
+<h3 id="amd_and_ozjs">AMD and OzJS</h3>
 
 <ul>
 <li>DollarJS can either be viewed as an independent library, or as a part of <a href="http://ozjs.org/#framework">OzJS mirco-framework</a>.</li>
-<li>It&#39;s wrapped as an <a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD (Asynchronous Module Definition)</a> module. You should use it with <a href="http://ozjs.org/#start">oz.js</a> (or require.js or <a href="http://wiki.commonjs.org/wiki/Implementations">similar</a> for handling dependencies). </li>
+
+<li>It’s wrapped as an <a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD (Asynchronous Module Definition)</a> module. You should use it with <a href="http://ozjs.org/#start">oz.js</a> (or require.js or <a href="http://wiki.commonjs.org/wiki/Implementations">similar</a> for handling dependencies).</li>
+
 <li>If you want to make it available for both other AMD code and traditional code based on global namespace. OzJS provides <a href="http://ozjs.org/examples/adapter/">a mini define/require implementation</a> to transform AMD module into traditional <a href="http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth">module pattern</a>.</li>
+
 <li>See <a href="http://ozjs.org">http://ozjs.org</a> for details.</li>
 </ul>
 
-<h3 id="toc_75">Get the code</h3>
+<h3 id="get_the_code">Get the code</h3>
 
 <p>Add to your project as new dependency</p>
 
 <ul>
 <li>via <a href="http://bower.io/">bower</a> - <code>bower install dollar</code></li>
+
 <li>via <a href="http://ozjs.org/istatic">istatic</a></li>
 </ul>
 
 <p>Or <a href="https://github.com/dexteryy/DollarJS/blob/master/dollar.js">download directly from Github</a></p>
 
-<h2 id="toc_76">Dependencies</h2>
+<h2 id="dependencies">Dependencies</h2>
 
 <ul>
 <li><a href="https://github.com/dexteryy/mo">mo/lang/es5</a></li>
+
 <li><a href="https://github.com/dexteryy/mo">mo/lang/mix</a></li>
+
 <li><a href="https://github.com/dexteryy/mo">mo/lang/type</a></li>
 </ul>
 
-<h2 id="toc_77">Examples</h2>
+<h2 id="examples">Examples</h2>
 
-<p>Under construction...</p>
+<p>Under construction</p>
 
-<h2 id="toc_78">API and usage</h2>
-<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;dollar&#39;</span><span class="p">);</span>
+<h2 id="api_and_usage">API and usage</h2>
+
+<pre class="javascript"><code class="javascript">
+var $ = require(&#39;dollar&#39;);
 </code></pre>
-</div>
 
 <ul>
-<li><code>$()</code> -- </li>
+<li><code>$()</code> </li>
 </ul>
 
-<h3 id="toc_79">API inherited from Array.prototype</h3>
+<h3 id="api_inherited_from_arrayprototype">API inherited from Array.prototype</h3>
 
 <ul>
 <li>support all Array methods</li>
 </ul>
 
-<h3 id="toc_80">API for traversing</h3>
+<h3 id="api_for_traversing">API for traversing</h3>
 
 <ul>
-<li><code>find()</code> -- </li>
-<li><code>eq()</code> -- </li>
-<li><code>not()</code> -- </li>
-<li><code>has()</code> -- </li>
-<li><code>parent()</code> -- </li>
-<li><code>parents()</code> -- </li>
-<li><code>closest()</code> -- </li>
-<li><code>siblings()</code> -- </li>
-<li><code>next()</code> -- </li>
-<li><code>nextAll()</code> -- </li>
-<li><code>nextUntil()</code> -- </li>
-<li><code>prev()</code> -- </li>
-<li><code>prevAll()</code> -- </li>
-<li><code>prevUntil()</code> -- </li>
-<li><code>children()</code> -- </li>
-<li><code>contents()</code> -- </li>
+<li><code>find()</code> </li>
+
+<li><code>eq()</code> </li>
+
+<li><code>not()</code> </li>
+
+<li><code>matches()</code> </li>
+
+<li><code>has()</code> </li>
+
+<li><code>parent()</code> </li>
+
+<li><code>parents()</code> </li>
+
+<li><code>closest()</code> </li>
+
+<li><code>siblings()</code> </li>
+
+<li><code>next()</code> </li>
+
+<li><code>nextAll()</code> </li>
+
+<li><code>nextUntil()</code> </li>
+
+<li><code>prev()</code> </li>
+
+<li><code>prevAll()</code> </li>
+
+<li><code>prevUntil()</code> </li>
+
+<li><code>children()</code> </li>
+
+<li><code>contents()</code> </li>
 </ul>
 
-<h3 id="toc_81">API for detection</h3>
+<h3 id="api_for_detection">API for detection</h3>
 
 <ul>
-<li><code>is()</code> -- </li>
-<li><code>hasClass()</code> -- </li>
+<li><code>is()</code> </li>
+
+<li><code>hasClass()</code> </li>
 </ul>
 
-<h3 id="toc_82">API for properties</h3>
+<h3 id="api_for_properties">API for properties</h3>
 
 <ul>
-<li><code>addClass()</code> -- </li>
-<li><code>removeClass()</code> -- </li>
-<li><code>toggleClass()</code> -- </li>
-<li><code>attr()</code> -- </li>
-<li><code>removeAttr()</code> -- </li>
-<li><code>prop()</code> -- </li>
-<li><code>removeProp()</code> -- </li>
-<li><code>data()</code> -- </li>
-<li><code>removeData()</code> -- </li>
-<li><code>val()</code> -- </li>
-<li><code>empty()</code> -- </li>
-<li><code>html()</code> -- </li>
-<li><code>text()</code> -- </li>
-<li><code>css()</code> -- </li>
-<li><code>hide()</code> -- </li>
-<li><code>show()</code> -- </li>
+<li><code>addClass()</code> </li>
+
+<li><code>removeClass()</code> </li>
+
+<li><code>toggleClass()</code> </li>
+
+<li><code>attr()</code> </li>
+
+<li><code>removeAttr()</code> </li>
+
+<li><code>prop()</code> </li>
+
+<li><code>removeProp()</code> </li>
+
+<li><code>data()</code> </li>
+
+<li><code>removeData()</code> </li>
+
+<li><code>val()</code> </li>
+
+<li><code>empty()</code> </li>
+
+<li><code>html()</code> </li>
+
+<li><code>text()</code> </li>
+
+<li><code>css()</code> </li>
+
+<li><code>hide()</code> </li>
+
+<li><code>show()</code> </li>
 </ul>
 
-<h3 id="toc_83">API for dimensions</h3>
+<h3 id="api_for_dimensions">API for dimensions</h3>
 
 <ul>
-<li><code>offset()</code> -- </li>
-<li><code>width()</code> -- </li>
-<li><code>height()</code> -- </li>
+<li><code>offset()</code> </li>
+
+<li><code>width()</code> </li>
+
+<li><code>height()</code> </li>
+
+<li><code>scrollLeft()</code> </li>
+
+<li><code>scrollTop()</code> </li>
 </ul>
 
-<h3 id="toc_84">API for manipulation</h3>
+<h3 id="api_for_manipulation">API for manipulation</h3>
 
 <ul>
-<li><code>appendTo()</code> -- </li>
-<li><code>append()</code> -- </li>
-<li><code>prependTo()</code> -- </li>
-<li><code>prepend()</code> -- </li>
-<li><code>insertBefore()</code> -- </li>
-<li><code>before()</code> -- </li>
-<li><code>insertAfter()</code> -- </li>
-<li><code>after()</code> -- </li>
-<li><code>replaceAll()</code> -- </li>
-<li><code>replaceWith()</code> -- </li>
-<li><code>wrap(boxes)</code> -- </li>
-<li><code>wrapAll()</code> -- </li>
-<li><code>wrapInner()</code> -- </li>
-<li><code>unwrap()</code> -- </li>
-<li><code>clone()</code> -- </li>
-<li><code>remove()</code> -- </li>
+<li><code>appendTo()</code> </li>
+
+<li><code>append()</code> </li>
+
+<li><code>prependTo()</code> </li>
+
+<li><code>prepend()</code> </li>
+
+<li><code>insertBefore()</code> </li>
+
+<li><code>before()</code> </li>
+
+<li><code>insertAfter()</code> </li>
+
+<li><code>after()</code> </li>
+
+<li><code>replaceAll()</code> </li>
+
+<li><code>replaceWith()</code> </li>
+
+<li><code>wrap(boxes)</code> </li>
+
+<li><code>wrapAll()</code> </li>
+
+<li><code>wrapInner()</code> </li>
+
+<li><code>unwrap()</code> </li>
+
+<li><code>clone()</code> </li>
+
+<li><code>remove()</code> </li>
 </ul>
 
-<h3 id="toc_85">API for event</h3>
+<h3 id="api_for_event">API for event</h3>
 
 <ul>
-<li><code>once()</code> -- </li>
-<li><code>bind()</code> -- </li>
-<li><code>unbind()</code> -- </li>
-<li><code>trigger()</code> -- </li>
+<li><code>one()</code> </li>
+
+<li><code>on()</code> </li>
+
+<li><code>off()</code> </li>
+
+<li><code>trigger()</code> </li>
 </ul>
 
-<h3 id="toc_86">API for miscellaneous</h3>
+<h3 id="api_for_miscellaneous">API for miscellaneous</h3>
 
 <ul>
-<li><code>end()</code> -- </li>
-<li><code>each()</code> -- </li>
+<li><code>end()</code> </li>
+
+<li><code>each()</code> </li>
 </ul>
 
-<h3 id="toc_87">Public static API</h3>
+<h3 id="public_static_api">Public static API</h3>
 
 <ul>
-<li><code>$.matchesSelector</code> -- </li>
-<li><code>$.createNodes</code> -- </li>
-<li><code>$.camelize</code> -- </li>
-<li><code>$.dasherize</code> -- </li>
-<li><code>$.Event</code> -- </li>
+<li><code>$.matchesSelector | $.matches</code> </li>
+
+<li><code>$.contains</code> </li>
+
+<li><code>$.createNodes</code> </li>
+
+<li><code>$.camelize</code> </li>
+
+<li><code>$.dasherize</code> </li>
+
+<li><code>$.Event</code> </li>
 </ul>
 
-<h3 id="toc_88">Why not add XXX</h3>
+<h3 id="why_not_add_xxx">Why not add XXX</h3>
 
 <ul>
-<li><code>$.ajax()</code> -- </li>
-<li><code>$.when()</code> -- </li>
-<li><code>$.type()</code> -- </li>
-<li><code>$.isArray()</code> -- </li>
-<li><code>$.proxy()</code> -- </li>
-<li><code>$.extend()</code> -- </li>
-<li><code>$.fn.ready()</code> -- </li>
-<li><code>$.fn.animate()</code> -- </li>
-<li><code>$.fn.delegate()</code> -- </li>
-<li><code>$.fn.on()</code> -- </li>
-<li><code>$.fn.map()</code> -- </li>
-<li><code>$.fn.data(object)</code> -- </li>
-<li><code>$.fn.detach(object)</code> -- </li>
+<li><code>$.ajax()</code> </li>
+
+<li><code>$.when()</code> </li>
+
+<li><code>$.type()</code> </li>
+
+<li><code>$.isArray()</code> </li>
+
+<li><code>$.proxy()</code> </li>
+
+<li><code>$.extend()</code> </li>
+
+<li><code>$.fn.ready()</code> </li>
+
+<li><code>$.fn.animate()</code> </li>
+
+<li><code>$.fn.delegate()</code> </li>
+
+<li><code>$.fn.map()</code> </li>
+
+<li><code>$.fn.data(object)</code> </li>
+
+<li><code>$.fn.detach(object)</code> </li>
 </ul>
 
-<p>Under construction...</p>
+<p>Under construction</p>
 
-<h2 id="toc_89">More References</h2>
+<h2 id="more_references">More References</h2>
 
 <p>See <a href="http://ozjs.org/">OzJS Project Homepage</a></p>
 
-<h2 id="toc_90">Release History</h2>
+<h2 id="release_history">Release History</h2>
 
 <p>See <a href="http://ozjs.org/#release">OzJS Release History</a></p>
 
-<h2 id="toc_91">License</h2>
+<h2 id="license">License</h2>
 
-<p>Copyright (c) 2010 - 2013 dexteryy<br>
-Licensed under the MIT license.</p>
-
+<p>Copyright (c) 2010 - 2013 dexteryy<br />Licensed under the MIT license.</p>
 </section>
 </div>
 

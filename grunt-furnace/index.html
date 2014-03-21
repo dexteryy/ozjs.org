@@ -36,8 +36,9 @@
         <ul>
             <li><a href="/generator-ozjs/">Generator</a></li>
             <li><a href="/ozma/">OzmaJS</a></li>
-            <li><a href="/istatic/">iStatic</a></li>
             <li><a href="/grunt-ozjs">grunt-ozjs</a></li>
+            <li><a href="/karma-ozjs">karma-ozjs</a></li>
+            <li><a href="/grunt-dispatch">grunt-dispatch</a></li>
             <li><a href="/grunt-furnace">grunt-furnace</a></li>
         </ul>
     </li>
@@ -56,15 +57,15 @@
     <li>
         <a href="/#ui">UI</a>
         <ul>
-            <li><a href="/momo/">Momo</a></li>
+            <li><a href="/DarkDOM/">DarkDOM</a></li>
             <li><a href="/moui/">Moui</a></li>
+            <li><a href="/momo/">Momo</a></li>
             <li><a href="/CardKit/">CardKit</a></li>
         </ul>
     </li>
     <li><a href="/#start">Quick Start</a></li>
     <li><a href="/#demo">Demo</a></li>
     <li><a href="/#ref">References</a></li>
-    <li><a href="https://github.com/dexteryy/OzJS/wiki/Changelog" target="_blank">Release History</a></li>
 </ul>
 
 </nav>
@@ -72,7 +73,7 @@
 
 <div class="wrapper">
 <section>
-<h1 id="toc_115">grunt-furnace</h1>
+<h1 id="gruntfurnace">grunt-furnace</h1>
 
 <blockquote>
 <ul>
@@ -80,64 +81,67 @@
 </ul>
 </blockquote>
 
-<h2 id="toc_116">Support</h2>
+<h2 id="support">Support</h2>
 
 <ul>
-<li><a href="">TPL</a> &gt; <a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD</a> - Use JS template file as AMD module no matter what syntax </li>
+<li><a href="">TPL</a> &gt; <a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD</a> - Use JS template file as AMD module no matter what syntax</li>
+
 <li>TPL &gt; <a href="http://wiki.commonjs.org/wiki/Modules/1.1">CJS</a> - Use JS template file as CommonJS module no matter what syntax</li>
+
 <li>AMD &gt; CJS - Make available AMD module in NodeJS or publish AMD module through NPM</li>
-<li>CJS &gt; AMD - Use <a href="https://github.com/component/component/wiki/Components">Component</a>-based module in your OzJS-based or RequireJS-based project </li>
-<li>AMD &gt; module pattern <em>(coming soon...)</em></li>
+
+<li>CJS &gt; AMD - Use <a href="https://github.com/component/component/wiki/Components">Component</a>-based module in your OzJS-based or RequireJS-based project</li>
+
+<li>AMD &gt; module pattern <em>(coming soon…)</em></li>
 </ul>
 
-<h2 id="toc_117">Config Example</h2>
-<div class="highlight"><pre><code class="javascript"><span class="nx">furnace</span><span class="o">:</span> <span class="p">{</span>
-    <span class="nx">tplExample</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">importas</span><span class="o">:</span> <span class="s1">&#39;tpl&#39;</span><span class="p">,</span>
-            <span class="nx">exportas</span><span class="o">:</span> <span class="s1">&#39;amd&#39;</span><span class="p">,</span>
-        <span class="p">},</span>
-        <span class="nx">src</span><span class="o">:</span> <span class="s1">&#39;tpl/**/*.tpl&#39;</span><span class="p">,</span>
-        <span class="nx">dest</span><span class="o">:</span> <span class="s1">&#39;js/app/tpl/&#39;</span>
-    <span class="p">},</span>
-    <span class="nx">npmExample</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">importas</span><span class="o">:</span> <span class="s1">&#39;amd&#39;</span><span class="p">,</span>
-            <span class="nx">exportas</span><span class="o">:</span> <span class="s1">&#39;cjs&#39;</span><span class="p">,</span>
-        <span class="p">},</span>
-        <span class="nx">files</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">expand</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-            <span class="nx">cwd</span><span class="o">:</span> <span class="s1">&#39;./&#39;</span><span class="p">,</span>
-            <span class="nx">src</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;**/*.js&#39;</span><span class="p">,</span> <span class="s1">&#39;!&lt;%= meta.npmPublishDir %&gt;/**&#39;</span><span class="p">,</span> <span class="s1">&#39;!node_modules/**&#39;</span><span class="p">,</span> <span class="s1">&#39;Gruntfile.js&#39;</span><span class="p">],</span>
-            <span class="nx">dest</span><span class="o">:</span> <span class="s1">&#39;&lt;%= meta.npmPublishDir %&gt;/&#39;</span><span class="p">,</span>
-            <span class="nx">ext</span><span class="o">:</span> <span class="s1">&#39;.js&#39;</span>
-        <span class="p">}]</span>
-    <span class="p">}</span>
-<span class="p">},</span>
+<h2 id="config_example">Config Example</h2>
+
+<pre class="javascript"><code class="javascript">
+furnace: {
+    tplExample: {
+        options: {
+            importas: &#39;tpl&#39;,
+            exportas: &#39;amd&#39;,
+        },
+        src: &#39;tpl/**/*.tpl&#39;,
+        dest: &#39;js/app/tpl/&#39;
+    },
+    npmExample: {
+        options: {
+            importas: &#39;amd&#39;,
+            exportas: &#39;cjs&#39;,
+        },
+        files: [{
+            expand: true,
+            cwd: &#39;./&#39;,
+            src: [&#39;**/*.js&#39;, &#39;!&lt;%= meta.npmPublishDir %&gt;/**&#39;, &#39;!node_modules/**&#39;, &#39;Gruntfile.js&#39;],
+            dest: &#39;&lt;%= meta.npmPublishDir %&gt;/&#39;,
+            ext: &#39;.js&#39;
+        }]
+    }
+},
 </code></pre>
-</div>
 
 <p>See <a href="https://github.com/dexteryy/grunt-furnace/blob/master/Gruntfile.js">Gruntfile.js</a> and <a href="https://github.com/dexteryy/grunt-furnace/blob/master/tests">tests/</a> for more examples.</p>
 
-<h2 id="toc_118">Source code</h2>
+<h2 id="source_code">Source code</h2>
 
 <ul>
 <li><a href="https://github.com/dexteryy/grunt-furnace">View on Github</a></li>
 </ul>
 
-<h2 id="toc_119">More References</h2>
+<h2 id="more_references">More References</h2>
 
 <p>See <a href="http://ozjs.org/">OzJS Project Homepage</a></p>
 
-<h2 id="toc_120">Release History</h2>
+<h2 id="release_history">Release History</h2>
 
 <p>See <a href="http://ozjs.org/#release">OzJS Release History</a></p>
 
-<h2 id="toc_121">License</h2>
+<h2 id="license">License</h2>
 
-<p>Copyright (c) 2010 - 2013 dexteryy<br>
-Licensed under the MIT license.</p>
-
+<p>Copyright (c) 2010 - 2013 dexteryy<br />Licensed under the MIT license.</p>
 </section>
 </div>
 

@@ -36,8 +36,9 @@
         <ul>
             <li><a href="/generator-ozjs/">Generator</a></li>
             <li><a href="/ozma/">OzmaJS</a></li>
-            <li><a href="/istatic/">iStatic</a></li>
             <li><a href="/grunt-ozjs">grunt-ozjs</a></li>
+            <li><a href="/karma-ozjs">karma-ozjs</a></li>
+            <li><a href="/grunt-dispatch">grunt-dispatch</a></li>
             <li><a href="/grunt-furnace">grunt-furnace</a></li>
         </ul>
     </li>
@@ -56,15 +57,15 @@
     <li>
         <a href="/#ui">UI</a>
         <ul>
-            <li><a href="/momo/">Momo</a></li>
+            <li><a href="/DarkDOM/">DarkDOM</a></li>
             <li><a href="/moui/">Moui</a></li>
+            <li><a href="/momo/">Momo</a></li>
             <li><a href="/CardKit/">CardKit</a></li>
         </ul>
     </li>
     <li><a href="/#start">Quick Start</a></li>
     <li><a href="/#demo">Demo</a></li>
     <li><a href="/#ref">References</a></li>
-    <li><a href="https://github.com/dexteryy/OzJS/wiki/Changelog" target="_blank">Release History</a></li>
 </ul>
 
 </nav>
@@ -72,7 +73,7 @@
 
 <div class="wrapper">
 <section>
-<h1 id="toc_199">Momo (MoMotion)</h1>
+<h1 id="momo_momotion">Momo (MoMotion)</h1>
 
 <blockquote>
 <ul>
@@ -80,35 +81,39 @@
 </ul>
 </blockquote>
 
-<h3 id="toc_200">AMD and OzJS</h3>
+<h3 id="amd_and_ozjs">AMD and OzJS</h3>
 
 <ul>
 <li>Momo can either be viewed as an independent library, or as a part of <a href="http://ozjs.org/#framework">OzJS mirco-framework</a>.</li>
-<li>It&#39;s wrapped as a number of mutually independent <a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD (Asynchronous Module Definition)</a> modules. You should use them with <a href="http://ozjs.org/#start">oz.js</a> (or require.js or <a href="http://wiki.commonjs.org/wiki/Implementations">similar</a> for handling dependencies). </li>
+
+<li>It’s wrapped as a number of mutually independent <a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD (Asynchronous Module Definition)</a> modules. You should use them with <a href="http://ozjs.org/#start">oz.js</a> (or require.js or <a href="http://wiki.commonjs.org/wiki/Implementations">similar</a> for handling dependencies).</li>
+
 <li>If you want to make them available for both other AMD code and traditional code based on global namespace. OzJS provides <a href="http://ozjs.org/examples/adapter/">a mini define/require implementation</a> to transform AMD module into traditional <a href="http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth">module pattern</a>.</li>
+
 <li>See <a href="http://ozjs.org">http://ozjs.org</a> for details.</li>
 </ul>
 
-<h3 id="toc_201">Get the Code</h3>
+<h3 id="get_the_code">Get the Code</h3>
 
 <p>Add to your project as new dependency</p>
 
 <ul>
 <li>via <a href="http://bower.io/">bower</a> - <code>bower install momo</code></li>
+
 <li>via <a href="http://ozjs.org/istatic">istatic</a></li>
 </ul>
 
 <p>Or <a href="https://github.com/dexteryy/momo/">download directly from Github</a></p>
 
-<h2 id="toc_202">Dependencies</h2>
+<h2 id="dependencies">Dependencies</h2>
 
 <ul>
 <li><a href="https://github.com/dexteryy/mo">mo/lang</a></li>
 </ul>
 
-<h2 id="toc_203">Modules Overview</h2>
+<h2 id="modules_overview">Modules Overview</h2>
 
-<h4 id="toc_204"><a href="https://github.com/dexteryy/momo/blob/master/momo.js">momo</a></h4>
+<h4 id="momo"><a href="https://github.com/dexteryy/momo/blob/master/momo.js">momo</a></h4>
 
 <blockquote>
 <ul>
@@ -116,7 +121,7 @@
 </ul>
 </blockquote>
 
-<h4 id="toc_205"><a href="https://github.com/dexteryy/momo/blob/master/momo/base.js">momo/base</a></h4>
+<h4 id="momobase"><a href="https://github.com/dexteryy/momo/blob/master/momo/base.js">momo/base</a></h4>
 
 <blockquote>
 <ul>
@@ -124,172 +129,207 @@
 </ul>
 </blockquote>
 
-<h4 id="toc_206"><a href="https://github.com/dexteryy/momo/blob/master/momo/tap.js">momo/tap</a></h4>
+<h4 id="momotap"><a href="https://github.com/dexteryy/momo/blob/master/momo/tap.js">momo/tap</a></h4>
 
 <blockquote>
 <ul>
-<li>&#39;tap&#39;, &#39;doubletap&#39;, &#39;hold&#39;, &#39;tapstart&#39;, &#39;tapcancel&#39;</li>
+<li>‘tap’, ‘doubletap’, ‘hold’, ‘tapstart’, ‘tapcancel’</li>
 </ul>
 </blockquote>
 
-<h4 id="toc_207"><a href="https://github.com/dexteryy/momo/blob/master/momo/scroll.js">momo/scroll</a></h4>
+<h4 id="momoscroll"><a href="https://github.com/dexteryy/momo/blob/master/momo/scroll.js">momo/scroll</a></h4>
 
 <blockquote>
 <ul>
-<li>&#39;scrolldown&#39;, &#39;scrollup&#39;, &#39;scrollstart&#39;, &#39;scrollend&#39;</li>
+<li>‘scrolldown’, ‘scrollup’, ‘scrollstart’, ‘scrollend’</li>
 </ul>
 </blockquote>
 
-<h4 id="toc_208"><a href="https://github.com/dexteryy/momo/blob/master/momo/swipe.js">momo/swipe</a></h4>
+<h4 id="momoswipe"><a href="https://github.com/dexteryy/momo/blob/master/momo/swipe.js">momo/swipe</a></h4>
 
 <blockquote>
 <ul>
-<li>&#39;swipeup&#39;, &#39;swipedown&#39;, &#39;swiperight&#39;, &#39;swipeleft&#39;</li>
+<li>‘swipeup’, ‘swipedown’, ‘swiperight’, ‘swipeleft’</li>
 </ul>
 </blockquote>
 
-<h4 id="toc_209">momo/drag (beta)</h4>
+<h4 id="momodrag_beta">momo/drag (beta)</h4>
 
 <blockquote>
 <ul>
-<li>&#39;drag&#39;, &#39;dragover&#39;, &#39;dragstart&#39;, &#39;dragend&#39;</li>
+<li>‘drag’, ‘dragover’, ‘dragstart’, ‘dragend’</li>
 </ul>
 </blockquote>
 
-<h2 id="toc_210">Examples</h2>
+<h2 id="examples">Examples</h2>
 
 <ul>
-<li>Comming soon...</li>
+<li>Comming soon</li>
 </ul>
 
-<h2 id="toc_211">API and usage</h2>
+<h2 id="api_and_usage">API and usage</h2>
 
-<h4 id="toc_212">momo</h4>
-<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">momo</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;momo&#39;</span><span class="p">);</span>
+<h4 id="momo_2">momo</h4>
+
+<pre class="javascript"><code class="javascript">
+var momo = require(&#39;momo&#39;);
 </code></pre>
-</div>
 
 <ul>
 <li><code>momo.init()</code> -</li>
+
 <li><code>momo.tap()</code> -</li>
+
 <li><code>momo.scroll()</code> -</li>
+
 <li><code>momo.swipe()</code> -</li>
+
 <li><code>momo.drag()</code> -</li>
 </ul>
 
-<h4 id="toc_213">momo/base</h4>
+<h4 id="momobase_2">momo/base</h4>
 
 <p>Defaults:</p>
 
 <ul>
-<li><code>namespace</code>: &quot;&quot;</li>
+<li><code>namespace</code>: ””</li>
 </ul>
-<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">momoBase</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;momo/base&#39;</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">MomoBase</span> <span class="o">=</span> <span class="nx">momoBase</span><span class="p">.</span><span class="nx">Class</span><span class="p">;</span>
+
+<pre class="javascript"><code class="javascript">
+var momoBase = require(&#39;momo/base&#39;);
+var MomoBase = momoBase.Class;
 </code></pre>
-</div>
 
 <ul>
-<li><code>MomoBase.prototype.config</code> -- </li>
-<li><code>MomoBase.prototype.enable</code> -- </li>
-<li><code>MomoBase.prototype.disable</code> -- </li>
-<li><code>MomoBase.prototype.once</code> -- </li>
-<li><code>MomoBase.prototype.event</code> -- </li>
-<li><code>MomoBase.prototype.SUPPORT_TOUCH</code> -- </li>
-<li><code>MomoBase.prototype.bind</code> -- [adapter]</li>
-<li><code>MomoBase.prototype.unbind</code> -- [adapter]</li>
-<li><code>MomoBase.prototype.trigger</code> -- [adapter]</li>
-<li><code>MomoBase.prototype.press</code> -- [hook]</li>
-<li><code>MomoBase.prototype.move</code> -- [hook]</li>
-<li><code>MomoBase.prototype.release</code> -- [hook]</li>
-<li><code>MomoBase.prototype.cancel</code> -- [hook]</li>
+<li><code>MomoBase.prototype.config</code> </li>
+
+<li><code>MomoBase.prototype.enable</code> </li>
+
+<li><code>MomoBase.prototype.disable</code> </li>
+
+<li><code>MomoBase.prototype.once</code> </li>
+
+<li><code>MomoBase.prototype.event</code> </li>
+
+<li><code>MomoBase.prototype.SUPPORT_TOUCH</code> </li>
+
+<li><code>MomoBase.prototype.bind</code> – [adapter]</li>
+
+<li><code>MomoBase.prototype.unbind</code> – [adapter]</li>
+
+<li><code>MomoBase.prototype.trigger</code> – [adapter]</li>
+
+<li><code>MomoBase.prototype.press</code> – [hook]</li>
+
+<li><code>MomoBase.prototype.move</code> – [hook]</li>
+
+<li><code>MomoBase.prototype.release</code> – [hook]</li>
+
+<li><code>MomoBase.prototype.cancel</code> – [hook]</li>
 </ul>
 
-<h4 id="toc_214">momo/tap</h4>
+<h4 id="momotap_2">momo/tap</h4>
 
 <p>Defaults:</p>
 
 <ul>
 <li><code>tapRadius</code>: 10</li>
+
 <li><code>doubleTimeout</code>: 300</li>
+
 <li><code>tapThreshold</code>: 0</li>
+
 <li><code>holdThreshold</code>: 500</li>
 </ul>
-<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">momoTap</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;momo/tap&#39;</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">tapGesture</span> <span class="o">=</span> <span class="nx">momoTap</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="cm">/* optional */</span> <span class="nx">config</span><span class="p">,</span> <span class="cm">/* optional */</span> <span class="nx">handler</span><span class="p">);</span>
+
+<pre class="javascript"><code class="javascript">
+var momoTap = require(&#39;momo/tap&#39;);
+var tapGesture = momoTap(element, /* optional */ config, /* optional */ handler);
 </code></pre>
-</div>
 
 <ul>
 <li><code>element.addEventListener(&#39;tap&#39;, handler)</code></li>
+
 <li><code>element.addEventListener(&#39;doubletap&#39;, handler)</code></li>
+
 <li><code>element.addEventListener(&#39;hold&#39;, handler)</code></li>
+
 <li><code>element.addEventListener(&#39;tapstart&#39;, handler)</code></li>
+
 <li><code>element.addEventListener(&#39;tapcancel&#39;, handler)</code></li>
 </ul>
 
-<h4 id="toc_215">momo/scroll</h4>
+<h4 id="momoscroll_2">momo/scroll</h4>
 
 <p>Defaults:</p>
 
 <ul>
 <li><code>directThreshold</code>: 5</li>
+
 <li><code>scrollEndGap</code>: 5</li>
 </ul>
-<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">momoScroll</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;momo/scroll&#39;</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">scrollGesture</span> <span class="o">=</span> <span class="nx">momoScroll</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="cm">/* optional */</span> <span class="nx">config</span><span class="p">,</span> <span class="cm">/* optional */</span> <span class="nx">handler</span><span class="p">);</span>
+
+<pre class="javascript"><code class="javascript">
+var momoScroll = require(&#39;momo/scroll&#39;);
+var scrollGesture = momoScroll(element, /* optional */ config, /* optional */ handler);
 </code></pre>
-</div>
 
 <ul>
-<li><code>scrollGesture.watchScroll(element)</code> - </li>
+<li><code>scrollGesture.watchScroll(element)</code> -</li>
+
 <li><code>element.addEventListener(&#39;scrolldown&#39;, handler)</code></li>
+
 <li><code>element.addEventListener(&#39;scrollup&#39;, handler)</code></li>
+
 <li><code>element.addEventListener(&#39;scrollstart&#39;, handler)</code></li>
+
 <li><code>element.addEventListener(&#39;scrollend&#39;, handler)</code></li>
 </ul>
 
-<h4 id="toc_216">momo/swipe</h4>
+<h4 id="momoswipe_2">momo/swipe</h4>
 
 <p>Defaults:</p>
 
 <ul>
 <li><code>timeThreshold</code>: 200</li>
+
 <li><code>distanceThreshold</code>: 20</li>
 </ul>
-<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">momoSwipe</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;momo/swipe&#39;</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">swipeGesture</span> <span class="o">=</span> <span class="nx">momoSwipe</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="cm">/* optional */</span> <span class="nx">config</span><span class="p">,</span> <span class="cm">/* optional */</span> <span class="nx">handler</span><span class="p">);</span>
+
+<pre class="javascript"><code class="javascript">
+var momoSwipe = require(&#39;momo/swipe&#39;);
+var swipeGesture = momoSwipe(element, /* optional */ config, /* optional */ handler);
 </code></pre>
-</div>
 
 <ul>
 <li><code>element.addEventListener(&#39;swipedown&#39;, handler)</code></li>
+
 <li><code>element.addEventListener(&#39;swipeup&#39;, handler)</code></li>
+
 <li><code>element.addEventListener(&#39;swipeleft&#39;, handler)</code></li>
+
 <li><code>element.addEventListener(&#39;swiperight&#39;, handler)</code></li>
 </ul>
 
-<h4 id="toc_217">momo/drag</h4>
+<h4 id="momodrag">momo/drag</h4>
 
 <ul>
-<li>Comming soon...</li>
+<li>Comming soon</li>
 </ul>
 
-<p>Under construction...</p>
+<p>Under construction</p>
 
-<h2 id="toc_218">More References</h2>
+<h2 id="more_references">More References</h2>
 
 <p>See <a href="http://ozjs.org/">OzJS Project Homepage</a></p>
 
-<h2 id="toc_219">Release History</h2>
+<h2 id="release_history">Release History</h2>
 
 <p>See <a href="http://ozjs.org/#release">OzJS Release History</a></p>
 
-<h2 id="toc_220">License</h2>
+<h2 id="license">License</h2>
 
-<p>Copyright (c) 2010 - 2013 dexteryy<br>
-Licensed under the MIT license.</p>
-
+<p>Copyright (c) 2010 - 2013 dexteryy<br />Licensed under the MIT license.</p>
 </section>
 </div>
 
