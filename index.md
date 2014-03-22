@@ -59,6 +59,32 @@ It is time to stop using All-in-One JavaScript library or framework which bundle
 
 OzJS Project provides plenty of tiny, mutually independent, single purpose modules to help you build(mix and match) your own MVC(or suchlike) framework.
 
+#### [Mo](http://ozjs.org/mo)
+> * A collection of OzJS core modules that form a library called "Mo" 
+> * Modules overview
+>   * `mo/lang`
+>     * ES5/6 shim and minimum utilities for language enhancement
+>   * `mo/domready`
+>     * Non-plugin implementation of cross-browser DOM ready event
+>     * Based on OzJS's built-in module -- 'finish'
+>   * `mo/browsers`
+>     * Standalone jQuery.browsers supports skin browsers popular in China 
+>   * `mo/template`
+>     * A lightweight and enhanced micro-template implementation, and minimum utilities
+>   * `mo/network`
+>     * Standalone jQuery.ajax API and enhanced getJSON, and so on
+>   * `mo/easing`
+>     * An easing library supports jquery.js, standalone module and CSS timing functions
+>   * `mo/mainloop`
+>     * Implement and manage single loop for WebApp life cycle
+>     * Provide tweening API for both property animation and frame animation(canvas or css)
+>   * `mo/key`
+>     * Wrapping API for keyboard events
+>     * Support key sequence, multiple key press, ...
+>   * `mo/console`
+>     * Debulg tool
+> * [Source code](https://github.com/dexteryy/mo)
+
 #### [EventMaster](http://ozjs.org/EventMaster)
 > * A simple, compact and consistent implementation of a variant of CommonJS's Promises and Events
 > * [Source code](https://github.com/dexteryy/EventMaster)
@@ -79,46 +105,8 @@ OzJS Project provides plenty of tiny, mutually independent, single purpose modul
 > * A lightweight implementation of routing and URL manager
 > * [Source code](https://github.com/dexteryy/URLKit)
 
-#### [ChoreoJS](http://ozjs.org/ChoreoJS)
-> * An animation library which uses "stage" and "actor" as metaphors
-> * [Source code](https://github.com/dexteryy/ChoreoJS)
-
-#### [Mo](http://ozjs.org/mo)
-> * A collection of OzJS core modules that form a library called "Mo" 
-> * Modules overview
->   * `mo/lang`
->     * ES5/6 shim and minimum utilities for language enhancement
->   * `mo/domready`
->     * Non-plugin implementation of cross-browser DOM ready event
->     * Based on OzJS's built-in module -- 'finish'
->   * `mo/browsers`
->     * Standalone jQuery.browsers supports skin browsers popular in China 
->   * `mo/cookie`
->     * Simple wrapping for managing cookie 
->   * `mo/template`
->     * A lightweight and enhanced micro-template implementation, and minimum utilities
->   * `mo/network`
->     * Standalone jQuery.ajax API and enhanced getJSON, and so on
->   * `mo/easing`
->     * An easing library supports jquery.js, standalone module and CSS timing functions
->   * `mo/mainloop`
->     * Implement and manage single loop for WebApp life cycle
->     * Provide tweening API for both property animation and frame animation(canvas or css)
->   * `mod/uiproxy`
->     * Standalone and most efficient implementation of UI event delegation
->     * Coming soon...
->   * `mo/key`
->     * Wrapping API for keyboard events
->     * Support key sequence, multiple key press, ...
-> * [Source code](https://github.com/dexteryy/mo)
-
 <a id="ui"> </a>
 ## UI Toolkit
-
-#### [DarkDOM](http://ozjs.org/DarkDOM)
-> * Design your own markup languages on a higher level of abstraction than HTML
-> * Build responsive cross-screen UI components
-> * [Source code](https://github.com/dexteryy/DarkDOM)
 
 #### [Moui](http://ozjs.org/moui)
 > * OO-based UI behavior modules behind [CardKit](http://ozjs.org/CardKit/)'s view components
@@ -143,20 +131,23 @@ OzJS Project provides plenty of tiny, mutually independent, single purpose modul
 >   * [More](http://ozjs.org/moui)
 > * [Source code](https://github.com/dexteryy/moui)
 
-#### [Momo (MoMotion)](http://ozjs.org/momo)
-> * A framework and a collection for separate and simple implementation of touch gestures
-> * [Source code](https://github.com/dexteryy/momo)
-
-## App Framework
+#### [DarkDOM](http://ozjs.org/DarkDOM)
+> * Design your own markup languages on a higher level of abstraction than HTML
+> * Build responsive cross-screen UI components
+> * [Source code](https://github.com/dexteryy/DarkDOM)
 
 #### [CardKit](http://ozjs.org/CardKit)
 > * A mobile UI library provides a series of building blocks to help you build mobile web apps quickly and simply, or transfer entire website to mobile-first web app for touch devices. 
 > * CardKit building blocks are all _use-html-as-configure-style_ (like Custom Elements, directive...) components built on [DarkDOM](https://github.com/dexteryy/DarkDOM) and [Moui](https://github.com/dexteryy/moui).
 > * [Source code](https://github.com/douban-f2e/CardKit)
 
-## Game Engine
+#### [Momo (MoMotion)](http://ozjs.org/momo)
+> * A framework and a collection for separate and simple implementation of touch gestures
+> * [Source code](https://github.com/dexteryy/momo)
 
-Under construction...
+#### [ChoreoJS](http://ozjs.org/ChoreoJS)
+> * An animation library which uses "stage" and "actor" as metaphors
+> * [Source code](https://github.com/dexteryy/ChoreoJS)
 
 <a id="start"> </a>
 ## Tutorials 
