@@ -51,16 +51,16 @@
             <li><a href="/DollarJS/">DollarJS</a></li>
             <li><a href="/SovietJS/">SovietJS</a></li>
             <li><a href="/URLKit/">URLKit</a></li>
-            <li><a href="/ChoreoJS/">ChoreoJS</a></li>
         </ul>
     </li>
     <li>
-        <a href="/#ui">UI</a>
+        <a href="/#ui">UI Toolkit</a>
         <ul>
-            <li><a href="/DarkDOM/">DarkDOM</a></li>
             <li><a href="/moui/">Moui</a></li>
-            <li><a href="/momo/">Momo</a></li>
+            <li><a href="/DarkDOM/">DarkDOM</a></li>
             <li><a href="/CardKit/">CardKit</a></li>
+            <li><a href="/momo/">Momo</a></li>
+            <li><a href="/ChoreoJS/">ChoreoJS</a></li>
         </ul>
     </li>
     <li><a href="/#start">Quick Start</a></li>
@@ -181,6 +181,80 @@
 
 <p>OzJS Project provides plenty of tiny, mutually independent, single purpose modules to help you build(mix and match) your own MVC(or suchlike) framework.</p>
 
+<h4 id="mo"><a href="http://ozjs.org/mo">Mo</a></h4>
+
+<blockquote>
+<ul>
+<li>A collection of OzJS core modules that form a library called “Mo”</li>
+
+<li>Modules overview
+<ul>
+<li><code>mo/lang</code>
+<ul>
+<li>ES5/6 shim and minimum utilities for language enhancement</li>
+</ul>
+</li>
+
+<li><code>mo/domready</code>
+<ul>
+<li>Non-plugin implementation of cross-browser DOM ready event</li>
+
+<li>Based on OzJS’s built-in module – ‘finish’</li>
+</ul>
+</li>
+
+<li><code>mo/browsers</code>
+<ul>
+<li>Standalone jQuery.browsers supports skin browsers popular in China</li>
+</ul>
+</li>
+
+<li><code>mo/template</code>
+<ul>
+<li>A lightweight and enhanced micro-template implementation, and minimum utilities</li>
+</ul>
+</li>
+
+<li><code>mo/network</code>
+<ul>
+<li>Standalone jQuery.ajax API and enhanced getJSON, and so on</li>
+</ul>
+</li>
+
+<li><code>mo/easing</code>
+<ul>
+<li>An easing library supports jquery.js, standalone module and CSS timing functions</li>
+</ul>
+</li>
+
+<li><code>mo/mainloop</code>
+<ul>
+<li>Implement and manage single loop for WebApp life cycle</li>
+
+<li>Provide tweening API for both property animation and frame animation(canvas or css)</li>
+</ul>
+</li>
+
+<li><code>mo/key</code>
+<ul>
+<li>Wrapping API for keyboard events</li>
+
+<li>Support key sequence, multiple key press, </li>
+</ul>
+</li>
+
+<li><code>mo/console</code>
+<ul>
+<li>Debulg tool</li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li><a href="https://github.com/dexteryy/mo">Source code</a></li>
+</ul>
+</blockquote>
+
 <h4 id="eventmaster"><a href="http://ozjs.org/EventMaster">EventMaster</a></h4>
 
 <blockquote>
@@ -231,113 +305,9 @@
 </ul>
 </blockquote>
 
-<h4 id="choreojs"><a href="http://ozjs.org/ChoreoJS">ChoreoJS</a></h4>
-
-<blockquote>
-<ul>
-<li>An animation library which uses “stage” and “actor” as metaphors</li>
-
-<li><a href="https://github.com/dexteryy/ChoreoJS">Source code</a></li>
-</ul>
-</blockquote>
-
-<h4 id="mo"><a href="http://ozjs.org/mo">Mo</a></h4>
-
-<blockquote>
-<ul>
-<li>A collection of OzJS core modules that form a library called “Mo”</li>
-
-<li>Modules overview
-<ul>
-<li><code>mo/lang</code>
-<ul>
-<li>ES5/6 shim and minimum utilities for language enhancement</li>
-</ul>
-</li>
-
-<li><code>mo/domready</code>
-<ul>
-<li>Non-plugin implementation of cross-browser DOM ready event</li>
-
-<li>Based on OzJS’s built-in module – ‘finish’</li>
-</ul>
-</li>
-
-<li><code>mo/browsers</code>
-<ul>
-<li>Standalone jQuery.browsers supports skin browsers popular in China</li>
-</ul>
-</li>
-
-<li><code>mo/cookie</code>
-<ul>
-<li>Simple wrapping for managing cookie</li>
-</ul>
-</li>
-
-<li><code>mo/template</code>
-<ul>
-<li>A lightweight and enhanced micro-template implementation, and minimum utilities</li>
-</ul>
-</li>
-
-<li><code>mo/network</code>
-<ul>
-<li>Standalone jQuery.ajax API and enhanced getJSON, and so on</li>
-</ul>
-</li>
-
-<li><code>mo/easing</code>
-<ul>
-<li>An easing library supports jquery.js, standalone module and CSS timing functions</li>
-</ul>
-</li>
-
-<li><code>mo/mainloop</code>
-<ul>
-<li>Implement and manage single loop for WebApp life cycle</li>
-
-<li>Provide tweening API for both property animation and frame animation(canvas or css)</li>
-</ul>
-</li>
-
-<li><code>mod/uiproxy</code>
-<ul>
-<li>Standalone and most efficient implementation of UI event delegation</li>
-
-<li>Coming soon</li>
-</ul>
-</li>
-
-<li><code>mo/key</code>
-<ul>
-<li>Wrapping API for keyboard events</li>
-
-<li>Support key sequence, multiple key press, </li>
-</ul>
-</li>
-</ul>
-</li>
-
-<li><a href="https://github.com/dexteryy/mo">Source code</a></li>
-</ul>
-</blockquote>
-
 <p><a id='ui'> </a></p>
 
 <h2 id="ui_toolkit">UI Toolkit</h2>
-
-<h4 id="darkdom"><a href="http://ozjs.org/DarkDOM">DarkDOM</a></h4>
-
-<blockquote>
-<ul>
-<li>Design your own markup languages on a higher level of abstraction than HTML</li>
-
-<li>Build responsive cross-screen UI components</li>
-
-<li><a href="https://github.com/dexteryy/DarkDOM">Source code</a></li>
-</ul>
-</blockquote>
 
 <h4 id="moui"><a href="http://ozjs.org/moui">Moui</a></h4>
 
@@ -405,17 +375,17 @@
 </ul>
 </blockquote>
 
-<h4 id="momo_momotion"><a href="http://ozjs.org/momo">Momo (MoMotion)</a></h4>
+<h4 id="darkdom"><a href="http://ozjs.org/DarkDOM">DarkDOM</a></h4>
 
 <blockquote>
 <ul>
-<li>A framework and a collection for separate and simple implementation of touch gestures</li>
+<li>Design your own markup languages on a higher level of abstraction than HTML</li>
 
-<li><a href="https://github.com/dexteryy/momo">Source code</a></li>
+<li>Build responsive cross-screen UI components</li>
+
+<li><a href="https://github.com/dexteryy/DarkDOM">Source code</a></li>
 </ul>
 </blockquote>
-
-<h2 id="app_framework">App Framework</h2>
 
 <h4 id="cardkit"><a href="http://ozjs.org/CardKit">CardKit</a></h4>
 
@@ -429,9 +399,25 @@
 </ul>
 </blockquote>
 
-<h2 id="game_engine">Game Engine</h2>
+<h4 id="momo_momotion"><a href="http://ozjs.org/momo">Momo (MoMotion)</a></h4>
 
-<p>Under construction</p>
+<blockquote>
+<ul>
+<li>A framework and a collection for separate and simple implementation of touch gestures</li>
+
+<li><a href="https://github.com/dexteryy/momo">Source code</a></li>
+</ul>
+</blockquote>
+
+<h4 id="choreojs"><a href="http://ozjs.org/ChoreoJS">ChoreoJS</a></h4>
+
+<blockquote>
+<ul>
+<li>An animation library which uses “stage” and “actor” as metaphors</li>
+
+<li><a href="https://github.com/dexteryy/ChoreoJS">Source code</a></li>
+</ul>
+</blockquote>
 
 <p><a id='start'> </a></p>
 
