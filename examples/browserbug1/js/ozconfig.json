@@ -1,0 +1,4 @@
+{
+    "baseUrl": "page2/",
+    "loader": "../lib/oz.min.js"
+}
