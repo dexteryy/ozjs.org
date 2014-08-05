@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Demo</title>
+</head>
+<body>
+
+<h1>Step 2 (with oz.js)</h1>
+<p>See the console</p>
+
+<fieldset>
+    <legend>Right:</legend>
+<pre>
+<code>
+0
+1 "11s passed"
+2 "12s passed" Object { a: 1 }
+4 "13s passed"
+</code>
+</pre>
+</fieldset>
+
+<script src="js/fixed2_pack.js"></script>
+<script>
+console.log(1, +new Date()- window._last_tm + 's passed')
+define('env', [], function(){            // 真正定义 env
+    return {
+      a: 1
+    }
+})
+require(['app'], function(App) {  // 真正调用 app
+    console.log(4, +new Date() - window._last_tm + 's passed')
+    new App().initialize()
+})
+</script>
+</body>
+</html>

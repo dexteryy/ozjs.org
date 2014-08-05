@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Demo</title>
+</head>
+<body>
+
+<h1>Step 2 (only setTimeout)</h1>
+<p>See the console</p>
+
+<fieldset>
+    <legend>Right:</legend>
+<pre>
+<code>
+0 
+1 "0s passed" 
+3 "4s passed" "yy" 
+4 "4s passed" "yy"
+</code>
+</pre>
+</fieldset>
+
+<fieldset>
+    <legend>Wrong:</legend>
+<pre>
+<code>
+0 
+3 "2s passed" undefined
+1 "52s passed" 
+4 "53s passed" "yy"
+</code>
+</pre>
+</fieldset>
+
+<script src="js/page1.js"></script>
+<script>
+console.log(1, +new Date() - window._last_tm + 's passed');
+
+window._html_data = 'yy';
+
+setTimeout(function(){
+    console.log(4, +new Date() - window._last_tm + 's passed', window._html_data);
+}, 0);
+</script>
+</body>
+</html>
